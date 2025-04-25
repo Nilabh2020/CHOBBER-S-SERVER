@@ -3,27 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHOBBER'S Server</title>
+    <title>CHOBBER'S Server | Premium Game Distribution</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         /* ==================== BASE STYLES ==================== */
         :root {
-            --bg-color: #090418;
-            --card-bg: rgba(26, 23, 42, 0.75);
-            --primary: #7040ff;
-            --primary-glow: rgba(112, 64, 255, 0.5);
-            --primary-dark: #5026d9;
-            --accent: #ff40a0;
-            --accent-glow: rgba(255, 64, 160, 0.5);
-            --text: #e6e6ff;
-            --text-secondary: #a0a0c8;
-            --border-radius: 12px;
-            --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            --neon-shadow: 0 0 10px rgba(112, 64, 255, 0.7), 0 0 20px rgba(112, 64, 255, 0.4);
-            --glow: 0 0 10px var(--primary-glow);
-            --card-hover-transform: translateY(-8px) scale(1.03);
+            --bg-primary: #0e1016;
+            --bg-secondary: #171b26;
+            --bg-tertiary: #1e2433;
+            --bg-card: #212738;
+            --primary: #5773ff;
+            --primary-dark: #4056cc;
+            --accent: #8c5cff;
+            --accent-hover: #9f75ff;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --text-primary: #ffffff;
+            --text-secondary: #cbd5e1;
+            --text-tertiary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(255, 255, 255, 0.06);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --border-radius-sm: 4px;
+            --border-radius-md: 6px;
+            --border-radius-lg: 10px;
+            --border-radius-xl: 16px;
+            --header-height: 70px;
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -33,196 +46,232 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--bg-color);
-            color: var(--text);
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
-            background-image:
-                radial-gradient(circle at 20% 35%, rgba(112, 64, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 75% 65%, rgba(255, 64, 160, 0.15) 0%, transparent 40%),
-                linear-gradient(to bottom, var(--bg-color), #0d0621);
-            background-attachment: fixed;
             min-height: 100vh;
             position: relative;
         }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><rect width="1" height="1" fill="rgba(255,255,255,0.03)" x="0" y="0"/></svg>') repeat;
-            pointer-events: none;
-            z-index: -1;
+        button, input, select, textarea {
+            font-family: inherit;
+            outline: none;
         }
 
         button {
             cursor: pointer;
-            font-family: 'Orbitron', sans-serif;
             border: none;
-            outline: none;
-            transition: var(--transition);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ==================== LAYOUT STYLES ==================== */
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-top: var(--header-height);
         }
 
         /* ==================== HEADER STYLES ==================== */
         .header {
-            background: rgba(9, 4, 24, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 1.5rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid rgba(112, 64, 255, 0.3);
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            background-color: var(--bg-secondary);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            position: relative;
         }
 
         .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            position: relative;
-            color: white;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(112, 64, 255, 0.8);
-            display: flex;
-            align-items: center;
-        }
-
-        .logo::before {
-            content: "{ ";
-            color: var(--accent);
-            margin-right: 4px;
-        }
-
-        .logo::after {
-            content: " }";
-            color: var(--accent);
-            margin-left: 4px;
-        }
-
-        .admin-btn {
-            background: rgba(112, 64, 255, 0.2);
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            font-size: 1.5rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 15px rgba(112, 64, 255, 0.5);
-            border: 1px solid rgba(112, 64, 255, 0.5);
-            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
-            overflow: hidden;
+            gap: 12px;
         }
 
-        .admin-btn::before {
-            content: "";
+        .logo-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: var(--border-radius-sm);
+            box-shadow: 0 2px 5px rgba(140, 92, 255, 0.2);
+        }
+
+        .logo-text {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            letter-spacing: 1px;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .header-right {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .search-bar {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(87, 115, 255, 0.15);
+        }
+
+        .search-icon {
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 2px solid rgba(112, 64, 255, 0.5);
-            border-radius: 18px;
-            animation: pulse 2s infinite;
-            opacity: 0;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-tertiary);
+            pointer-events: none;
+        }
+
+        /* Secret admin area - completely invisible */
+        .admin-access-area {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            background-color: transparent;
+            z-index: 1001;
+        }
+
+        /* Visible admin button - only shows when admin is logged in */
+        .admin-btn {
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: var(--bg-tertiary);
+            border-radius: var(--border-radius-md);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            margin-left: 10px;
+        }
+
+        .admin-btn.visible {
+            display: flex; /* Show when admin is logged in */
         }
 
         .admin-btn:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 0 20px rgba(112, 64, 255, 0.8);
-            background: rgba(112, 64, 255, 0.4);
+            background-color: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(87, 115, 255, 0.15);
         }
 
-        .admin-btn:hover::before {
-            opacity: 1;
+        /* ==================== TICKER STYLES ==================== */
+        .announcement-bar {
+            background-color: var(--bg-secondary);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        @keyframes pulse {
-            0% {
-                transform: scale(0.95);
-                opacity: 0.7;
-            }
-            70% {
-                transform: scale(1.05);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(0.95);
-                opacity: 0;
-            }
-        }
-
-        /* ==================== TICKER/CAROUSEL STYLES ==================== */
         .ticker-container {
-            background: linear-gradient(90deg, rgba(112, 64, 255, 0.15), rgba(255, 64, 160, 0.15));
-            padding: 1rem;
+            max-width: 1440px;
+            margin: 0 auto;
             overflow: hidden;
             position: relative;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .ticker-container::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100px;
-            height: 100%;
-            background: linear-gradient(90deg, var(--bg-color), transparent);
-            z-index: 2;
-        }
-
-        .ticker-container::after {
-            content: "";
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 100px;
-            height: 100%;
-            background: linear-gradient(270deg, var(--bg-color), transparent);
-            z-index: 2;
         }
 
         .ticker {
             display: flex;
             white-space: nowrap;
-            animation: ticker-scroll 30s linear infinite;
+            animation: ticker-scroll 25s linear infinite;
         }
 
         .ticker-item {
-            padding: 0 2rem;
-            color: var(--text);
-            font-weight: 500;
+            padding: 0 24px;
             display: flex;
             align-items: center;
-            text-shadow: 0 0 10px rgba(112, 64, 255, 0.5);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
-        .ticker-item span {
-            color: var(--accent);
+        .ticker-label {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.75rem;
             font-weight: 600;
-            margin: 0 0.5rem;
+            margin-right: 10px;
         }
 
-        .ticker-item::before {
-            content: "★";
+        .label-new {
+            background-color: rgba(87, 115, 255, 0.15);
             color: var(--primary);
-            margin-right: 8px;
-            animation: star-pulse 2s infinite alternate;
         }
 
-        @keyframes star-pulse {
-            from { opacity: 0.5; text-shadow: 0 0 5px var(--primary-glow); }
-            to { opacity: 1; text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow); }
+        .label-hot {
+            background-color: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+        }
+
+        .label-popular {
+            background-color: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+
+        .ticker-text {
+            font-weight: 500;
         }
 
         @keyframes ticker-scroll {
@@ -230,7 +279,7 @@
                 transform: translateX(0);
             }
             100% {
-                transform: translateX(-100%);
+                transform: translateX(-50%);
             }
         }
 
@@ -238,605 +287,1070 @@
             animation-play-state: paused;
         }
 
-        /* ==================== MAIN CONTENT STYLES ==================== */
+        /* ==================== HERO SECTION ==================== */
+        .hero-section {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            background-image: linear-gradient(rgba(14, 16, 22, 0.6), rgba(14, 16, 22, 0.8)),
+                              url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 700px;
+            padding: 0 2rem;
+        }
+
+        .hero-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(to right, #fff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero-btn {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(87, 115, 255, 0.3);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(87, 115, 255, 0.4);
+        }
+
+        /* ==================== CONTENT SECTIONS ==================== */
         .container {
             max-width: 1440px;
             margin: 0 auto;
-            padding: 2rem 1rem;
+            padding: 0 2rem;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
         }
 
         .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 2.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .view-all {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 1rem;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(112, 64, 255, 0.8);
-            position: relative;
-            padding-bottom: 15px;
+            gap: 6px;
         }
 
-        .section-title::before {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 2px;
-            box-shadow: 0 0 10px var(--primary-glow);
+        .view-all:hover {
+            color: var(--accent);
         }
 
-        .section-title::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 80px;
-            width: 30px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 2px;
-            box-shadow: 0 0 10px var(--accent-glow);
-        }
-
+        /* ==================== CARD GRID ==================== */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            perspective: 1000px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
         }
 
         .card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
+            background-color: var(--bg-card);
+            border-radius: var(--border-radius-lg);
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
             transition: var(--transition);
-            border: 1px solid rgba(112, 64, 255, 0.2);
+            border: 1px solid var(--border-color);
             position: relative;
-            transform-style: preserve-3d;
-            transform: translateZ(0);
-            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
         }
 
         .card:hover {
-            transform: var(--card-hover-transform);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(112, 64, 255, 0.4);
-            border-color: rgba(112, 64, 255, 0.6);
-        }
-
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
-            background-size: 200% 100%;
-            animation: gradient-shift 3s ease infinite;
-            z-index: 1;
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        @keyframes gradient-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: rgba(87, 115, 255, 0.2);
         }
 
         .card-image-container {
             position: relative;
+            height: 180px;
             overflow: hidden;
-            height: 200px;
         }
 
         .card-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: transform 0.5s ease;
         }
 
         .card:hover .card-image {
             transform: scale(1.05);
         }
 
-        .card-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                transparent 50%,
-                rgba(9, 4, 24, 0.8) 100%
-            );
-            z-index: 1;
-        }
-
         .card-badge {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 64, 160, 0.9);
-            color: white;
-            font-size: 0.8rem;
+            top: 12px;
+            right: 12px;
+            padding: 4px 10px;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.7rem;
             font-weight: 600;
-            padding: 5px 10px;
-            border-radius: 4px;
-            z-index: 2;
-            box-shadow: 0 0 10px rgba(255, 64, 160, 0.5);
-            transform: translateZ(20px);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-new {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .badge-hot {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .badge-popular {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .badge-updated {
+            background-color: var(--info);
+            color: white;
         }
 
         .card-content {
-            padding: 1.5rem;
-            position: relative;
-            z-index: 2;
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .card-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: #fff;
             font-weight: 600;
-            text-shadow: 0 0 5px rgba(112, 64, 255, 0.5);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            line-height: 1.4;
         }
 
-        .card-btn {
-            display: block;
-            width: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            font-weight: 600;
-            text-align: center;
-            text-decoration: none;
-            transition: var(--transition);
-            position: relative;
+        .card-meta {
+            margin-bottom: 16px;
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+            display: flex;
+            gap: 12px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
             overflow: hidden;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 5px rgba(112, 64, 255, 0.5);
         }
 
-        .card-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 10px rgba(112, 64, 255, 0.8);
+        .card-actions {
+            margin-top: auto;
+            display: flex;
+            gap: 10px;
         }
 
-        .card-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to right,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transition: 0.5s;
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 16px;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            gap: 8px;
         }
 
-        .card-btn:hover::before {
-            left: 100%;
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            flex: 1;
         }
 
-        /* ==================== 3D HOVER EFFECT ==================== */
-        .tilt-card {
-            transform-style: preserve-3d;
-            transform: perspective(1000px);
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
         }
 
-        .tilt-card-inner {
-            transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
         }
 
-        .tilt-card:hover .tilt-card-inner {
-            transform: translateZ(20px);
+        .btn-outline:hover {
+            background-color: var(--bg-tertiary);
+            border-color: var(--text-tertiary);
+            color: var(--text-primary);
         }
 
-        .tilt-card-front {
-            backface-visibility: hidden;
+        .btn-icon {
+            width: 38px;
+            padding: 0;
+        }
+
+        /* ==================== CATEGORY NAV ==================== */
+        .category-nav {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;  /* Firefox */
+            white-space: nowrap;
+            padding-bottom: 2px;
+        }
+
+        .category-nav::-webkit-scrollbar {
+            display: none;  /* Chrome, Safari, Opera */
+        }
+
+        .category-nav-list {
+            display: flex;
+            gap: 2px;
+            list-style: none;
+        }
+
+        .category-nav-item {
+            position: relative;
+        }
+
+        .category-nav-link {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-tertiary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+        }
+
+        .category-nav-link:hover {
+            color: var(--text-primary);
+        }
+
+        .category-nav-link.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
         /* ==================== LOGIN PAGE STYLES ==================== */
-        .login-container {
-            max-width: 450px;
-            margin: 6rem auto;
-            background: rgba(26, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(112, 64, 255, 0.2);
-            border: 1px solid rgba(112, 64, 255, 0.3);
-            animation: fade-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
-            overflow: hidden;
+        .auth-container {
+            max-width: 440px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
         }
 
-        .login-container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
-            background-size: 200% 100%;
-            animation: gradient-shift 3s ease infinite;
-            z-index: 1;
-        }
-
-        .login-title {
-            font-family: 'Orbitron', sans-serif;
+        .auth-header {
             text-align: center;
-            margin-bottom: 2.5rem;
-            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .auth-title {
+            font-family: 'Rajdhani', sans-serif;
             font-size: 2rem;
-            text-shadow: 0 0 10px rgba(112, 64, 255, 0.5);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .auth-subtitle {
+            color: var(--text-tertiary);
+            font-size: 0.95rem;
         }
 
         .form-group {
-            margin-bottom: 1.8rem;
-            position: relative;
+            margin-bottom: 1.5rem;
         }
 
         .form-label {
             display: block;
-            margin-bottom: 0.7rem;
-            color: var(--text);
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
             font-size: 0.9rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
         }
 
         .form-input {
             width: 100%;
-            padding: 1rem 1.2rem;
-            border-radius: 8px;
-            border: 1px solid rgba(112, 64, 255, 0.3);
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text);
-            font-family: inherit;
+            padding: 12px 16px;
+            background-color: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            color: var(--text-primary);
+            font-size: 0.95rem;
             transition: var(--transition);
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .form-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(112, 64, 255, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.1);
-            outline: none;
+            box-shadow: 0 0 0 2px rgba(87, 115, 255, 0.15);
+        }
+
+        .form-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-checkbox input {
+            accent-color: var(--primary);
+        }
+
+        .form-checkbox label {
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .forgot-password:hover {
+            color: var(--accent-hover);
         }
 
         .submit-btn {
             width: 100%;
-            padding: 1rem;
-            background: linear-gradient(90deg, var(--primary), var(--accent));
+            padding: 12px;
+            background-color: var(--primary);
+            border-radius: var(--border-radius-md);
             color: white;
-            border-radius: 8px;
             font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
             transition: var(--transition);
-            margin-top: 1.5rem;
-            position: relative;
-            overflow: hidden;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
-            font-size: 1.1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 5px rgba(112, 64, 255, 0.5);
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         }
 
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 10px rgba(112, 64, 255, 0.8);
+            background-color: var(--accent-hover);
+            box-shadow: 0 4px 12px rgba(87, 115, 255, 0.3);
         }
 
-        .submit-btn::before {
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+
+        .divider::before,
+        .divider::after {
             content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to right,
-                transparent,
-                rgba(255, 255, 255, 0.2),
-                transparent
-            );
-            transition: 0.5s;
+            flex: 1;
+            height: 1px;
+            background-color: var(--border-color);
         }
 
-        .submit-btn:hover::before {
-            left: 100%;
+        .divider span {
+            padding: 0 1rem;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: var(--bg-tertiary);
+            border-radius: var(--border-radius-md);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            background-color: var(--bg-secondary);
+            border-color: var(--text-tertiary);
+            color: var(--text-primary);
+        }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+        }
+
+        .auth-footer a {
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .auth-footer a:hover {
+            color: var(--accent-hover);
         }
 
         .error-message {
-            color: #ff5e5e;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            text-align: center;
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            padding: 12px;
+            border-radius: var(--border-radius-md);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             display: none;
-            background: rgba(255, 0, 0, 0.1);
-            padding: 0.5rem;
-            border-radius: 4px;
-            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
-        }
-
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
         }
 
         /* ==================== ADD NEW LINK FORM STYLES ==================== */
-        .add-link-container {
-            max-width: 650px;
-            margin: 3rem auto;
-            background: rgba(26, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: var(--border-radius);
-            padding: 2.5rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(112, 64, 255, 0.2);
-            border: 1px solid rgba(112, 64, 255, 0.3);
-            animation: fade-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
-            overflow: hidden;
+        .form-container {
+            max-width: 700px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
         }
 
-        .add-link-container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
-            background-size: 200% 100%;
-            animation: gradient-shift 3s ease infinite;
-            z-index: 1;
+        .form-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .form-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
         .back-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            margin-bottom: 1.5rem;
+            gap: 6px;
+            color: var(--text-tertiary);
             font-size: 0.9rem;
+            font-weight: 500;
             transition: var(--transition);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(112, 64, 255, 0.2);
         }
 
         .back-btn:hover {
             color: var(--primary);
-            background: rgba(112, 64, 255, 0.1);
-            transform: translateX(-3px);
-            box-shadow: 0 0 10px rgba(112, 64, 255, 0.2);
         }
 
-        /* ==================== PARTICLE EFFECTS ==================== */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
-        .particle {
-            position: absolute;
-            background: #ffffff;
-            border-radius: 50%;
-            opacity: 0;
-            animation: particle-animation 6s ease-in-out infinite;
+        .form-grid .form-group:last-child {
+            grid-column: span 2;
         }
 
-        @keyframes particle-animation {
-            0% {
-                opacity: 0;
-                transform: translateY(0) translateX(0) scale(1);
-            }
-            10% {
-                opacity: 0.8;
-            }
-            90% {
-                opacity: 0.2;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-100px) translateX(20px) scale(0);
-            }
+        .form-group.full-width {
+            grid-column: span 2;
         }
 
-        /* ==================== ANIMATIONS ==================== */
-        @keyframes fade-in {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .form-help {
+            font-size: 0.8rem;
+            margin-top: 4px;
+            color: var(--text-tertiary);
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
+        .form-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 2rem;
+        }
+
+        .cancel-btn {
+            padding: 12px 20px;
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-md);
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .cancel-btn:hover {
+            background-color: var(--bg-tertiary);
+            border-color: var(--text-tertiary);
+            color: var(--text-primary);
+        }
+
+        /* ==================== FOOTER ==================== */
+        .footer {
+            background-color: var(--bg-secondary);
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+        }
+
+        .footer-column h3 {
+            font-family: 'Rajdhani', sans-serif;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-tertiary);
+            font-size: 0.85rem;
+        }
+
+        /* ==================== SVG ICONS ==================== */
+        .icon {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
+        /* ==================== LOGOUT BUTTON ==================== */
+        .logout-btn {
+            font-size: 0.9rem;
+            color: var(--text-tertiary);
+            background: transparent;
+            padding: 8px 12px;
+            border-radius: var(--border-radius-md);
+            transition: var(--transition);
+            display: none;
+        }
+
+        .logout-btn.visible {
+            display: block;
+        }
+
+        .logout-btn:hover {
+            color: var(--primary);
+            background: rgba(87, 115, 255, 0.1);
         }
 
         /* ==================== RESPONSIVE STYLES ==================== */
-        @media (max-width: 768px) {
-            .header {
-                padding: 1rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
-            }
-
-            .admin-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-
-            .cards-grid {
-                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-                gap: 1.5rem;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-                margin-bottom: 2rem;
-            }
-
-            .card-image-container {
-                height: 180px;
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 1rem;
+            }
+
+            .search-bar {
+                width: 200px;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-section {
+                height: 350px;
+            }
+
             .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            }
+
+            .form-grid {
                 grid-template-columns: 1fr;
             }
 
-            .login-container,
-            .add-link-container {
-                margin: 3rem 1rem;
-                padding: 1.5rem;
-            }
-
-            .section-title {
-                font-size: 1.5rem;
-            }
-
-            .admin-btn {
-                width: 35px;
-                height: 35px;
+            .form-grid .form-group:last-child,
+            .form-group.full-width {
+                grid-column: span 1;
             }
         }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .hero-section {
+                height: 300px;
+            }
+
+            .hero-btn {
+                padding: 10px 20px;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .search-bar {
+                display: none;
+            }
+
+            .logo-text {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Debug outlines for development
+        [id] {
+            outline: 1px solid red;
+        }
+        */
     </style>
 </head>
 <body>
-    <!-- Particle effects container -->
-    <div class="particles" id="particles"></div>
-
-    <!-- Main homepage content -->
-    <div id="homepage" class="page active">
+    <div class="app-container">
+        <!-- Header -->
         <header class="header">
-            <div class="logo">CHOBBER'S SERVER</div>
-            <button class="admin-btn" id="adminBtn">+</button>
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="search-bar">
+                        <div class="search-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <circle cx="10" cy="10" r="7"></circle>
+                                <line x1="21" y1="21" x2="15" y2="15"></line>
+                            </svg>
+                        </div>
+                        <input type="text" class="search-input" placeholder="Search games and software...">
+                    </div>
+                </div>
+
+                <div class="logo">
+                    <div class="logo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16v8a8 8 0 0 1 -16 0v-8"></path>
+                            <path d="M4 4v8a8 8 0 0 0 16 0v-8"></path>
+                            <path d="M9 15v2"></path>
+                            <path d="M15 15v2"></path>
+                        </svg>
+                    </div>
+                    <div class="logo-text">CHOBBER'S SERVER</div>
+                </div>
+
+                <div class="header-right">
+                    <!-- Invisible admin access area - blended with background -->
+                    <div id="adminAccessArea" class="admin-access-area"></div>
+
+                    <!-- Only visible when admin is logged in -->
+                    <button class="admin-btn" id="adminBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                    </button>
+                    <button class="logout-btn" id="logoutBtn">Logout</button>
+                </div>
+            </div>
         </header>
 
-        <div class="ticker-container">
-            <div class="ticker">
-                <div class="ticker-item"><span>New Release:</span> Cyberpunk 2077 DLC - Phantom Liberty</div>
-                <div class="ticker-item"><span>Just Added:</span> Adobe Photoshop 2023</div>
-                <div class="ticker-item"><span>Popular:</span> Call of Duty: Modern Warfare III</div>
-                <div class="ticker-item"><span>Mobile:</span> FL Studio Mobile Premium</div>
-                <div class="ticker-item"><span>Media:</span> Premiere Pro Templates Pack</div>
-            </div>
-            <div class="ticker" aria-hidden="true">
-                <div class="ticker-item"><span>New Release:</span> Cyberpunk 2077 DLC - Phantom Liberty</div>
-                <div class="ticker-item"><span>Just Added:</span> Adobe Photoshop 2023</div>
-                <div class="ticker-item"><span>Popular:</span> Call of Duty: Modern Warfare III</div>
-                <div class="ticker-item"><span>Mobile:</span> FL Studio Mobile Premium</div>
-                <div class="ticker-item"><span>Media:</span> Premiere Pro Templates Pack</div>
-            </div>
-        </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Homepage -->
+            <div id="homepage" class="page active">
+                <!-- Announcements Ticker -->
+                <div class="announcement-bar">
+                    <div class="ticker-container">
+                        <div class="ticker">
+                            <div class="ticker-item">
+                                <span class="ticker-label label-new">NEW</span>
+                                <span class="ticker-text">Cyberpunk 2077: Phantom Liberty now available</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="ticker-label label-hot">HOT</span>
+                                <span class="ticker-text">Adobe Creative Cloud 2023 Suite complete collection</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="ticker-label label-popular">POPULAR</span>
+                                <span class="ticker-text">Call of Duty: Modern Warfare III pre-release</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="ticker-label label-new">NEW</span>
+                                <span class="ticker-text">FL Studio Mobile Premium with sound packs</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="ticker-label label-hot">HOT</span>
+                                <span class="ticker-text">Microsoft Office 2023 Professional Plus with activator</span>
+                            </div>
+                        </div>
+                        <div class="ticker" aria-hidden="true">
+                            <div class="ticker-item">
+                                <span class="ticker-label label-new">NEW</span>
+                                <span class="ticker-text">Cyberpunk 2077: Phantom Liberty now available</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="ticker-label label-hot">HOT</span>
+                                <span class="ticker-text">Adobe Creative Cloud 2023 Suite complete collection</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="ticker-label label-popular">POPULAR</span>
+                                <span class="ticker-text">Call of Duty: Modern Warfare III pre-release</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="ticker-label label-new">NEW</span>
+                                <span class="ticker-text">FL Studio Mobile Premium with sound packs</span>
+                            </div>
+                            <div class="ticker-item">
+                                <span class="ticker-label label-hot">HOT</span>
+                                <span class="ticker-text">Microsoft Office 2023 Professional Plus with activator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="container">
-            <h2 class="section-title">Featured Files</h2>
-            <div class="cards-grid" id="cardsContainer">
-                <!-- Cards will be dynamically inserted here -->
-            </div>
-        </div>
-    </div>
+                <!-- Hero Section -->
+                <section class="hero-section">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Premium Games & Software</h1>
+                        <p class="hero-subtitle">Access a vast library of premium content, always up-to-date and ready to download</p>
+                        <button class="hero-btn">Explore Collection</button>
+                    </div>
+                </section>
 
-    <!-- Login page -->
-    <div id="loginPage" class="page" style="display: none;">
-        <div class="container">
-            <div class="login-container">
-                <h2 class="login-title">ADMIN LOGIN</h2>
-                <div class="error-message" id="loginError">Incorrect username or password</div>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" id="username" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" class="form-input" required>
-                    </div>
-                    <button type="submit" class="submit-btn">ACCESS SYSTEM</button>
-                </form>
-            </div>
-        </div>
-    </div>
+                <!-- Categories Navigation -->
+                <div class="container">
+                    <nav class="category-nav">
+                        <ul class="category-nav-list">
+                            <li class="category-nav-item">
+                                <a href="#" class="category-nav-link active">All Content</a>
+                            </li>
+                            <li class="category-nav-item">
+                                <a href="#" class="category-nav-link">Games</a>
+                            </li>
+                            <li class="category-nav-item">
+                                <a href="#" class="category-nav-link">Creative Software</a>
+                            </li>
+                            <li class="category-nav-item">
+                                <a href="#" class="category-nav-link">Productivity</a>
+                            </li>
+                            <li class="category-nav-item">
+                                <a href="#" class="category-nav-link">Mobile Apps</a>
+                            </li>
+                            <li class="category-nav-item">
+                                <a href="#" class="category-nav-link">Templates & Assets</a>
+                            </li>
+                        </ul>
+                    </nav>
 
-    <!-- Add new link page -->
-    <div id="addLinkPage" class="page" style="display: none;">
-        <header class="header">
-            <div class="logo">CHOBBER'S SERVER</div>
-        </header>
+                    <!-- Featured Section -->
+                    <section class="section">
+                        <div class="section-header">
+                            <h2 class="section-title">Featured Content</h2>
+                            <a href="#" class="view-all">
+                                View all
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <polyline points="9 6 15 12 9 18"></polyline>
+                                </svg>
+                            </a>
+                        </div>
 
-        <div class="container">
-            <div class="add-link-container">
-                <a href="#" class="back-btn" id="backBtn">← Back to Dashboard</a>
-                <h2 class="login-title">Add New Content</h2>
-                <form id="addLinkForm">
-                    <div class="form-group">
-                        <label for="title" class="form-label">Title</label>
-                        <input type="text" id="title" class="form-input" required placeholder="Enter content title">
-                    </div>
-                    <div class="form-group">
-                        <label for="imageUrl" class="form-label">Image URL</label>
-                        <input type="url" id="imageUrl" class="form-input" required placeholder="Enter image URL">
-                    </div>
-                    <div class="form-group">
-                        <label for="driveUrl" class="form-label">Google Drive URL</label>
-                        <input type="url" id="driveUrl" class="form-input" required placeholder="Enter Google Drive URL">
-                    </div>
-                    <button type="submit" class="submit-btn">PUBLISH CONTENT</button>
-                </form>
+                        <!-- FIXED: Corrected ID attribute from "i d" to "id" -->
+                        <div class="cards-grid" id="cardsContainer">
+                            <!-- Cards will be dynamically inserted here -->
+                        </div>
+                    </section>
+
+                    <!-- Recent Additions Section -->
+                    <section class="section">
+                        <div class="section-header">
+                            <h2 class="section-title">Recently Added</h2>
+                            <a href="#" class="view-all">
+                                View all
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <polyline points="9 6 15 12 9 18"></polyline>
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="cards-grid" id="recentCardsContainer">
+                            <!-- Recent cards will be dynamically inserted here -->
+                        </div>
+                    </section>
+                </div>
             </div>
-        </div>
+
+            <!-- Login Page -->
+            <div id="loginPage" class="page" style="display: none;">
+                <div class="container">
+                    <div class="auth-container">
+                        <div class="auth-header">
+                            <h2 class="auth-title">Admin Login</h2>
+                            <p class="auth-subtitle">Enter your credentials to access admin panel</p>
+                        </div>
+
+                        <div class="error-message" id="loginError">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                            </svg>
+                            Invalid username or password
+                        </div>
+
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" id="username" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" class="form-input" required>
+                            </div>
+
+                            <div class="form-footer">
+                                <div class="form-checkbox">
+                                    <input type="checkbox" id="remember">
+                                    <label for="remember">Remember me</label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="submit-btn">Sign In</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add New Link Page -->
+            <div id="addLinkPage" class="page" style="display: none;">
+                <div class="container">
+                    <div class="form-container">
+                        <div class="form-header">
+                            <h2 class="form-title">Add New Content</h2>
+                            <a href="#" class="back-btn" id="backBtn">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <line x1="5" y1="12" x2="11" y2="18"></line>
+                                    <line x1="5" y1="12" x2="11" y2="6"></line>
+                                </svg>
+                                Back to Dashboard
+                            </a>
+                        </div>
+
+                        <form id="addLinkForm">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="title" class="form-label">Title</label>
+                                    <input type="text" id="title" class="form-input" required placeholder="Enter content title">
+                                    <p class="form-help">Name of the game or software</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="category" class="form-label">Category</label>
+                                    <select class="form-input" id="category">
+                                        <option value="games">Games</option>
+                                        <option value="creative">Creative Software</option>
+                                        <option value="productivity">Productivity</option>
+                                        <option value="mobile">Mobile Apps</option>
+                                        <option value="templates">Templates & Assets</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="imageUrl" class="form-label">Image URL</label>
+                                    <input type="url" id="imageUrl" class="form-input" required placeholder="https://example.com/image.jpg">
+                                    <p class="form-help">URL to the cover image</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="badge" class="form-label">Badge (optional)</label>
+                                    <select class="form-input" id="badge">
+                                        <option value="">None</option>
+                                        <option value="NEW">New</option>
+                                        <option value="HOT">Hot</option>
+                                        <option value="POPULAR">Popular</option>
+                                        <option value="UPDATED">Updated</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description" class="form-label">Description (optional)</label>
+                                    <textarea id="description" class="form-input" rows="3" placeholder="Brief description of the content"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="driveUrl" class="form-label">Google Drive URL</label>
+                                    <input type="url" id="driveUrl" class="form-input" required placeholder="https://drive.google.com/...">
+                                    <p class="form-help">Direct link to the Google Drive file or folder</p>
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                                <button type="submit" class="submit-btn">Publish Content</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>CHOBBER'S SERVER</h3>
+                    <p style="color: var(--text-tertiary); font-size: 0.9rem; line-height: 1.6;">
+                        The premier destination for high-quality games and professional software distribution.
+                    </p>
+                </div>
+                <div class="footer-column">
+                    <h3>Browse</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Games</a></li>
+                        <li><a href="#">Creative Software</a></li>
+                        <li><a href="#">Productivity Tools</a></li>
+                        <li>
+                            <!-- Hidden admin trigger in footer -->
+                            <a href="#" id="footerAdminLink">Mobile Apps</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li>
+                            <!-- Another hidden admin trigger in footer -->
+                            <a href="#" id="footerAdminLink2">Request Content</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">DMCA Policy</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 CHOBBER'S SERVER. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
 
     <script>
@@ -846,244 +1360,424 @@
                 title: "Cyberpunk 2077: Phantom Liberty",
                 image: "https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/3091615a8a2b7bb84a8fa55687be2bd8.jpg",
                 url: "https://drive.google.com/drive/folders/example1",
-                badge: "NEW"
+                badge: "NEW",
+                category: "games",
+                description: "The massive expansion for Cyberpunk 2077 featuring a spy-thriller adventure in a new district of Night City."
             },
             {
-                title: "Adobe Photoshop 2023",
+                title: "Adobe Creative Cloud 2023 Complete",
                 image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1200px-Adobe_Photoshop_CC_icon.svg.png",
                 url: "https://drive.google.com/drive/folders/example2",
-                badge: "POPULAR"
+                badge: "POPULAR",
+                category: "creative",
+                description: "Complete Adobe Creative Cloud 2023 suite including Photoshop, Illustrator, Premiere Pro and more."
             },
             {
                 title: "Call of Duty: Modern Warfare III",
                 image: "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/60eca3ac0eda3f337dfb5b6a045670912eef0e8e0c5c667c.jpg",
                 url: "https://drive.google.com/drive/folders/example3",
-                badge: "HOT"
+                badge: "HOT",
+                category: "games",
+                description: "The newest installment in the Call of Duty franchise with enhanced multiplayer and campaign modes."
             },
             {
                 title: "FL Studio Mobile Premium",
                 image: "https://play-lh.googleusercontent.com/E8comp6AI-ViExCJT9l2BfWQVE3aEFdTVV2_Y-VuTRDuOQEB2zdEAtxKmRsgrMErCRs=w240-h480-rw",
                 url: "https://drive.google.com/drive/folders/example4",
-                badge: "MOBILE"
+                badge: "MOBILE",
+                category: "mobile",
+                description: "Professional music production studio for mobile devices with all premium features unlocked."
             },
             {
-                title: "Premiere Pro Templates Pack",
-                image: "https://cdn.mos.cms.futurecdn.net/SytNGv3ZxAVCkvcszmLGd3.jpg",
-                url: "https://drive.google.com/drive/folders/example5",
-                badge: "MEDIA"
-            },
-            {
-                title: "Microsoft Office 2023 Professional",
+                title: "Microsoft Office 2023 Professional Plus",
                 image: "https://cdn-icons-png.flaticon.com/512/732/732224.png",
                 url: "https://drive.google.com/drive/folders/example6",
-                badge: "UTILITY"
+                badge: "UPDATED",
+                category: "productivity",
+                description: "The latest version of Microsoft Office suite including Word, Excel, PowerPoint and more."
+            },
+            {
+                title: "Premiere Pro Templates Pack 2023",
+                image: "https://cdn.mos.cms.futurecdn.net/SytNGv3ZxAVCkvcszmLGd3.jpg",
+                url: "https://drive.google.com/drive/folders/example5",
+                badge: "",
+                category: "templates",
+                description: "Collection of 500+ professional templates for Adobe Premiere Pro with transitions and effects."
+            }
+        ];
+
+        // Recent cards data
+        const recentCards = [
+            {
+                title: "Autodesk 3ds Max 2024",
+                image: "https://www.gamepressure.com/gallery/html/news/bigphotos/51775860.jpg",
+                url: "https://drive.google.com/drive/folders/example7",
+                badge: "NEW",
+                category: "creative",
+                description: "Professional 3D modeling and animation software for game developers and visual effects artists."
+            },
+            {
+                title: "The Sims 4: All Expansions Bundle",
+                image: "https://media.contentapi.ea.com/content/dam/eacom/SIMS/franchise-landing/ts4-refresh-assets/images/2019/06/ts4-featured-image-base-refresh.png.adapt.crop16x9.1455w.png",
+                url: "https://drive.google.com/drive/folders/example8",
+                badge: "UPDATED",
+                category: "games",
+                description: "Complete collection of The Sims 4 with all expansion packs, game packs, and stuff packs included."
+            },
+            {
+                title: "Final Cut Pro X (macOS)",
+                image: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/7c/78/74/7c7874f8-ddf7-dcde-5a23-22dff756a0cb/AppIcon-FCPX-85-220-0-4-2x.png/1200x630bb.png",
+                url: "https://drive.google.com/drive/folders/example9",
+                badge: "",
+                category: "creative",
+                description: "Apple's professional video editing software with all plugins and additional resources."
+            },
+            {
+                title: "Windows 11 Pro (22H2)",
+                image: "https://cdn.mos.cms.futurecdn.net/UMtzXfbKX8wd9ynELARPYb.jpg",
+                url: "https://drive.google.com/drive/folders/example10",
+                badge: "POPULAR",
+                category: "productivity",
+                description: "The latest version of Windows 11 Professional with activator and pre-installed essential software."
             }
         ];
 
         // ==================== DOM ELEMENTS ====================
-        const homepage = document.getElementById("homepage");
-        const loginPage = document.getElementById("loginPage");
-        const addLinkPage = document.getElementById("addLinkPage");
-        const cardsContainer = document.getElementById("cardsContainer");
-        const adminBtn = document.getElementById("adminBtn");
-        const loginForm = document.getElementById("loginForm");
-        const loginError = document.getElementById("loginError");
-        const addLinkForm = document.getElementById("addLinkForm");
-        const backBtn = document.getElementById("backBtn");
-        const particlesContainer = document.getElementById("particles");
+        // Wait for DOM to be fully loaded before accessing elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const homepage = document.getElementById("homepage");
+            const loginPage = document.getElementById("loginPage");
+            const addLinkPage = document.getElementById("addLinkPage");
 
-        // ==================== ADMIN CREDENTIALS ====================
-        const adminCredentials = {
-            username: "admin",
-            password: "password123"
-        };
+            // Fixed: Make sure these elements exist and are properly selected
+            const cardsContainer = document.getElementById("cardsContainer");
+            const recentCardsContainer = document.getElementById("recentCardsContainer");
 
-        // ==================== DATA STORAGE ====================
-        // Load cards from localStorage or use initial data
-        let cards = JSON.parse(localStorage.getItem("chobbersCards")) || initialCards;
+            if (!cardsContainer) {
+                console.error("Cards container element not found!");
+            }
 
-        // ==================== FUNCTIONS ====================
-        // Function to render all cards
-        function renderCards() {
-            cardsContainer.innerHTML = "";
-            cards.forEach((card, index) => {
-                const cardElement = createCardElement(card, index);
-                cardsContainer.appendChild(cardElement);
-            });
+            if (!recentCardsContainer) {
+                console.error("Recent cards container element not found!");
+            }
 
-            // Initialize 3D card effects after rendering
-            initTiltEffect();
-        }
+            const adminBtn = document.getElementById("adminBtn");
+            const adminAccessArea = document.getElementById("adminAccessArea");
+            const footerAdminLink = document.getElementById("footerAdminLink");
+            const footerAdminLink2 = document.getElementById("footerAdminLink2");
+            const logoutBtn = document.getElementById("logoutBtn");
+            const loginForm = document.getElementById("loginForm");
+            const loginError = document.getElementById("loginError");
+            const addLinkForm = document.getElementById("addLinkForm");
+            const backBtn = document.getElementById("backBtn");
+            const cancelBtn = document.getElementById("cancelBtn");
 
-        // Function to create a single card element
-        function createCardElement(card, index) {
-            const cardDiv = document.createElement("div");
-            cardDiv.className = "card tilt-card";
-            cardDiv.setAttribute('data-card-index', index);
-
-            // Add badge if it exists
-            const badgeHtml = card.badge ? `<div class="card-badge">${card.badge}</div>` : '';
-
-            cardDiv.innerHTML = `
-                <div class="tilt-card-inner">
-                    <div class="tilt-card-front">
-                        <div class="card-image-container">
-                            <img src="${card.image}" alt="${card.title}" class="card-image">
-                            <div class="card-overlay"></div>
-                            ${badgeHtml}
-                        </div>
-                        <div class="card-content">
-                            <h3 class="card-title">${card.title}</h3>
-                            <a href="${card.url}" target="_blank" class="card-btn">DOWNLOAD</a>
-                        </div>
-                    </div>
-                </div>
-            `;
-
-            return cardDiv;
-        }
-
-        // Function to add a new card
-        function addNewCard(title, imageUrl, driveUrl) {
-            const newCard = {
-                title: title,
-                image: imageUrl,
-                url: driveUrl,
-                badge: "NEW"
+            // ==================== ADMIN CREDENTIALS ====================
+            const adminCredentials = {
+                username: "admin",
+                password: "password123"
             };
 
-            cards.unshift(newCard); // Add to beginning of array
-            saveCards();
-            renderCards();
-        }
+            // ==================== SECRET ADMIN ACCESS VARIABLES ====================
+            let clickCount = 0;
+            let lastClickTime = 0;
 
-        // Function to save cards to localStorage
-        function saveCards() {
-            localStorage.setItem("chobbersCards", JSON.stringify(cards));
-        }
+            // ==================== DATA STORAGE ====================
+            // Load cards from localStorage or use initial data
+            let cards = JSON.parse(localStorage.getItem("chobbersCards")) || initialCards;
 
-        // Function to navigate between pages
-        function navigateTo(page) {
-            homepage.style.display = "none";
-            loginPage.style.display = "none";
-            addLinkPage.style.display = "none";
-
-            if (page === "homepage") {
-                homepage.style.display = "block";
-            } else if (page === "login") {
-                loginPage.style.display = "block";
-            } else if (page === "addLink") {
-                addLinkPage.style.display = "block";
+            // Check if admin is logged in (using session storage)
+            function isAdminLoggedIn() {
+                return sessionStorage.getItem('adminLoggedIn') === 'true';
             }
-        }
 
-        // Function to initialize 3D tilt effect on cards
-        function initTiltEffect() {
-            const cards = document.querySelectorAll('.tilt-card');
+            // Set admin logged in status
+            function setAdminLoggedIn(status) {
+                if (status) {
+                    sessionStorage.setItem('adminLoggedIn', 'true');
+                } else {
+                    sessionStorage.removeItem('adminLoggedIn');
+                }
+                updateAdminUI();
+            }
 
-            cards.forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const cardRect = card.getBoundingClientRect();
-                    const x = e.clientX - cardRect.left;
-                    const y = e.clientY - cardRect.top;
+            // Update UI based on admin login status
+            function updateAdminUI() {
+                if (isAdminLoggedIn()) {
+                    adminBtn.classList.add('visible');
+                    logoutBtn.classList.add('visible');
+                } else {
+                    adminBtn.classList.remove('visible');
+                    logoutBtn.classList.remove('visible');
+                }
+            }
 
-                    const centerX = cardRect.width / 2;
-                    const centerY = cardRect.height / 2;
+            // ==================== FUNCTIONS ====================
+            // Function to render all cards
+            function renderCards() {
+                if (!cardsContainer) {
+                    console.error("Cannot render cards: container element not found");
+                    return;
+                }
 
-                    const rotateY = (x - centerX) / 20;
-                    const rotateX = (centerY - y) / 20;
-
-                    card.querySelector('.tilt-card-inner').style.transform =
-                        `rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(20px)`;
+                console.log("Rendering cards...");
+                cardsContainer.innerHTML = "";
+                cards.forEach(card => {
+                    const cardElement = createCardElement(card);
+                    cardsContainer.appendChild(cardElement);
                 });
 
-                card.addEventListener('mouseleave', () => {
-                    card.querySelector('.tilt-card-inner').style.transform =
-                        `rotateY(0deg) rotateX(0deg) translateZ(0px)`;
-                });
+                // Render recent cards
+                if (recentCardsContainer) {
+                    recentCardsContainer.innerHTML = "";
+                    recentCards.forEach(card => {
+                        const cardElement = createCardElement(card);
+                        recentCardsContainer.appendChild(cardElement);
+                    });
+                }
 
-                // Add subtle floating animation to each card
-                card.style.animation = `float ${3 + Math.random() * 2}s ease-in-out infinite`;
-                card.style.animationDelay = `${Math.random() * 2}s`;
-            });
-        }
-
-        // Function to create particles
-        function createParticles() {
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-
-                // Random size (tiny)
-                const size = Math.random() * 3 + 1;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-
-                // Random position
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-
-                // Random glow color (purple/blue variation)
-                const hue = 240 + (Math.random() * 60);
-                particle.style.boxShadow = `0 0 ${size * 2}px hsla(${hue}, 100%, 70%, 0.8)`;
-
-                // Random animation duration and delay
-                const duration = 6 + Math.random() * 4;
-                const delay = Math.random() * 5;
-                particle.style.animation = `particle-animation ${duration}s ease-in-out ${delay}s infinite`;
-
-                particlesContainer.appendChild(particle);
+                console.log("Cards rendered successfully");
             }
-        }
 
-        // ==================== EVENT LISTENERS ====================
-        // Admin button click - show login page
-        adminBtn.addEventListener("click", () => {
-            navigateTo("login");
-        });
+            // Function to create a single card element
+            function createCardElement(card) {
+                const cardDiv = document.createElement("div");
+                cardDiv.className = "card";
 
-        // Login form submission
-        loginForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
+                // Add badge if it exists
+                const badgeHtml = card.badge ?
+                    `<div class="card-badge badge-${card.badge.toLowerCase()}">${card.badge}</div>` : '';
 
-            if (username === adminCredentials.username && password === adminCredentials.password) {
+                cardDiv.innerHTML = `
+                    <div class="card-image-container">
+                        <img src="${card.image}" alt="${card.title}" class="card-image">
+                        ${badgeHtml}
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">${card.title}</h3>
+                        <div class="card-meta">
+                            <div class="meta-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                                    <line x1="4" y1="8" x2="20" y2="8"></line>
+                                    <line x1="8" y1="4" x2="8" y2="8"></line>
+                                    <line x1="16" y1="4" x2="16" y2="8"></line>
+                                </svg>
+                                ${new Date().toLocaleDateString()}
+                            </div>
+                            <div class="meta-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9l8 -4.5"></path>
+                                    <line x1="12" y1="12" x2="12" y2="12.01"></line>
+                                    <path d="M12 12l8 -4.5"></path>
+                                    <path d="M8.2 9.8l7.6 -4.6"></path>
+                                </svg>
+                                ${card.category || 'General'}
+                            </div>
+                        </div>
+                        <p class="card-description">${card.description || 'No description available'}</p>
+                        <div class="card-actions">
+                            <a href="${card.url}" target="_blank" class="btn btn-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                                    <polyline points="7 11 12 16 17 11"></polyline>
+                                    <line x1="12" y1="4" x2="12" y2="16"></line>
+                                </svg>
+                                Download
+                            </a>
+                            <button class="btn btn-outline btn-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                return cardDiv;
+            }
+
+            // Function to add a new card
+            function addNewCard(title, imageUrl, driveUrl, category, badge, description) {
+                const newCard = {
+                    title: title,
+                    image: imageUrl,
+                    url: driveUrl,
+                    badge: badge,
+                    category: category,
+                    description: description
+                };
+
+                // Add to beginning of array
+                cards.unshift(newCard);
+                saveCards();
+                renderCards();
+
+                console.log("New card added:", newCard);
+            }
+
+            // Function to save cards to localStorage
+            function saveCards() {
+                localStorage.setItem("chobbersCards", JSON.stringify(cards));
+                console.log("Cards saved to localStorage");
+            }
+
+            // Function to navigate between pages
+            function navigateTo(page) {
+                homepage.style.display = "none";
+                loginPage.style.display = "none";
+                addLinkPage.style.display = "none";
+
+                if (page === "homepage") {
+                    homepage.style.display = "block";
+                } else if (page === "login") {
+                    loginPage.style.display = "block";
+                } else if (page === "addLink") {
+                    addLinkPage.style.display = "block";
+                }
+
+                console.log("Navigated to:", page);
+            }
+
+            // ==================== EVENT LISTENERS ====================
+            // Admin button click (visible only when logged in)
+            adminBtn.addEventListener("click", () => {
                 navigateTo("addLink");
-                loginForm.reset();
-                loginError.style.display = "none";
-            } else {
-                loginError.style.display = "block";
-                setTimeout(() => {
+            });
+
+            // Secret admin access area click handling
+            adminAccessArea.addEventListener("click", (e) => {
+                const currentTime = new Date().getTime();
+
+                // Reset counter if clicks are more than 1 second apart
+                if (currentTime - lastClickTime > 1000) {
+                    clickCount = 0;
+                }
+
+                clickCount++;
+                lastClickTime = currentTime;
+
+                // After 3 quick clicks, show login page
+                if (clickCount >= 3) {
+                    clickCount = 0;
+                    navigateTo("login");
+                }
+            });
+
+            // Footer hidden admin access
+            footerAdminLink.addEventListener("click", (e) => {
+                // Prevent normal navigation
+                e.preventDefault();
+
+                // Special sequence: right-click followed by left-click within 1 second
+                const now = new Date().getTime();
+                if (e.button === 0 && footerAdminLink.dataset.rightClicked === 'true' &&
+                    now - parseInt(footerAdminLink.dataset.clickTime || 0) < 1000) {
+                    navigateTo("login");
+                    // Reset state
+                    footerAdminLink.dataset.rightClicked = 'false';
+                }
+            });
+
+            footerAdminLink.addEventListener("contextmenu", (e) => {
+                // Mark that right-click occurred and store the time
+                footerAdminLink.dataset.rightClicked = 'true';
+                footerAdminLink.dataset.clickTime = new Date().getTime();
+                // Don't show context menu
+                e.preventDefault();
+            });
+
+            // Second footer link - double-click access
+            footerAdminLink2.addEventListener("dblclick", (e) => {
+                e.preventDefault();
+                navigateTo("login");
+            });
+
+            // Logout button click
+            logoutBtn.addEventListener("click", () => {
+                setAdminLoggedIn(false);
+                navigateTo("homepage");
+            });
+
+            // Login form submission
+            loginForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+                const remember = document.getElementById("remember").checked;
+
+                if (username === adminCredentials.username && password === adminCredentials.password) {
+                    setAdminLoggedIn(true);
+                    navigateTo("addLink");
+                    loginForm.reset();
                     loginError.style.display = "none";
-                }, 3000);
-            }
+                } else {
+                    loginError.style.display = "flex";
+                    setTimeout(() => {
+                        loginError.style.display = "none";
+                    }, 3000);
+                }
+            });
+
+            // Add link form submission
+            addLinkForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+                const title = document.getElementById("title").value;
+                const imageUrl = document.getElementById("imageUrl").value;
+                const driveUrl = document.getElementById("driveUrl").value;
+                const category = document.getElementById("category").value;
+                const badge = document.getElementById("badge").value;
+                const description = document.getElementById("description").value;
+
+                addNewCard(title, imageUrl, driveUrl, category, badge, description);
+                addLinkForm.reset();
+                navigateTo("homepage");
+            });
+
+            // Back button click
+            backBtn.addEventListener("click", (e) =>  {
+                e.preventDefault();
+                navigateTo("homepage");
+            });
+
+            // Cancel button click
+            cancelBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                navigateTo("homepage");
+            });
+
+            // Category navigation
+            document.querySelectorAll('.category-nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.querySelectorAll('.category-nav-link').forEach(l => {
+                        l.classList.remove('active');
+                    });
+                    link.classList.add('active');
+                });
+            });
+
+            // Add event listener for secret key combination (Ctrl+Shift+A)
+            document.addEventListener('keydown', function(event) {
+                if (event.ctrlKey && event.shiftKey && event.key === 'A') {
+                    navigateTo('login');
+                    event.preventDefault();
+                }
+            });
+
+            // ==================== INITIALIZATION ====================
+            // Render initial cards
+            renderCards();
+
+            // Update admin UI based on login status
+            updateAdminUI();
+
+            console.log("Application initialized successfully");
         });
-
-        // Add link form submission
-        addLinkForm.addEventListener("submit", (e) => {
-            e.preventDefault();
-            const title = document.getElementById("title").value;
-            const imageUrl = document.getElementById("imageUrl").value;
-            const driveUrl = document.getElementById("driveUrl").value;
-
-            addNewCard(title, imageUrl, driveUrl);
-            addLinkForm.reset();
-            navigateTo("homepage");
-        });
-
-        // Back button click
-        backBtn.addEventListener("click", (e) => {
-            e.preventDefault();
-            navigateTo("homepage");
-        });
-
-        // ==================== INITIALIZATION ====================
-        // Create particle effects
-        createParticles();
-
-        // Render initial cards
-        renderCards();
     </script>
 </body>
 </html>
