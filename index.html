@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHOBBER'S Server</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== BASE STYLES ==================== */
+        :root {
+            --bg-color: #090418;
+            --card-bg: rgba(26, 23, 42, 0.75);
+            --primary: #7040ff;
+            --primary-glow: rgba(112, 64, 255, 0.5);
+            --primary-dark: #5026d9;
+            --accent: #ff40a0;
+            --accent-glow: rgba(255, 64, 160, 0.5);
+            --text: #e6e6ff;
+            --text-secondary: #a0a0c8;
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            --neon-shadow: 0 0 10px rgba(112, 64, 255, 0.7), 0 0 20px rgba(112, 64, 255, 0.4);
+            --glow: 0 0 10px var(--primary-glow);
+            --card-hover-transform: translateY(-8px) scale(1.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-color);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 20% 35%, rgba(112, 64, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 75% 65%, rgba(255, 64, 160, 0.15) 0%, transparent 40%),
+                linear-gradient(to bottom, var(--bg-color), #0d0621);
+            background-attachment: fixed;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><rect width="1" height="1" fill="rgba(255,255,255,0.03)" x="0" y="0"/></svg>') repeat;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        button {
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            border: none;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        /* ==================== HEADER STYLES ==================== */
+        .header {
+            background: rgba(9, 4, 24, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(112, 64, 255, 0.3);
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            color: white;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(112, 64, 255, 0.8);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo::before {
+            content: "{ ";
+            color: var(--accent);
+            margin-right: 4px;
+        }
+
+        .logo::after {
+            content: " }";
+            color: var(--accent);
+            margin-left: 4px;
+        }
+
+        .admin-btn {
+            background: rgba(112, 64, 255, 0.2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(112, 64, 255, 0.5);
+            border: 1px solid rgba(112, 64, 255, 0.5);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-btn::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid rgba(112, 64, 255, 0.5);
+            border-radius: 18px;
+            animation: pulse 2s infinite;
+            opacity: 0;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 20px rgba(112, 64, 255, 0.8);
+            background: rgba(112, 64, 255, 0.4);
+        }
+
+        .admin-btn:hover::before {
+            opacity: 1;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+            70% {
+                transform: scale(1.05);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+        }
+
+        /* ==================== TICKER/CAROUSEL STYLES ==================== */
+        .ticker-container {
+            background: linear-gradient(90deg, rgba(112, 64, 255, 0.15), rgba(255, 64, 160, 0.15));
+            padding: 1rem;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .ticker-container::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(90deg, var(--bg-color), transparent);
+            z-index: 2;
+        }
+
+        .ticker-container::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(270deg, var(--bg-color), transparent);
+            z-index: 2;
+        }
+
+        .ticker {
+            display: flex;
+            white-space: nowrap;
+            animation: ticker-scroll 30s linear infinite;
+        }
+
+        .ticker-item {
+            padding: 0 2rem;
+            color: var(--text);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            text-shadow: 0 0 10px rgba(112, 64, 255, 0.5);
+        }
+
+        .ticker-item span {
+            color: var(--accent);
+            font-weight: 600;
+            margin: 0 0.5rem;
+        }
+
+        .ticker-item::before {
+            content: "★";
+            color: var(--primary);
+            margin-right: 8px;
+            animation: star-pulse 2s infinite alternate;
+        }
+
+        @keyframes star-pulse {
+            from { opacity: 0.5; text-shadow: 0 0 5px var(--primary-glow); }
+            to { opacity: 1; text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary-glow); }
+        }
+
+        @keyframes ticker-scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .ticker:hover {
+            animation-play-state: paused;
+        }
+
+        /* ==================== MAIN CONTENT STYLES ==================== */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(112, 64, 255, 0.8);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 80px;
+            width: 30px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            perspective: 1000px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            transition: var(--transition);
+            border: 1px solid rgba(112, 64, 255, 0.2);
+            position: relative;
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: var(--card-hover-transform);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(112, 64, 255, 0.4);
+            border-color: rgba(112, 64, 255, 0.6);
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+            background-size: 200% 100%;
+            animation: gradient-shift 3s ease infinite;
+            z-index: 1;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.05);
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(9, 4, 24, 0.8) 100%
+            );
+            z-index: 1;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 64, 160, 0.9);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 4px;
+            z-index: 2;
+            box-shadow: 0 0 10px rgba(255, 64, 160, 0.5);
+            transform: translateZ(20px);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            font-weight: 600;
+            text-shadow: 0 0 5px rgba(112, 64, 255, 0.5);
+        }
+
+        .card-btn {
+            display: block;
+            width: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 5px rgba(112, 64, 255, 0.5);
+        }
+
+        .card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 10px rgba(112, 64, 255, 0.8);
+        }
+
+        .card-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .card-btn:hover::before {
+            left: 100%;
+        }
+
+        /* ==================== 3D HOVER EFFECT ==================== */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+
+        .tilt-card-inner {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .tilt-card:hover .tilt-card-inner {
+            transform: translateZ(20px);
+        }
+
+        .tilt-card-front {
+            backface-visibility: hidden;
+        }
+
+        /* ==================== LOGIN PAGE STYLES ==================== */
+        .login-container {
+            max-width: 450px;
+            margin: 6rem auto;
+            background: rgba(26, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(112, 64, 255, 0.2);
+            border: 1px solid rgba(112, 64, 255, 0.3);
+            animation: fade-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+            background-size: 200% 100%;
+            animation: gradient-shift 3s ease infinite;
+            z-index: 1;
+        }
+
+        .login-title {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: #fff;
+            font-size: 2rem;
+            text-shadow: 0 0 10px rgba(112, 64, 255, 0.5);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+            position: relative;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.7rem;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid rgba(112, 64, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            font-family: inherit;
+            transition: var(--transition);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(112, 64, 255, 0.3), inset 0 0 10px rgba(0, 0, 0, 0.1);
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 0 5px rgba(112, 64, 255, 0.5);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 10px rgba(112, 64, 255, 0.8);
+        }
+
+        .submit-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to right,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .submit-btn:hover::before {
+            left: 100%;
+        }
+
+        .error-message {
+            color: #ff5e5e;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            text-align: center;
+            display: none;
+            background: rgba(255, 0, 0, 0.1);
+            padding: 0.5rem;
+            border-radius: 4px;
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+        }
+
+        /* ==================== ADD NEW LINK FORM STYLES ==================== */
+        .add-link-container {
+            max-width: 650px;
+            margin: 3rem auto;
+            background: rgba(26, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(112, 64, 255, 0.2);
+            border: 1px solid rgba(112, 64, 255, 0.3);
+            animation: fade-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .add-link-container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+            background-size: 200% 100%;
+            animation: gradient-shift 3s ease infinite;
+            z-index: 1;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(112, 64, 255, 0.2);
+        }
+
+        .back-btn:hover {
+            color: var(--primary);
+            background: rgba(112, 64, 255, 0.1);
+            transform: translateX(-3px);
+            box-shadow: 0 0 10px rgba(112, 64, 255, 0.2);
+        }
+
+        /* ==================== PARTICLE EFFECTS ==================== */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: #ffffff;
+            border-radius: 50%;
+            opacity: 0;
+            animation: particle-animation 6s ease-in-out infinite;
+        }
+
+        @keyframes particle-animation {
+            0% {
+                opacity: 0;
+                transform: translateY(0) translateX(0) scale(1);
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.2;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) translateX(20px) scale(0);
+            }
+        }
+
+        /* ==================== ANIMATIONS ==================== */
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* ==================== RESPONSIVE STYLES ==================== */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .admin-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .card-image-container {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .login-container,
+            .add-link-container {
+                margin: 3rem 1rem;
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .admin-btn {
+                width: 35px;
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle effects container -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Main homepage content -->
+    <div id="homepage" class="page active">
+        <header class="header">
+            <div class="logo">CHOBBER'S SERVER</div>
+            <button class="admin-btn" id="adminBtn">+</button>
+        </header>
+
+        <div class="ticker-container">
+            <div class="ticker">
+                <div class="ticker-item"><span>New Release:</span> Cyberpunk 2077 DLC - Phantom Liberty</div>
+                <div class="ticker-item"><span>Just Added:</span> Adobe Photoshop 2023</div>
+                <div class="ticker-item"><span>Popular:</span> Call of Duty: Modern Warfare III</div>
+                <div class="ticker-item"><span>Mobile:</span> FL Studio Mobile Premium</div>
+                <div class="ticker-item"><span>Media:</span> Premiere Pro Templates Pack</div>
+            </div>
+            <div class="ticker" aria-hidden="true">
+                <div class="ticker-item"><span>New Release:</span> Cyberpunk 2077 DLC - Phantom Liberty</div>
+                <div class="ticker-item"><span>Just Added:</span> Adobe Photoshop 2023</div>
+                <div class="ticker-item"><span>Popular:</span> Call of Duty: Modern Warfare III</div>
+                <div class="ticker-item"><span>Mobile:</span> FL Studio Mobile Premium</div>
+                <div class="ticker-item"><span>Media:</span> Premiere Pro Templates Pack</div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2 class="section-title">Featured Files</h2>
+            <div class="cards-grid" id="cardsContainer">
+                <!-- Cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Login page -->
+    <div id="loginPage" class="page" style="display: none;">
+        <div class="container">
+            <div class="login-container">
+                <h2 class="login-title">ADMIN LOGIN</h2>
+                <div class="error-message" id="loginError">Incorrect username or password</div>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="username" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" class="form-input" required>
+                    </div>
+                    <button type="submit" class="submit-btn">ACCESS SYSTEM</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add new link page -->
+    <div id="addLinkPage" class="page" style="display: none;">
+        <header class="header">
+            <div class="logo">CHOBBER'S SERVER</div>
+        </header>
+
+        <div class="container">
+            <div class="add-link-container">
+                <a href="#" class="back-btn" id="backBtn">← Back to Dashboard</a>
+                <h2 class="login-title">Add New Content</h2>
+                <form id="addLinkForm">
+                    <div class="form-group">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" id="title" class="form-input" required placeholder="Enter content title">
+                    </div>
+                    <div class="form-group">
+                        <label for="imageUrl" class="form-label">Image URL</label>
+                        <input type="url" id="imageUrl" class="form-input" required placeholder="Enter image URL">
+                    </div>
+                    <div class="form-group">
+                        <label for="driveUrl" class="form-label">Google Drive URL</label>
+                        <input type="url" id="driveUrl" class="form-input" required placeholder="Enter Google Drive URL">
+                    </div>
+                    <button type="submit" class="submit-btn">PUBLISH CONTENT</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== INITIALIZE SAMPLE CARD DATA ====================
+        const initialCards = [
+            {
+                title: "Cyberpunk 2077: Phantom Liberty",
+                image: "https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/3091615a8a2b7bb84a8fa55687be2bd8.jpg",
+                url: "https://drive.google.com/drive/folders/example1",
+                badge: "NEW"
+            },
+            {
+                title: "Adobe Photoshop 2023",
+                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1200px-Adobe_Photoshop_CC_icon.svg.png",
+                url: "https://drive.google.com/drive/folders/example2",
+                badge: "POPULAR"
+            },
+            {
+                title: "Call of Duty: Modern Warfare III",
+                image: "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/60eca3ac0eda3f337dfb5b6a045670912eef0e8e0c5c667c.jpg",
+                url: "https://drive.google.com/drive/folders/example3",
+                badge: "HOT"
+            },
+            {
+                title: "FL Studio Mobile Premium",
+                image: "https://play-lh.googleusercontent.com/E8comp6AI-ViExCJT9l2BfWQVE3aEFdTVV2_Y-VuTRDuOQEB2zdEAtxKmRsgrMErCRs=w240-h480-rw",
+                url: "https://drive.google.com/drive/folders/example4",
+                badge: "MOBILE"
+            },
+            {
+                title: "Premiere Pro Templates Pack",
+                image: "https://cdn.mos.cms.futurecdn.net/SytNGv3ZxAVCkvcszmLGd3.jpg",
+                url: "https://drive.google.com/drive/folders/example5",
+                badge: "MEDIA"
+            },
+            {
+                title: "Microsoft Office 2023 Professional",
+                image: "https://cdn-icons-png.flaticon.com/512/732/732224.png",
+                url: "https://drive.google.com/drive/folders/example6",
+                badge: "UTILITY"
+            }
+        ];
+
+        // ==================== DOM ELEMENTS ====================
+        const homepage = document.getElementById("homepage");
+        const loginPage = document.getElementById("loginPage");
+        const addLinkPage = document.getElementById("addLinkPage");
+        const cardsContainer = document.getElementById("cardsContainer");
+        const adminBtn = document.getElementById("adminBtn");
+        const loginForm = document.getElementById("loginForm");
+        const loginError = document.getElementById("loginError");
+        const addLinkForm = document.getElementById("addLinkForm");
+        const backBtn = document.getElementById("backBtn");
+        const particlesContainer = document.getElementById("particles");
+
+        // ==================== ADMIN CREDENTIALS ====================
+        const adminCredentials = {
+            username: "admin",
+            password: "password123"
+        };
+
+        // ==================== DATA STORAGE ====================
+        // Load cards from localStorage or use initial data
+        let cards = JSON.parse(localStorage.getItem("chobbersCards")) || initialCards;
+
+        // ==================== FUNCTIONS ====================
+        // Function to render all cards
+        function renderCards() {
+            cardsContainer.innerHTML = "";
+            cards.forEach((card, index) => {
+                const cardElement = createCardElement(card, index);
+                cardsContainer.appendChild(cardElement);
+            });
+
+            // Initialize 3D card effects after rendering
+            initTiltEffect();
+        }
+
+        // Function to create a single card element
+        function createCardElement(card, index) {
+            const cardDiv = document.createElement("div");
+            cardDiv.className = "card tilt-card";
+            cardDiv.setAttribute('data-card-index', index);
+
+            // Add badge if it exists
+            const badgeHtml = card.badge ? `<div class="card-badge">${card.badge}</div>` : '';
+
+            cardDiv.innerHTML = `
+                <div class="tilt-card-inner">
+                    <div class="tilt-card-front">
+                        <div class="card-image-container">
+                            <img src="${card.image}" alt="${card.title}" class="card-image">
+                            <div class="card-overlay"></div>
+                            ${badgeHtml}
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">${card.title}</h3>
+                            <a href="${card.url}" target="_blank" class="card-btn">DOWNLOAD</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            return cardDiv;
+        }
+
+        // Function to add a new card
+        function addNewCard(title, imageUrl, driveUrl) {
+            const newCard = {
+                title: title,
+                image: imageUrl,
+                url: driveUrl,
+                badge: "NEW"
+            };
+
+            cards.unshift(newCard); // Add to beginning of array
+            saveCards();
+            renderCards();
+        }
+
+        // Function to save cards to localStorage
+        function saveCards() {
+            localStorage.setItem("chobbersCards", JSON.stringify(cards));
+        }
+
+        // Function to navigate between pages
+        function navigateTo(page) {
+            homepage.style.display = "none";
+            loginPage.style.display = "none";
+            addLinkPage.style.display = "none";
+
+            if (page === "homepage") {
+                homepage.style.display = "block";
+            } else if (page === "login") {
+                loginPage.style.display = "block";
+            } else if (page === "addLink") {
+                addLinkPage.style.display = "block";
+            }
+        }
+
+        // Function to initialize 3D tilt effect on cards
+        function initTiltEffect() {
+            const cards = document.querySelectorAll('.tilt-card');
+
+            cards.forEach(card => {
+                card.addEventListener('mousemove', e => {
+                    const cardRect = card.getBoundingClientRect();
+                    const x = e.clientX - cardRect.left;
+                    const y = e.clientY - cardRect.top;
+
+                    const centerX = cardRect.width / 2;
+                    const centerY = cardRect.height / 2;
+
+                    const rotateY = (x - centerX) / 20;
+                    const rotateX = (centerY - y) / 20;
+
+                    card.querySelector('.tilt-card-inner').style.transform =
+                        `rotateY(${rotateY}deg) rotateX(${rotateX}deg) translateZ(20px)`;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.querySelector('.tilt-card-inner').style.transform =
+                        `rotateY(0deg) rotateX(0deg) translateZ(0px)`;
+                });
+
+                // Add subtle floating animation to each card
+                card.style.animation = `float ${3 + Math.random() * 2}s ease-in-out infinite`;
+                card.style.animationDelay = `${Math.random() * 2}s`;
+            });
+        }
+
+        // Function to create particles
+        function createParticles() {
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+
+                // Random size (tiny)
+                const size = Math.random() * 3 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+
+                // Random glow color (purple/blue variation)
+                const hue = 240 + (Math.random() * 60);
+                particle.style.boxShadow = `0 0 ${size * 2}px hsla(${hue}, 100%, 70%, 0.8)`;
+
+                // Random animation duration and delay
+                const duration = 6 + Math.random() * 4;
+                const delay = Math.random() * 5;
+                particle.style.animation = `particle-animation ${duration}s ease-in-out ${delay}s infinite`;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // ==================== EVENT LISTENERS ====================
+        // Admin button click - show login page
+        adminBtn.addEventListener("click", () => {
+            navigateTo("login");
+        });
+
+        // Login form submission
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === adminCredentials.username && password === adminCredentials.password) {
+                navigateTo("addLink");
+                loginForm.reset();
+                loginError.style.display = "none";
+            } else {
+                loginError.style.display = "block";
+                setTimeout(() => {
+                    loginError.style.display = "none";
+                }, 3000);
+            }
+        });
+
+        // Add link form submission
+        addLinkForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const title = document.getElementById("title").value;
+            const imageUrl = document.getElementById("imageUrl").value;
+            const driveUrl = document.getElementById("driveUrl").value;
+
+            addNewCard(title, imageUrl, driveUrl);
+            addLinkForm.reset();
+            navigateTo("homepage");
+        });
+
+        // Back button click
+        backBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            navigateTo("homepage");
+        });
+
+        // ==================== INITIALIZATION ====================
+        // Create particle effects
+        createParticles();
+
+        // Render initial cards
+        renderCards();
+    </script>
+</body>
+</html>
