@@ -3,1819 +3,937 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHOBBER'S Server | Premium Content Hub</title>
+    <title>CHOBBER'S Server</title>
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Particle.js for better background effects -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        /* ==================== BASE STYLES ==================== */
         :root {
-            /* Bluish-Purple Color Palette */
-            --bg-primary: #0a0521;
-            --bg-secondary: #12083a;
-            --bg-tertiary: #1b0f54;
-            --bg-card: #251470;
-            --primary: #6d4aff;
-            --primary-light: #8a6eff;
-            --primary-dark: #5836df;
-            --accent: #bd4be3;
-            --accent-light: #d176ed;
-            --accent-dark: #9a30c2;
-            --discord: #5865F2;
-            --discord-dark: #4752C4;
-            --text-primary: #ffffff;
-            --text-secondary: #e6e6e6;
-            --text-tertiary: #b3b3b3;
-            --text-muted: #808080;
-            --danger: #fa5252;
-            --success: #40c057;
-            --warning: #fd7e14;
-            --info: #339af0;
-            --border-color: rgba(255, 255, 255, 0.08);
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --border-radius-sm: 4px;
-            --border-radius-md: 8px;
-            --border-radius-lg: 12px;
-            --border-radius-xl: 16px;
-            --header-height: 70px;
-            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --primary-dark: #1e1e6a;
+            --primary-light: #5e3b7d;
+            --discord-color: #7289DA;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --transition-speed: 0.3s;
         }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary), #1e0f5a);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-light));
+            color: var(--text-light);
             min-height: 100vh;
-            position: relative;
-        }
-        /* Particles.js container */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-        button, input, select, textarea {
-            font-family: inherit;
-            outline: none;
-        }
-        button {
-            cursor: pointer;
-            border: none;
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        /* Override some Bootstrap styles */
-        .btn-custom-primary {
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border: none;
-            color: white;
-            box-shadow: 0 4px 12px rgba(109, 74, 255, 0.3);
-            transition: var(--transition);
-        }
-        .btn-custom-primary:hover,
-        .btn-custom-primary:active {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(109, 74, 255, 0.4);
-            color: white;
+            overflow-x: hidden;
         }
 
-        /* Discord button styles */
-        .discord-btn {
+        .container {
+            padding: 0 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
+            padding: 16px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-container {
             display: flex;
-            align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 8px 16px;
-            background: var(--discord);
-            color: white;
-            border-radius: var(--border-radius-md);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            border: none;
-            box-shadow: 0 2px 5px rgba(88, 101, 242, 0.3);
-            text-decoration: none;
+            align-items: center;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
             margin-right: 12px;
         }
 
-        .discord-btn:hover {
-            background: var(--discord-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(88, 101, 242, 0.4);
-            color: white;
+        .site-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin: 0;
         }
 
-        .discord-btn svg {
-            color: white;
-        }
-
-        .hero-discord-btn {
-            background-color: var(--discord);
-            color: white;
-            margin-left: 10px;
-        }
-
-        .hero-discord-btn:hover {
-            background-color: var(--discord-dark);
-            color: white;
-        }
-
-        /* ==================== LAYOUT STYLES ==================== */
-        .app-container {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        .main-content {
-            flex: 1;
-            margin-top: var(--header-height);
-            position: relative;
-            z-index: 1;
-        }
-        /* ==================== HEADER STYLES ==================== */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: var(--header-height);
-            background: rgba(18, 8, 58, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 2rem;
-            box-shadow: var(--shadow-md);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 1440px;
-            margin: 0 auto;
-            position: relative;
-        }
-        .logo {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-        .logo-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            border-radius: var(--border-radius-sm);
-            box-shadow: 0 2px 5px rgba(109, 74, 255, 0.3);
+        /* Carousel Styles */
+        .carousel-container {
+            margin: 24px auto;
+            max-width: 1000px;
+            border-radius: 12px;
             overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
         }
-        .logo-icon img {
-            width: 100%;
+
+        .carousel-item {
+            height: 400px;
+        }
+
+        .carousel-img {
             height: 100%;
+            width: 100%;
             object-fit: cover;
         }
-        .logo-icon.empty {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            font-weight: bold;
-            color: white;
-        }
-        .logo-text {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-            color: var(--text-primary);
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(109, 74, 255, 0.3);
-        }
-        .header-left {
-            flex: 1;
-        }
-        .header-right {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-        }
-        .search-bar {
-            position: relative;
-            width: 300px;
-        }
-        .search-input {
-            width: 100%;
-            padding: 10px 16px 10px 40px;
-            background-color: rgba(27, 15, 84, 0.6);
-            border: 1px solid rgba(109, 74, 255, 0.2);
-            border-radius: var(--border-radius-md);
-            color: var(--text-primary);
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-        .search-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.15);
-        }
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-tertiary);
-            pointer-events: none;
-        }
-        /* Secret admin area - completely invisible */
-        .admin-access-area {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            background-color: transparent;
-            z-index: 1001;
-        }
-        /* Visible admin button - only shows when admin is logged in */
-        .admin-btn {
-            display: none; /* Hidden by default */
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            background-color: var(--bg-tertiary);
-            border-radius: var(--border-radius-md);
-            color: var(--text-primary);
-            font-size: 1.2rem;
-            transition: var(--transition);
-            border: 1px solid rgba(109, 74, 255, 0.2);
-            margin-left: 10px;
-        }
-        .admin-btn.visible {
-            display: flex; /* Show when admin is logged in */
-        }
-        .admin-btn:hover {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.15);
-        }
-        /* ==================== HERO SECTION ==================== */
-        .hero-section {
-            position: relative;
-            height: 400px;
-            overflow: hidden;
-            margin-bottom: 3rem;
-            background-image: linear-gradient(rgba(10, 5, 33, 0.7), rgba(10, 5, 33, 0.8)),
-                              url('https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/ss_9ce8d438bee236425b5820e2e19841c0a1f51e48.1920x1080.jpg?t=1686157127');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .hero-content {
-            text-align: center;
-            max-width: 700px;
-            padding: 0 2rem;
-        }
-        .hero-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-            color: var(--text-primary);
-            text-shadow: 0 2px 10px rgba(109, 74, 255, 0.5);
-        }
-        .hero-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-        .hero-btn {
-            padding: 12px 28px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white;
-            border-radius: var(--border-radius-md);
-            font-weight: 600;
-            font-size: 1rem;
-            transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(109, 74, 255, 0.3);
-        }
-        .hero-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(109, 74, 255, 0.4);
-        }
-        /* ==================== CONTENT SECTIONS ==================== */
-        .container {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        .section {
-            margin-bottom: 4rem;
-        }
-        .section-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            position: relative;
-            padding-left: 15px;
-            margin-bottom: 0;
-        }
-        .section-title::before {
-            content: "";
-            position: absolute;
+
+        .carousel-caption {
+            background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+            border-radius: 0 0 12px 12px;
             left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 5px;
-            height: 25px;
-            background: linear-gradient(to bottom, var(--primary), var(--accent));
-            border-radius: 2px;
+            right: 0;
+            bottom: 0;
+            padding: 32px 16px 24px;
+            text-align: left;
         }
-        /* ==================== CATEGORY TABS ==================== */
-        .categories-container {
-            margin-bottom: 2rem;
+
+        .carousel-caption h3 {
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 8px;
         }
-        .category-tabs {
-            display: flex;
-            overflow-x: auto;
-            scrollbar-width: none; /* For Firefox */
-            -ms-overflow-style: none; /* For Internet Explorer and Edge */
-            padding-bottom: 5px;
-            gap: 8px;
-            margin-bottom: 18px;
+
+        .carousel-caption p {
+            font-weight: 300;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
         }
-        .category-tabs::-webkit-scrollbar {
-            display: none; /* For Chrome, Safari, and Opera */
-        }
-        .category-tab {
-            padding: 10px 20px;
-            border-radius: var(--border-radius-m);
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--text-tertiary);
-            background-color: rgba(27, 15, 84, 0.4);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            white-space: nowrap;
-            transition: var(--transition);
-        }
-        .category-tab:hover {
-            border-color: var(--primary);
+
+        .carousel-download-btn {
+            background-color: var(--text-light);
             color: var(--primary-light);
+            border: none;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all var(--transition-speed);
         }
-        .category-tab.active {
-            background: linear-gradient(45deg, var(--primary-dark), var(--primary));
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 10px rgba(109, 74, 255, 0.2);
+
+        .carousel-download-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-        /* ==================== CARD GRID ==================== */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 24px;
-        }
-        .empty-state {
-            grid-column: 1 / -1;
+
+        /* Welcome Banner */
+        .welcome-banner {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px auto;
             text-align: center;
-            padding: 5rem 0;
-            color: var(--text-tertiary);
+            max-width: 900px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
-        .empty-state h3 {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
+
+        .welcome-banner h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
-        .empty-state p {
-            max-width: 500px;
+
+        .welcome-banner p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            max-width: 700px;
             margin: 0 auto;
-            margin-bottom: 2rem;
+            line-height: 1.6;
         }
-        .empty-state-icon {
-            font-size: 4rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            opacity: 0.5;
+
+        /* Widget Grid */
+        .widgets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 48px auto;
         }
-        .card {
-            background: linear-gradient(135deg, rgba(37, 20, 112, 0.9), rgba(27, 15, 84, 0.7));
-            border-radius: var(--border-radius-lg);
+
+        .widget-card {
+            background: var(--card-bg);
+            border-radius: 12px;
             overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all var(--transition-speed);
             position: relative;
+            color: var(--text-dark);
+            height: 100%;
             display: flex;
             flex-direction: column;
-            backdrop-filter: blur(5px);
         }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-            border-color: rgba(109, 74, 255, 0.2);
+
+        /* Glare effect */
+        .widget-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 150%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: rotate(35deg);
+            transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 10;
+            pointer-events: none;
         }
-        .card-image-container {
-            position: relative;
+
+        .widget-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .widget-card:hover::before {
+            left: 100%;
+        }
+
+        .widget-img-container {
             height: 180px;
             overflow: hidden;
         }
-        .card-image {
+
+        .widget-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform var(--transition-speed);
         }
-        .card:hover .card-image {
-            transform: scale(1.05);
+
+        .widget-card:hover .widget-img {
+            transform: scale(1.1);
         }
-        .card-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            padding: 4px 10px;
-            border-radius: var(--border-radius-sm);
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            z-index: 1;
-        }
-        .badge-new {
-            background-color: var(--primary);
-            color: white;
-        }
-        .badge-hot {
-            background-color: var(--danger);
-            color: white;
-        }
-        .badge-popular {
-            background-color: var(--success);
-            color: white;
-        }
-        .badge-updated {
-            background-color: var(--info);
-            color: white;
-        }
-        .card-content {
-            padding: 20px;
-            flex: 1;
+
+        .widget-content {
+            padding: 16px;
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
         }
-        .card-title {
-            font-weight: 600;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            line-height: 1.4;
-        }
-        .card-meta {
-            margin-bottom: 16px;
-            color: var(--text-tertiary);
-            font-size: 0.85rem;
-            display: flex;
-            gap: 12px;
-        }
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .card-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            flex: 1;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        .card-actions {
-            margin-top: auto;
-            display: flex;
-            gap: 10px;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 16px;
-            border-radius: var(--border-radius-md);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition);
-            gap: 8px;
-        }
-        .btn-primary {
-            background: linear-gradient(to right, var(--primary-dark), var(--primary));
-            color: white;
-            flex: 1;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(to right, var(--primary), var(--primary-dark));
-            box-shadow: 0 4px 10px rgba(109, 74, 255, 0.3);
-        }
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
-        .btn-outline:hover {
-            background-color: var(--bg-tertiary);
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        .btn-icon {
-            width: 38px;
-            padding: 0;
-        }
-        /* Admin card actions for delete/edit */
-        .admin-card-actions {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            display: flex;
-            gap: 6px;
-            z-index: 10;
-        }
-        .admin-action-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background-color: rgba(10, 5, 33, 0.7);
-            backdrop-filter: blur(5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            font-size: 14px;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .delete-btn:hover {
-            background-color: var(--danger);
-            color: white;
-        }
-        /* ==================== LOGIN PAGE STYLES ==================== */
-        .auth-container {
-            max-width: 440px;
-            margin: 4rem auto;
-            padding: 2rem;
-            background: linear-gradient(145deg, rgba(18, 8, 58, 0.9), rgba(27, 15, 84, 0.8));
-            border-radius: var(--border-radius-lg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-            backdrop-filter: blur(10px);
-        }
-        .auth-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        .auth-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+
+        .widget-title {
+            font-size: 1.3rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
+            margin-bottom: 8px;
+            color: var(--primary-dark);
         }
-        .auth-subtitle {
-            color: var(--text-tertiary);
+
+        .widget-description {
             font-size: 0.95rem;
+            margin-bottom: 16px;
+            line-height: 1.5;
+            flex-grow: 1;
         }
+
+        .widget-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .download-btn {
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 500;
+            flex-grow: 1;
+            transition: all var(--transition-speed);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(30, 30, 106, 0.3);
+        }
+
+        .specs-btn {
+            background: transparent;
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-dark);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all var(--transition-speed);
+        }
+
+        .specs-btn:hover {
+            background-color: rgba(30, 30, 106, 0.1);
+        }
+
+        /* Modal Styles */
+        .specs-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .specs-modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--primary-dark);
+        }
+
+        .modal-specs {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
+            padding: 32px 0;
+            margin-top: 64px;
+            text-align: center;
+        }
+
+        .discord-btn {
+            background-color: var(--discord-color);
+            color: white;
+            border: none;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all var(--transition-speed);
+            display: inline-block;
+            margin-bottom: 16px;
+            text-decoration: none;
+        }
+
+        .discord-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 20px rgba(114, 137, 218, 0.7);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.2);
+            transition: right var(--transition-speed);
+            z-index: 2000;
+            padding: 24px;
+            overflow-y: auto;
+            color: var(--text-dark);
+        }
+
+        .admin-panel.show {
+            right: 0;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .admin-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin: 0;
+        }
+
+        .admin-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .login-form {
+            margin-bottom: 24px;
+        }
+
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 16px;
         }
+
         .form-label {
             display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
+            margin-bottom: 8px;
             font-weight: 500;
         }
+
         .form-input {
             width: 100%;
-            padding: 12px 16px;
-            background-color: rgba(27, 15, 84, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            color: var(--text-primary);
-            font-size: 0.95rem;
-            transition: var(--transition);
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
         }
-        .form-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.15);
-        }
-        .form-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-        }
-        .form-checkbox {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .form-checkbox input {
-            accent-color: var(--primary);
-        }
-        .form-checkbox label {
-            color: var(--text-tertiary);
-            font-size: 0.85rem;
-        }
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            border-radius: var(--border-radius-md);
+
+        .login-btn {
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
             color: white;
-            font-weight: 600;
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-            transition: var(--transition);
-        }
-        .submit-btn:hover {
-            background: linear-gradient(to right, var(--primary-dark), var(--primary));
-            box-shadow: 0 4px 12px rgba(109, 74, 255, 0.3);
-        }
-        .error-message {
-            background-color: rgba(250, 82, 82, 0.1);
-            color: var(--danger);
-            padding: 12px;
-            border-radius: var(--border-radius-md);
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            display: none;
-        }
-        /*  ADD NEW LINK FORM STYLES */
-        .form-container {
-            max-width: 700px;
-            margin: 4rem auto;
-            padding: 2rem;
-            background: linear-gradient(145deg, rgba(18, 8, 58, 0.9), rgba(27, 15, 84, 0.8));
-            border-radius: var(--border-radius-lg);
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow-lg);
-            backdrop-filter: blur(10px);
-        }
-        .form-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .form-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-        .back-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-tertiary);
-            font-size: 0.9rem;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
             font-weight: 500;
-            transition: var(--transition);
-        }
-        .back-btn:hover {
-            color: var(--primary);
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .form-grid .form-group:last-child {
-            grid-column: span 2;
-        }
-        .form-group.full-width {
-            grid-column: span 2;
-        }
-        .form-help {
-            font-size: 0.8rem;
-            margin-top: 4px;
-            color: var(--text-tertiary);
-        }
-        .form-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 2rem;
-        }
-        .cancel-btn {
-            padding: 12px 20px;
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius-md);
-            color: var(--text-secondary);
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
-        .cancel-btn:hover {
-            background-color: var(--bg-tertiary);
-            border-color: var(--text-tertiary);
-            color: var(--text-primary);
-        }
-        /* Logo upload area styles */
-        .logo-upload-container {
-            grid-column: span 2;
-            padding: 20px;
-            border: 2px dashed var(--border-color);
-            border-radius: var(--border-radius-lg);
-            text-align: center;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
             cursor: pointer;
-            background-color: rgba(27, 15, 84, 0.3);
-        }
-        .logo-upload-container:hover {
-            border-color: var(--primary);
-            background-color: rgba(27, 15, 84, 0.5);
-        }
-        .logo-preview {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 15px;
-            background-color: var(--bg-tertiary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-tertiary);
-            font-size: 28px;
-        }
-        .logo-preview img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            transition: all var(--transition-speed);
         }
-        /* CONFIRM DIALOG STYLES */
-        .modal-backdrop {
-            background-color: rgba(0, 0, 0, 0.7) !important;
-            backdrop-filter: blur(5px);
+
+        .login-btn:hover {
+            box-shadow: 0 5px 15px rgba(94, 59, 125, 0.3);
         }
-        .modal-content {
-            background: linear-gradient(145deg, rgba(18, 8, 58, 0.95), rgba(27, 15, 84, 0.9));
-            border-radius: var(--border-radius-lg);
-            border: 1px solid var(--border-color);
-        }
-        .modal-header, .modal-footer {
-            border-color: var(--border-color);
-        }
-        .modal-title {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--text-primary);
-        }
-        .btn-close {
-            color: var(--text-primary);
-            filter: invert(1) grayscale(100%) brightness(200%);
-        }
-        /* FOOTER */
-        .footer {
-            background: linear-gradient(to right, rgba(18, 8, 58, 0.9), rgba(27, 15, 84,0.8));
-            padding: 3rem 0;
-            border-top: 1px solid var(--border-color);
-            margin-top: 3rem;
-            backdrop-filter: blur(10px);
-        }
-        .footer-content {
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3rem;
-        }
-        .footer-column h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--text-primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-        .footer-links {
-            list-style: none;
-            padding: 0;
-        }
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-        .footer-links a {
-            color: var(--text-tertiary);
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-        .footer-links a:hover {
-            color: var(--primary);
-        }
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-tertiary);
-            font-size: 0.85rem;
-        }
-        /* SVG ICONS */
-        .icon {
-            width: 18px;
-            height: 18px;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-        /* LOGOUT BUTTON */
-        .logout-btn {
-            font-size: 0.9rem;
-            color: var(--text-tertiary);
-            background: transparent;
-            padding: 8px 12px;
-            border-radius: var(--border-radius-md);
-            transition: var(--transition);
+
+        .admin-widgets {
             display: none;
         }
-        .logout-btn.visible {
+
+        .admin-widgets.show {
             display: block;
         }
-        .logout-btn:hover {
-            color: var(--primary);
-            background: rgba(109, 74, 255, 0.1);
+
+        .widget-list {
+            margin-bottom: 24px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 8px;
         }
-        /* Toast notification */
-        .toast-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 9999;
-        }
-        .toast {
-            background: linear-gradient(145deg, rgba(18, 8, 58, 0.95), rgba(27, 15, 84, 0.9));
-            color: white;
-            padding: 12px 20px;
-            border-radius: var(--border-radius-md);
-            margin-top: 10px;
-            box-shadow: var(--shadow-lg);
+
+        .widget-item {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
             display: flex;
             align-items: center;
-            gap: 10px;
-            min-width: 250px;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
+            justify-content: space-between;
         }
-        .toast.success {
-            border-left: 4px solid var(--success);
+
+        .widget-item:last-child {
+            border-bottom: none;
         }
-        .toast.error {
-            border-left: 4px solid var(--danger);
+
+        .widget-name {
+            font-weight: 500;
         }
-        /* RESPONSIVE STYLES */
-        @media (max-width: 1024px) {
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
+
+        .delete-widget {
+            background: none;
+            border: none;
+            color: #f44336;
+            cursor: pointer;
         }
+
+        .add-widget-form {
+            border-top: 1px solid #eee;
+            padding-top: 16px;
+        }
+
+        .add-widget-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--primary-dark);
+        }
+
+        /* Responsive Styles */
         @media (max-width: 768px) {
-            .header {
-                padding: 0 1rem;
+            .site-title {
+                font-size: 1.5rem;
             }
-            .search-bar {
-                width: 200px;
+
+            .logo-icon {
+                font-size: 1.5rem;
             }
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            .hero-section {
-                height: 350px;
-            }
-            .cards-grid {
-                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            }
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            .form-grid .form-group:last-child,
-            .form-group.full-width {
-                grid-column: span 1;
-            }
-            .discord-btn span {
-                display: none;
-            }
-        }
-        @media (max-width: 576px) {
-            .hero-title {
-                font-size: 2rem;
-            }
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-            .hero-section {
+
+            .carousel-item {
                 height: 300px;
             }
-            .hero-btn {
-                padding: 10px 20px;
+
+            .carousel-caption h3 {
+                font-size: 1.5rem;
             }
-            .container {
-                padding: 0 1rem;
+
+            .welcome-banner h2 {
+                font-size: 1.5rem;
             }
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+
+            .widgets-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
-            .search-bar {
-                display: none;
+
+            .admin-panel {
+                width: 100%;
+                right: -100%;
             }
-            .logo-text {
-                font-size: 1.4rem;
+        }
+
+        @media (max-width: 480px) {
+            .carousel-item {
+                height: 250px;
             }
-            .category-tab {
-                padding: 8px 16px;
-                font-size: 0.85rem;
+
+            .widget-actions {
+                flex-direction: column;
             }
+
+            .specs-btn, .download-btn {
+                width: 100%;
+            }
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
 <body>
-    <!-- Particle.js container -->
-    <div id="particles-js"></div>
-    <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="header-left">
-                    <div class="search-bar">
-                        <div class="search-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <circle cx="10" cy="10" r="7"></circle>
-                                <line x1="21" y1="21" x2="15" y2="15"></line>
-                            </svg>
-                        </div>
-                        <input type="text" id="searchInput" class="search-input" placeholder="Search games and software...">
-                    </div>
-                </div>
-                <div class="logo">
-                    <div id="siteLogo" class="logo-icon">
-                        <div id="logoPlaceholder">C</div>
-                    </div>
-                    <div class="logo-text">CHOBBER'S SERVER</div>
-                </div>
-                <div class="header-right">
-                    <!-- Discord button -->
-                    <a href="https://discord.gg/SKqbQupn" target="_blank" class="discord-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
-                        </svg>
-                        <span>Join Discord</span>
-                    </a>
-                    <!-- Invisible admin access area -->
-                    <div id="adminAccessArea" class="admin-access-area"></div>
-                    <!-- Only visible when admin is logged in -->
-                    <button class="admin-btn" id="adminBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                        </svg>
-                    </button>
-                    <button class="logout-btn" id="logoutBtn">Logout</button>
-                </div>
-            </div>
-        </header>
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Homepage -->
-            <div id="homepage" class="page active">
-                <!-- Hero Section -->
-                <section class="hero-section">
-                    <div class="hero-content">
-                        <h1 class="hero-title">Premium Games & Software</h1>
-                        <p class="hero-subtitle">Access a vast library of premium content, always up-to-date and ready to download</p>
-                        <div class="d-flex justify-content-center gap-2">
-                            <button class="btn btn-custom-primary btn-lg hero-btn">Explore Collection</button>
-                            <a href="https://discord.gg/SKqbQupn" target="_blank" class="btn btn-lg hero-discord-btn">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                                    <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
-                                </svg>
-                                Join Discord
-                            </a>
-                        </div>
-                    </div>
-                </section>
-                <div class="container">
-                    <!-- Categories Tabs -->
-                    <div class="categories-container">
-                        <div class="category-tabs" id="categoryTabs">
-                            <div class="category-tab active" data-category="all">All Content</div>
-                            <div class="category-tab" data-category="games">Games</div>
-                            <div class="category-tab" data-category="creative">Creative Software</div>
-                            <div class="category-tab" data-category="productivity">Productivity</div>
-                            <div class="category-tab" data-category="mobile">Mobile Apps</div>
-                            <div class="category-tab" data-category="templates">Templates & Assets</div>
-                        </div>
-                    </div>
-                    <!-- Content Section -->
-                    <section class="section">
-                        <div class="section-header">
-                            <h2 class="section-title">Featured Content</h2>
-                        </div>
-                        <div class="cards-grid" id="cardsContainer">
-                            <!-- Empty state will be shown initially, cards will be added here -->
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <!-- Login Page -->
-            <div id="loginPage" class="page" style="display: none;">
-                <div class="container">
-                    <div class="auth-container">
-                        <div class="auth-header">
-                            <h2 class="auth-title">Admin Login</h2>
-                            <p class="auth-subtitle">Enter your credentials to access admin panel</p>
-                        </div>
-                        <div class="error-message" id="loginError">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <circle cx="12" cy="12" r="9"></circle>
-                                <line x1="12" y1="8" x2="12" y2="12"></line>
-                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                            </svg>
-                            Invalid username or password
-                        </div>
-                        <form id="loginForm">
-                            <div class="form-group">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" id="username" class="form-input" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" id="password" class="form-input" required>
-                            </div>
-                            <div class="form-footer">
-                                <div class="form-checkbox">
-                                    <input type="checkbox" id="remember">
-                                    <label for="remember">Remember me</label>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-custom-primary submit-btn">Sign In</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- Add New Link Page -->
-            <div id="addLinkPage" class="page" style="display: none;">
-                <div class="container">
-                    <div class="form-container">
-                        <div class="form-header">
-                            <h2 class="form-title">Add New Content</h2>
-                            <a href="#" class="back-btn" id="backBtn">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    <line x1="5" y1="12" x2="11" y2="18"></line>
-                                    <line x1="5" y1="12" x2="11" y2="6"></line>
-                                </svg>
-                                Back to Dashboard
-                            </a>
-                        </div>
-                        <form id="addLinkForm">
-                            <!-- Logo upload area -->
-                            <div class="logo-upload-container" id="logoUploadContainer">
-                                <div class="logo-preview" id="logoPreview">
-                                    <span>+</span>
-                                </div>
-                                <p>Click to upload site logo</p>
-                                <input type="file" id="logoUpload" style="display: none;" accept="image/*">
-                            </div>
-                            <div class="form-grid">
-                                <div class="form-group">
-                                    <label for="title" class="form-label">Title</label>
-                                    <input type="text" id="title" class="form-input" required placeholder="Enter content title">
-                                    <p class="form-help">Name of the game or software</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="category" class="form-label">Category</label>
-                                    <select class="form-input form-select" id="category">
-                                        <option value="games">Games</option>
-                                        <option value="creative">Creative Software</option>
-                                        <option value="productivity">Productivity</option>
-                                        <option value="mobile">Mobile Apps</option>
-                                        <option value="templates">Templates & Assets</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="imageUrl" class="form-label">Image URL</label>
-                                    <input type="url" id="imageUrl" class="form-input" required placeholder="https://example.com/image.jpg">
-                                    <p class="form-help">URL to the cover image</p>
-                                </div>
-                                <div class="form-group">
-                                    <label for="badge" class="form-label">Badge (optional)</label>
-                                    <select class="form-input form-select" id="badge">
-                                        <option value="">None</option>
-                                        <option value="NEW">New</option>
-                                        <option value="HOT">Hot</option>
-                                        <option value="POPULAR">Popular</option>
-                                        <option value="UPDATED">Updated</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="description" class="form-label">Description (optional)</label>
-                                    <textarea id="description" class="form-input" rows="3" placeholder="Brief description of the content"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="driveUrl" class="form-label">Google Drive URL</label>
-                                    <input type="url" id="driveUrl" class="form-input" required placeholder="https://drive.google.com/...">
-                                    <p class="form-help">Direct link to the Google Drive file or folder</p>
-                                </div>
-                            </div>
-                            <div class="form-actions">
-                                <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
-                                <button type="submit" class="btn btn-custom-primary submit-btn">Publish Content</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </main>
-        <!-- Confirmation Dialog (Bootstrap Modal) -->
-        <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Confirm Deletion</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure you want to delete this item? This action cannot be undone.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
-                    </div>
-                </div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <i class="fas fa-desktop logo-icon"></i>
+                <h1 class="site-title">CHOBBER'S Server</h1>
             </div>
         </div>
-        <!-- Toast Notifications Container -->
-        <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer"></div>
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>CHOBBER'S SERVER</h3>
-                    <p style="color: var(--text-tertiary); font-size: 0.9rem; line-height: 1.6;">
-                        The premier destination for high-quality games and professional software distribution.
-                    </p>
-                </div>
-                <div class="footer-column">
-                    <h3>Browse</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Games</a></li>
-                        <li><a href="#">Creative Software</a></li>
-                        <li><a href="#">Productivity Tools</a></li>
-                        <li>
-                            <!-- Hidden admin trigger in footer -->
-                            <a href="#" id="footerAdminLink">Mobile Apps</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li>
-                            <!-- Another hidden admin trigger in footer -->
-                            <a href="#" id="footerAdminLink2">Request Content</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">DMCA Policy</a></li>
-                        <li><a href="#">Refund Policy</a></li>
-                    </ul>
-                </div>
+    </header>
+
+    <main class="container">
+        <!-- Carousel -->
+        <div id="widgetCarousel" class="carousel slide carousel-container" data-bs-ride="carousel">
+            <div class="carousel-inner" id="carouselInner">
+                <!-- Carousel items will be added dynamically with JavaScript -->
             </div>
-            <div class="footer-bottom">
-                <p>© 2023 CHOBBER'S SERVER. All rights reserved.</p>
-            </div>
-        </footer>
+            <button class="carousel-control-prev" type="button" data-bs-target="#widgetCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#widgetCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <h2>Welcome to CHOBBER'S Server</h2>
+            <p>Discover our collection of powerful and elegant widgets designed to enhance your desktop experience. Each widget is crafted with attention to detail, providing both functionality and style to your system.</p>
+        </div>
+
+        <!-- Widgets Grid -->
+        <div class="widgets-grid" id="widgetsGrid">
+            <!-- Widget cards will be added dynamically with JavaScript -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <a href="https://discord.gg/SKqbQupn" target="_blank" class="discord-btn">
+                <i class="fab fa-discord me-2"></i> Join Our Discord
+            </a>
+            <p class="copyright">&copy; <span id="currentYear"></span> CHOBBER'S Server. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Specs Modal -->
+    <div class="specs-modal" id="specsModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h3 class="modal-title" id="modalTitle">Widget Specifications</h3>
+            <p class="modal-specs" id="modalSpecs"></p>
+        </div>
     </div>
-    <!-- Bootstrap JS Bundle with Popper -->
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h3 class="admin-title">Admin Panel</h3>
+            <button class="admin-close" id="closeAdmin">&times;</button>
+        </div>
+
+        <div class="login-form" id="loginForm">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" class="form-input" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label for="code" class="form-label">6-Digit Code</label>
+                <input type="password" id="code" class="form-input" placeholder="Enter 6-digit code" maxlength="6">
+            </div>
+            <button class="login-btn" id="loginBtn">Login</button>
+        </div>
+
+        <div class="admin-widgets" id="adminWidgets">
+            <h4>Manage Widgets</h4>
+            <div class="widget-list" id="adminWidgetList">
+                <!-- Admin widget list will be populated dynamically -->
+            </div>
+
+            <div class="add-widget-form">
+                <h4 class="add-widget-title">Add New Widget</h4>
+                <div class="form-group">
+                    <label for="widgetName" class="form-label">Widget Name</label>
+                    <input type="text" id="widgetName" class="form-input" placeholder="Enter widget name">
+                </div>
+                <div class="form-group">
+                    <label for="widgetDescription" class="form-label">Description</label>
+                    <input type="text" id="widgetDescription" class="form-input" placeholder="Enter description">
+                </div>
+                <div class="form-group">
+                    <label for="widgetImage" class="form-label">Image URL</label>
+                    <input type="text" id="widgetImage" class="form-input" placeholder="Enter image URL">
+                </div>
+                <div class="form-group">
+                    <label for="widgetDownload" class="form-label">Download URL</label>
+                    <input type="text" id="widgetDownload" class="form-input" placeholder="Enter download URL">
+                </div>
+                <div class="form-group">
+                    <label for="widgetSpecs" class="form-label">Specifications</label>
+                    <input type="text" id="widgetSpecs" class="form-input" placeholder="Enter specifications">
+                </div>
+                <button class="login-btn" id="addWidgetBtn">Add Widget</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        // ==================== PARTICLES.JS CONFIGURATION ====================
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize particles.js
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": {
-                        "value": 100,
-                        "density": {
-                            "enable": true,
-                            "value_area": 800
-                        }
-                    },
-                    "color": {
-                        "value": "#6d4aff"
-                    },
-                    "shape": {
-                        "type": "circle",
-                        "stroke": {
-                            "width": 0,
-                            "color": "#000000"
-                        },
-                        "polygon": {
-                            "nb_sides": 5
-                        }
-                    },
-                    "opacity": {
-                        "value": 0.3,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 1,
-                            "opacity_min": 0.1,
-                            "sync": false
-                        }
-                    },
-                    "size": {
-                        "value": 5,
-                        "random": true,
-                        "anim": {
-                            "enable": true,
-                            "speed": 2,
-                            "size_min": 0.3,
-                            "sync": false
-                        }
-                    },
-                    "line_linked": {
-                        "enable": true,
-                        "distance": 150,
-                        "color": "#6d4aff",
-                        "opacity": 0.2,
-                        "width": 1
-                    },
-                    "move": {
-                        "enable": true,
-                        "speed": 1,
-                        "direction": "none",
-                        "random": true,
-                        "straight": false,
-                        "out_mode": "out",
-                        "bounce": false,
-                        "attract": {
-                            "enable": false,
-                            "rotateX": 600,
-                            "rotateY": 1200
-                        }
-                    }
-                },
-                "interactivity": {
-                    "detect_on": "canvas",
-                    "events": {
-                        "onhover": {
-                            "enable": true,
-                            "mode": "grab"
-                        },
-                        "onclick": {
-                            "enable": true,
-                            "mode": "push"
-                        },
-                        "resize": true
-                    },
-                    "modes": {
-                        "grab": {
-                            "distance": 150,
-                            "line_linked": {
-                                "opacity": 0.6
-                            }
-                        },
-                        "bubble": {
-                            "distance": 400,
-                            "size": 40,
-                            "duration": 2,
-                            "opacity": 8,
-                            "speed": 3
-                        },
-                        "repulse": {
-                            "distance": 200,
-                            "duration": 0.4
-                        },
-                        "push": {
-                            "particles_nb": 4
-                        },
-                        "remove": {
-                            "particles_nb": 2
-                        }
-                    }
-                },
-                "retina_detect": true
-            });
-            // ==================== DOM ELEMENTS ====================
-            const homepage = document.getElementById("homepage");
-            const loginPage = document.getElementById("loginPage");
-            const addLinkPage = document.getElementById("addLinkPage");
-            const cardsContainer = document.getElementById("cardsContainer");
-            const searchInput = document.getElementById("searchInput");
-            const categoryTabs = document.getElementById("categoryTabs");
-            const deleteConfirmModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
-            const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
-            const siteLogo = document.getElementById("siteLogo");
-            const logoPlaceholder = document.getElementById("logoPlaceholder");
-            const logoUploadContainer = document.getElementById("logoUploadContainer");
-            const logoPreview = document.getElementById("logoPreview");
-            const logoUpload = document.getElementById("logoUpload");
-            const toastContainer = document.getElementById("toastContainer");
-            // Admin elements
-            const adminBtn = document.getElementById("adminBtn");
-            const adminAccessArea = document.getElementById("adminAccessArea");
-            const footerAdminLink = document.getElementById("footerAdminLink");
-            const footerAdminLink2 = document.getElementById("footerAdminLink2");
-            const logoutBtn = document.getElementById("logoutBtn");
-            const loginForm = document.getElementById("loginForm");
-            const loginError = document.getElementById("loginError");
-            const addLinkForm = document.getElementById("addLinkForm");
-            const backBtn = document.getElementById("backBtn");
-            const cancelBtn = document.getElementById("cancelBtn");
-            // ==================== ADMIN CREDENTIALS ====================
-            const adminCredentials = {
-                username: "admin",
-                password: "password123"
-            };
-            // ==================== SECRET ADMIN ACCESS VARIABLES ====================
-            let clickCount = 0;
-            let lastClickTime = 0;
-            // ==================== DATA STORAGE ====================
-            // Load cards from localStorage or use initial data (empty array)
-            let cards =  [];
-            try {
-                const savedCards = localStorage.getItem("chobbersCards");
-                if (savedCards) {
-                    cards = JSON.parse(savedCards);
-                }
-            } catch (error) {
-                console.error("Error loading cards from localStorage:", error);
-                cards = [];
+        // Widget Data
+        let widgets = [
+            {
+                id: 1,
+                name: "Weather Widget",
+                description: "Real-time weather updates with customizable locations",
+                image: "https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                downloadUrl: "#download-weather",
+                specs: "Compatible with all major browsers, 5MB size, requires internet connection"
+            },
+            {
+                id: 2,
+                name: "CPU Monitor",
+                description: "Track your system's CPU usage in real-time",
+                image: "https://images.pexels.com/photos/1779487/pexels-photo-1779487.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                downloadUrl: "#download-cpu",
+                specs: "Windows/Mac/Linux, 2MB size, minimal resource usage"
+            },
+            {
+                id: 3,
+                name: "Calendar Widget",
+                description: "Stay organized with this elegant calendar widget",
+                image: "https://images.pexels.com/photos/273153/pexels-photo-273153.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                downloadUrl: "#download-calendar",
+                specs: "Sync with Google/Apple Calendar, 3MB size, customizable themes"
+            },
+            {
+                id: 4,
+                name: "Music Player",
+                description: "Minimalist music player with visualizer",
+                image: "https://images.pexels.com/photos/1626481/pexels-photo-1626481.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                downloadUrl: "#download-music",
+                specs: "MP3/WAV/FLAC support, 7MB size, equalizer included"
+            },
+            {
+                id: 5,
+                name: "Network Monitor",
+                description: "Monitor your network traffic with detailed statistics",
+                image: "https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                downloadUrl: "#download-network",
+                specs: "Real-time monitoring, 4MB size, bandwidth alerts"
+            },
+            {
+                id: 6,
+                name: "Clock Widget",
+                description: "Stylish analog and digital clock with multiple timezones",
+                image: "https://images.pexels.com/photos/280254/pexels-photo-280254.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                downloadUrl: "#download-clock",
+                specs: "Customizable faces, 1MB size, alarm functionality"
             }
-            let currentCategory = "all"; // Track current category filter
-            let cardToDelete = null; // Store the card ID to delete
-            // Load site logo
-            const savedLogo = localStorage.getItem("chobbersLogo");
-            if (savedLogo) {
-                siteLogo.innerHTML = `<img src="${savedLogo}" alt="Site Logo">`;
-                logoPlaceholder.style.display = 'none';
-            }
-            // =================== TOAST NOTIFICATION SYSTEM ===================
-            function showToast(message, type = 'success') {
-                // Create toast element using Bootstrap
-                const toastEl = document.createElement('div');
-                toastEl.className = `toast align-items-center border-0 ${type === 'success' ? 'bg-success' : 'bg-danger'} text-white`;
-                toastEl.setAttribute('role', 'alert');
-                toastEl.setAttribute('aria-live', 'assertive');
-                toastEl.setAttribute('aria-atomic', 'true');
-                toastEl.innerHTML = `
-                    <div class="d-flex">
-                        <div class="toast-body">
-                            ${message}
+        ];
+
+        // Check for stored widgets in local storage
+        const storedWidgets = localStorage.getItem('chobberWidgets');
+        if (storedWidgets) {
+            widgets = JSON.parse(storedWidgets);
+        }
+
+        // DOM Elements
+        const carouselInner = document.getElementById('carouselInner');
+        const widgetsGrid = document.getElementById('widgetsGrid');
+        const specsModal = document.getElementById('specsModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalSpecs = document.getElementById('modalSpecs');
+        const closeModal = document.getElementById('closeModal');
+        const adminPanel = document.getElementById('adminPanel');
+        const adminWidgetList = document.getElementById('adminWidgetList');
+        const loginForm = document.getElementById('loginForm');
+        const adminWidgets = document.getElementById('adminWidgets');
+        const currentYear = document.getElementById('currentYear');
+
+        // Set current year in footer
+        currentYear.textContent = new Date().getFullYear();
+
+        // Populate carousel
+        function populateCarousel() {
+            carouselInner.innerHTML = '';
+
+            widgets.slice(0, 3).forEach((widget, index) => {
+                const isActive = index === 0 ? 'active' : '';
+                const carouselItem = `
+                    <div class="carousel-item ${isActive}">
+                        <img src="${widget.image}" class="carousel-img" alt="${widget.name}">
+                        <div class="carousel-caption">
+                            <h3>${widget.name}</h3>
+                            <p>${widget.description}</p>
+                            <a href="${widget.downloadUrl}" class="carousel-download-btn">Download Now</a>
                         </div>
-                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                 `;
-                toastContainer.appendChild(toastEl);
-                const bsToast = new bootstrap.Toast(toastEl, {
-                    delay: 5000,
-                    autohide: true
-                });
-                bsToast.show();
-                // Remove the element when hidden
-                toastEl.addEventListener('hidden.bs.toast', function() {
-                    toastEl.remove();
-                });
-            }
-            // ==================== LOGO UPLOAD FUNCTIONALITY ====================
-            logoUploadContainer.addEventListener('click', () => {
-                logoUpload.click();
+                carouselInner.innerHTML += carouselItem;
             });
-            logoUpload.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                if (!file.type.startsWith('image/')) {
-                    showToast('Please select an image file', 'danger');
-                    return;
-                }
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    const dataUrl = e.target.result;
-                    // Update preview
-                    logoPreview.innerHTML = `<img src="${dataUrl}" alt="Logo Preview">`;
-                    // Store logo in localStorage
-                    localStorage.setItem("chobbersLogo", dataUrl);
-                    // Update site logo
-                    siteLogo.innerHTML = `<img src="${dataUrl}" alt="Site Logo">`;
-                    logoPlaceholder.style.display = 'none';
-                    showToast('Logo uploaded successfully');
-                };
-                reader.readAsDataURL(file);
-            });
-            // Check if admin is logged in (using session storage)
-            function isAdminLoggedIn() {
-                return sessionStorage.getItem('adminLoggedIn') === 'true';
-            }
-            // Set admin logged in status
-            function setAdminLoggedIn(status) {
-                if (status) {
-                    sessionStorage.setItem('adminLoggedIn', 'true');
-                } else {
-                    sessionStorage.removeItem('adminLoggedIn');
-                }
-                updateAdminUI();
-            }
-            // Update UI based on admin login status
-            function updateAdminUI() {
-                if (isAdminLoggedIn()) {
-                    adminBtn.classList.add('visible');
-                    logoutBtn.classList.add('visible');
-                } else {
-                    adminBtn.classList.remove('visible');
-                    logoutBtn.classList.remove('visible');
-                }
-                // Rerender cards to show/hide admin actions
-                renderCards();
-            }
-            // ==================== DELETE FUNCTIONALITY ====================
-            function showDeleteConfirmation(cardId) {
-                cardToDelete = cardId;
-                deleteConfirmModal.show();
-            }
-            // Delete card function - completely rewritten for reliability
-            function deleteCard(cardId) {
-                console.log("Attempting to delete card with ID:", cardId);
-                // First, find the index of the card to delete
-                const cardIndex = cards.findIndex(card => card.id === cardId);
-                if (cardIndex !== -1) {
-                    // Remove the card from the array
-                    cards.splice(cardIndex, 1);
-                    // Save changes to localStorage
-                    localStorage.setItem("chobbersCards", JSON.stringify(cards));
-                    // Re-render the updated cards
-                    renderCards();
-                    // Show success toast
-                    showToast("Item successfully deleted", "success");
-                    console.log("Card deleted successfully. Remaining cards:", cards.length);
-                    return true;
-                } else {
-                    console.error("Card with ID:", cardId, "not found.");
-                    showToast("Error: Item not found", "danger");
-                    return false;
-                }
-            }
-            // ==================== CARD FUNCTIONALITY ====================
-            // Function to filter cards based on category and search term
-            function filterCards() {
-                const searchTerm = searchInput.value.toLowerCase();
-                return cards.filter(card => {
-                    const matchesCategory = currentCategory === 'all' || card.category === currentCategory;
-                    const matchesSearch = card.title.toLowerCase().includes(searchTerm) ||
-                                          (card.description && card.description.toLowerCase().includes(searchTerm));
-                    return matchesCategory && matchesSearch;
-                });
-            }
-            // Function to render filtered cards
-            function renderCards() {
-                if (!cardsContainer) {
-                    console.error("Cannot render cards: container element not found");
-                    return;
-                }
-                const filteredCards = filterCards();
-                cardsContainer.innerHTML = "";
-                // Show empty state if no cards
-                if (cards.length === 0) {
-                    cardsContainer.innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-state-icon">➕</div>
-                            <h3>No content found</h3>
-                            <p>Click the "+" button when logged in as admin to add your first content item.</p>
+        }
+
+        // Populate widgets grid
+        function populateWidgetsGrid() {
+            widgetsGrid.innerHTML = '';
+
+            widgets.forEach(widget => {
+                const widgetCard = `
+                    <div class="widget-card" data-id="${widget.id}">
+                        <div class="widget-img-container">
+                            <img src="${widget.image}" alt="${widget.name}" class="widget-img">
                         </div>
-                    `;
-                    return;
-                }
-                // Show no results message if no matching cards
-                if (filteredCards.length === 0) {
-                    cardsContainer.innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-state-icon">🔍</div>
-                            <h3>No matching content</h3>
-                            <p>Try adjusting your search or filter criteria to find what you're looking for.</p>
-                        </div>
-                    `;
-                    return;
-                }
-                // Render cards
-                filteredCards.forEach(card => {
-                    const cardElement = createCardElement(card);
-                    cardsContainer.appendChild(cardElement);
-                });
-                // Set up delete buttons
-                if (isAdminLoggedIn()) {
-                    document.querySelectorAll('.delete-btn').forEach(btn => {
-                        btn.addEventListener('click', function() {
-                            const cardId = this.getAttribute('data-id');
-                            showDeleteConfirmation(cardId);
-                        });
-                    });
-                }
-            }
-            // Function to create a single card element
-            function createCardElement(card) {
-                const cardDiv = document.createElement("div");
-                cardDiv.className = "card";
-                cardDiv.setAttribute("data-id", card.id); // Store card ID in data attribute
-                // Add badge if it exists
-                const badgeHtml = card.badge ?
-                    `<div class="card-badge badge-${card.badge.toLowerCase()}">${card.badge}</div>` : '';
-                // Add admin action buttons if logged in
-                const adminActionsHtml = isAdminLoggedIn() ? `
-                    <div class="admin-card-actions">
-                        <button class="admin-action-btn delete-btn" data-id="${card.id}" title="Delete" aria-label="Delete item">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <line x1="4" y1="7" x2="20" y2="7"></line>
-                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
-                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
-                            </svg>
-                        </button>
-                    </div>` : '';
-                cardDiv.innerHTML = `
-                    <div class="card-image-container">
-                        <img src="${card.image}" alt="${card.title}" class="card-image">
-                        ${badgeHtml}
-                        ${adminActionsHtml}
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title">${card.title}</h3>
-                        <div class="card-meta">
-                            <div class="meta-item">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M12 3l8 4.5v9l-8 4.5l-8 -4.5v-9l8 -4.5"></path>
-                                    <line x1="12" y1="12" x2="12" y2="12.01"></line>
-                                    <path d="M12 12l8 -4.5"></path>
-                                    <path d="M8.2 9.8l7.6 -4.6"></path>
-                                </svg>
-                                ${capitalizeFirstLetter(card.category) || 'General'}
+                        <div class="widget-content">
+                            <h3 class="widget-title">${widget.name}</h3>
+                            <p class="widget-description">${widget.description}</p>
+                            <div class="widget-actions">
+                                <a href="${widget.downloadUrl}" class="download-btn">Download</a>
+                                <button class="specs-btn" data-id="${widget.id}">Specs</button>
                             </div>
                         </div>
-                        <p class="card-description">${card.description || 'No description available'}</p>
-                        <div class="card-actions">
-                            <a href="${card.url}" target="_blank" class="btn btn-primary">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
-                                    <polyline points="7 11 12 16 17 11"></polyline>
-                                    <line x1="12" y1="4" x2="12" y2="16"></line>
-                                </svg>
-                                Download
-                            </a>
-                            <button class="btn btn-outline btn-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
-                                </svg>
-                            </button>
-                        </div>
                     </div>
                 `;
-                return cardDiv;
+                widgetsGrid.innerHTML += widgetCard;
+            });
+
+            // Add event listeners to specs buttons
+            document.querySelectorAll('.specs-btn').forEach(btn => {
+                btn.addEventListener('click', showSpecs);
+            });
+        }
+
+        // Show specs modal
+        function showSpecs(e) {
+            const widgetId = parseInt(e.target.getAttribute('data-id'));
+            const widget = widgets.find(w => w.id === widgetId);
+
+            if (widget) {
+                modalTitle.textContent = `${widget.name} Specifications`;
+                modalSpecs.textContent = widget.specs;
+                specsModal.classList.add('show');
             }
-            // Helper function to capitalize first letter
-            function capitalizeFirstLetter(string) {
-                return string ? string.charAt(0).toUpperCase() + string.slice(1) : '';
-            }
-            // Function to add a new card
-            function addNewCard(title, imageUrl, driveUrl, category, badge, description) {
-                // Generate a unique ID for the card
-                const id = 'card' + Date.now();
-                const newCard = {
-                    id: id,
-                    title: title,
-                    image: imageUrl,
-                    url: driveUrl,
-                    badge: badge,
-                    category: category,
-                    description: description
-                };
-                // Add to beginning of array
-                cards.unshift(newCard);
-                saveCards();
-                renderCards();
-                showToast('New content added successfully');
-            }
-            // Function to save cards to localStorage
-            function saveCards() {
-                localStorage.setItem("chobbersCards", JSON.stringify(cards));
-            }
-            // Function to navigate between pages
-            function navigateTo(page) {
-                homepage.style.display = "none";
-                loginPage.style.display = "none";
-                addLinkPage.style.display = "none";
-                if (page === "homepage") {
-                    homepage.style.display = "block";
-                } else if (page === "login") {
-                    loginPage.style.display = "block";
-                } else if (page === "addLink") {
-                    addLinkPage.style.display = "block";
-                }
-            }
-            // ==================== EVENT LISTENERS ====================
-            // Admin button click (visible only when logged in)
-            adminBtn.addEventListener("click", () => {
-                navigateTo("addLink");
-            });
-            // Secret admin access area click handling
-            adminAccessArea.addEventListener("click", (e) => {
-                const currentTime = new Date().getTime();
-                // Reset counter if clicks are more than 1 second apart
-                if (currentTime - lastClickTime > 1000) {
-                    clickCount = 0;
-                }
-                clickCount++;
-                lastClickTime = currentTime;
-                // After 3 quick clicks, show login page
-                if (clickCount >= 3) {
-                    clickCount = 0;
-                    navigateTo("login");
-                }
-            });
-            // Footer hidden admin access
-            footerAdminLink.addEventListener("click", (e) => {
-                // Prevent normal navigation
-                e.preventDefault();
-                // Special sequence: right-click followed by left-click within 1 second
-                const now = new Date().getTime();
-                if (e.button === 0 && footerAdminLink.dataset.rightClicked === 'true' &&
-                    now - parseInt(footerAdminLink.dataset.clickTime || 0) < 1000) {
-                    navigateTo("login");
-                    // Reset state
-                    footerAdminLink.dataset.rightClicked = 'false';
-                }
-            });
-            footerAdminLink.addEventListener("contextmenu", (e) => {
-                // Mark that right-click occurred and store the time
-                footerAdminLink.dataset.rightClicked = 'true';
-                footerAdminLink.dataset.clickTime = new Date().getTime();
-                // Don't show context menu
-                e.preventDefault();
-            });
-            // Second footer link - double-click access
-            footerAdminLink2.addEventListener("dblclick", (e) => {
-                e.preventDefault();
-                navigateTo("login");
-            });
-            // Logout button click
-            logoutBtn.addEventListener("click", () => {
-                setAdminLoggedIn(false);
-                navigateTo("homepage");
-                showToast('Logged out successfully');
-            });
-            // Login form submission
-            loginForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-                const username = document.getElementById("username").value;
-                const password = document.getElementById("password").value;
-                const remember = document.getElementById("remember").checked;
-                if (username === adminCredentials.username && password === adminCredentials.password) {
-                    setAdminLoggedIn(true);
-                    navigateTo("addLink");
-                    loginForm.reset();
-                    loginError.style.display = "none";
-                    showToast('Logged in successfully');
-                } else {
-                    loginError.style.display = "flex";
-                    setTimeout(() => {
-                        loginError.style.display = "none";
-                    }, 3000);
-                }
-            });
-            // Add link form submission
-            addLinkForm.addEventListener("submit", (e) => {
-                e.preventDefault();
-                const title = document.getElementById("title").value;
-                const imageUrl = document.getElementById("imageUrl").value;
-                const driveUrl = document.getElementById("driveUrl").value;
-                const category = document.getElementById("category").value;
-                const badge = document.getElementById("badge").value;
-                const description = document.getElementById("description").value;
-                addNewCard(title, imageUrl, driveUrl, category, badge, description);
-                addLinkForm.reset();
-                navigateTo("homepage");
-            });
-            // Back button click
-            backBtn.addEventListener("click", (e) =>  {
-                e.preventDefault();
-                navigateTo("homepage");
-            });
-            // Cancel button click
-            cancelBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                navigateTo("homepage");
-            });
-            // Confirm delete button click (Bootstrap modal)
-            confirmDeleteBtn.addEventListener('click', function() {
-                if (cardToDelete) {
-                    deleteCard(cardToDelete);
-                    deleteConfirmModal.hide();
-                    cardToDelete = null;
-                }
-            });
-            // Category tabs click
-            if (categoryTabs) {
-                categoryTabs.querySelectorAll('.category-tab').forEach(tab => {
-                    tab.addEventListener('click', () => {
-                        categoryTabs.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
-                        tab.classList.add('active');
-                        currentCategory = tab.dataset.category;
-                        renderCards();
-                    });
-                });
-            }
-            // Search input
-            if (searchInput) {
-                searchInput.addEventListener('input', () => {
-                    renderCards();
-                });
-            }
-            // Add event listener for secret key combination (Ctrl+Shift+A)
-            document.addEventListener('keydown', function(event) {
-                if (event.ctrlKey && event.shiftKey && event.key === 'A') {
-                    navigateTo('login');
-                    event.preventDefault();
-                }
-            });
-            // ==================== INITIALIZATION ====================
-            // Render initial cards
-            renderCards();
-            // Update admin UI based on login status
-            updateAdminUI();
+        }
+
+        // Close specs modal
+        closeModal.addEventListener('click', () => {
+            specsModal.classList.remove('show');
         });
+
+        // Close modal when clicking outside
+        specsModal.addEventListener('click', (e) => {
+            if (e.target === specsModal) {
+                specsModal.classList.remove('show');
+            }
+        });
+
+        // Admin Panel Functionality
+        let adminOpen = false;
+
+        // Admin Credentials (in a real app, this would be server-side)
+        const adminUsername = 'admin';
+        const adminCode = '123456';
+
+        // Toggle admin panel with Ctrl+Shift+A
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+                e.preventDefault();
+                toggleAdminPanel();
+            }
+        });
+
+        // Toggle admin panel
+        function toggleAdminPanel() {
+            adminOpen = !adminOpen;
+            if (adminOpen) {
+                adminPanel.classList.add('show');
+                populateAdminWidgetList();
+            } else {
+                adminPanel.classList.remove('show');
+            }
+        }
+
+        // Close admin panel
+        document.getElementById('closeAdmin').addEventListener('click', () => {
+            adminOpen = false;
+            adminPanel.classList.remove('show');
+        });
+
+        // Admin login
+        document.getElementById('loginBtn').addEventListener('click', () => {
+            const username = document.getElementById('username').value;
+            const code = document.getElementById('code').value;
+
+            if (username === adminUsername && code === adminCode) {
+                loginForm.style.display = 'none';
+                adminWidgets.classList.add('show');
+                populateAdminWidgetList();
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+
+        // Populate admin widget list
+        function populateAdminWidgetList() {
+            adminWidgetList.innerHTML = '';
+
+            widgets.forEach(widget => {
+                const widgetItem = `
+                    <div class="widget-item">
+                        <span class="widget-name">${widget.name}</span>
+                        <button class="delete-widget" data-id="${widget.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+                adminWidgetList.innerHTML += widgetItem;
+            });
+
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.delete-widget').forEach(btn => {
+                btn.addEventListener('click', deleteWidget);
+            });
+        }
+
+        // Delete widget
+        function deleteWidget(e) {
+            const widgetId = parseInt(e.currentTarget.getAttribute('data-id'));
+            widgets = widgets.filter(w => w.id !== widgetId);
+
+            // Update local storage
+            localStorage.setItem('chobberWidgets', JSON.stringify(widgets));
+
+            // Update UI
+            populateAdminWidgetList();
+            populateWidgetsGrid();
+            populateCarousel();
+        }
+
+        // Add new widget
+        document.getElementById('addWidgetBtn').addEventListener('click', () => {
+            const name = document.getElementById('widgetName').value;
+            const description = document.getElementById('widgetDescription').value;
+            const image = document.getElementById('widgetImage').value;
+            const downloadUrl = document.getElementById('widgetDownload').value;
+            const specs = document.getElementById('widgetSpecs').value;
+
+            if (!name || !description || !image || !downloadUrl || !specs) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            // Create new widget
+            const newId = widgets.length > 0 ? Math.max(...widgets.map(w => w.id)) + 1 : 1;
+            const newWidget = {
+                id: newId,
+                name,
+                description,
+                image,
+                downloadUrl,
+                specs
+            };
+
+            widgets.push(newWidget);
+
+            // Update local storage
+            localStorage.setItem('chobberWidgets', JSON.stringify(widgets));
+
+            // Update UI
+            populateAdminWidgetList();
+            populateWidgetsGrid();
+            populateCarousel();
+
+            // Clear form
+            document.getElementById('widgetName').value = '';
+            document.getElementById('widgetDescription').value = '';
+            document.getElementById('widgetImage').value = '';
+            document.getElementById('widgetDownload').value = '';
+            document.getElementById('widgetSpecs').value = '';
+        });
+
+        // Initialize page
+        populateCarousel();
+        populateWidgetsGrid();
     </script>
 </body>
 </html>
