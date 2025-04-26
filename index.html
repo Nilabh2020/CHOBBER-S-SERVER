@@ -3,37 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHOBBER'S Server | Premium Game Distribution</title>
+    <title>CHOBBER'S Server | Premium Content Hub</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Particle.js for better background effects -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+
     <style>
         /* ==================== BASE STYLES ==================== */
         :root {
-            --bg-primary: #0e1016;
-            --bg-secondary: #171b26;
-            --bg-tertiary: #1e2433;
-            --bg-card: #212738;
-            --primary: #5773ff;
-            --primary-dark: #4056cc;
-            --accent: #8c5cff;
-            --accent-hover: #9f75ff;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --info: #3b82f6;
+            /* Bluish-Purple Color Palette */
+            --bg-primary: #0a0521;
+            --bg-secondary: #12083a;
+            --bg-tertiary: #1b0f54;
+            --bg-card: #251470;
+            --primary: #6d4aff;
+            --primary-light: #8a6eff;
+            --primary-dark: #5836df;
+            --accent: #bd4be3;
+            --accent-light: #d176ed;
+            --accent-dark: #9a30c2;
             --text-primary: #ffffff;
-            --text-secondary: #cbd5e1;
-            --text-tertiary: #94a3b8;
-            --text-muted: #64748b;
-            --border-color: rgba(255, 255, 255, 0.06);
+            --text-secondary: #e6e6e6;
+            --text-tertiary: #b3b3b3;
+            --text-muted: #808080;
+            --danger: #fa5252;
+            --success: #40c057;
+            --warning: #fd7e14;
+            --info: #339af0;
+            --border-color: rgba(255, 255, 255, 0.08);
             --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             --border-radius-sm: 4px;
-            --border-radius-md: 6px;
-            --border-radius-lg: 10px;
+            --border-radius-md: 8px;
+            --border-radius-lg: 12px;
             --border-radius-xl: 16px;
             --header-height: 70px;
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
@@ -46,13 +58,23 @@
         }
 
         body {
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: var(--bg-primary);
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary), #1e0f5a);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
             position: relative;
+        }
+
+        /* Particles.js container */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
         }
 
         button, input, select, textarea {
@@ -70,6 +92,23 @@
             color: inherit;
         }
 
+        /* Override some Bootstrap styles */
+        .btn-custom-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border: none;
+            color: white;
+            box-shadow: 0 4px 12px rgba(109, 74, 255, 0.3);
+            transition: var(--transition);
+        }
+
+        .btn-custom-primary:hover,
+        .btn-custom-primary:active {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(109, 74, 255, 0.4);
+            color: white;
+        }
+
         /* ==================== LAYOUT STYLES ==================== */
         .app-container {
             display: flex;
@@ -80,6 +119,8 @@
         .main-content {
             flex: 1;
             margin-top: var(--header-height);
+            position: relative;
+            z-index: 1;
         }
 
         /* ==================== HEADER STYLES ==================== */
@@ -89,14 +130,14 @@
             left: 0;
             right: 0;
             height: var(--header-height);
-            background-color: var(--bg-secondary);
+            background: rgba(18, 8, 58, 0.8);
+            backdrop-filter: blur(10px);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 2rem;
             box-shadow: var(--shadow-md);
-            backdrop-filter: blur(8px);
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -128,15 +169,32 @@
             height: 40px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
             border-radius: var(--border-radius-sm);
-            box-shadow: 0 2px 5px rgba(140, 92, 255, 0.2);
+            box-shadow: 0 2px 5px rgba(109, 74, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-icon.empty {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
         }
 
         .logo-text {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 700;
             font-size: 1.8rem;
             color: var(--text-primary);
             letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(109, 74, 255, 0.3);
         }
 
         .header-left {
@@ -157,8 +215,8 @@
         .search-input {
             width: 100%;
             padding: 10px 16px 10px 40px;
-            background-color: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
+            background-color: rgba(27, 15, 84, 0.6);
+            border: 1px solid rgba(109, 74, 255, 0.2);
             border-radius: var(--border-radius-md);
             color: var(--text-primary);
             font-size: 0.9rem;
@@ -167,7 +225,7 @@
 
         .search-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(87, 115, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.15);
         }
 
         .search-icon {
@@ -203,7 +261,7 @@
             color: var(--text-primary);
             font-size: 1.2rem;
             transition: var(--transition);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(109, 74, 255, 0.2);
             margin-left: 10px;
         }
 
@@ -214,77 +272,7 @@
         .admin-btn:hover {
             background-color: var(--primary);
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(87, 115, 255, 0.15);
-        }
-
-        /* ==================== TICKER STYLES ==================== */
-        .announcement-bar {
-            background-color: var(--bg-secondary);
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .ticker-container {
-            max-width: 1440px;
-            margin: 0 auto;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .ticker {
-            display: flex;
-            white-space: nowrap;
-            animation: ticker-scroll 25s linear infinite;
-        }
-
-        .ticker-item {
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .ticker-label {
-            display: inline-flex;
-            align-items: center;
-            padding: 2px 8px;
-            border-radius: var(--border-radius-sm);
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-right: 10px;
-        }
-
-        .label-new {
-            background-color: rgba(87, 115, 255, 0.15);
-            color: var(--primary);
-        }
-
-        .label-hot {
-            background-color: rgba(239, 68, 68, 0.15);
-            color: var(--danger);
-        }
-
-        .label-popular {
-            background-color: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-        }
-
-        .ticker-text {
-            font-weight: 500;
-        }
-
-        @keyframes ticker-scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        .ticker:hover {
-            animation-play-state: paused;
+            box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.15);
         }
 
         /* ==================== HERO SECTION ==================== */
@@ -293,8 +281,8 @@
             height: 400px;
             overflow: hidden;
             margin-bottom: 3rem;
-            background-image: linear-gradient(rgba(14, 16, 22, 0.6), rgba(14, 16, 22, 0.8)),
-                              url('https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+            background-image: linear-gradient(rgba(10, 5, 33, 0.7), rgba(10, 5, 33, 0.8)),
+                              url('https://cdn.cloudflare.steamstatic.com/steam/apps/1091500/ss_9ce8d438bee236425b5820e2e19841c0a1f51e48.1920x1080.jpg?t=1686157127');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -309,16 +297,13 @@
         }
 
         .hero-title {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 1rem;
             line-height: 1.2;
-            background: linear-gradient(to right, #fff, #cbd5e1);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            color: var(--text-primary);
+            text-shadow: 0 2px 10px rgba(109, 74, 255, 0.5);
         }
 
         .hero-subtitle {
@@ -335,12 +320,12 @@
             font-weight: 600;
             font-size: 1rem;
             transition: var(--transition);
-            box-shadow: 0 4px 12px rgba(87, 115, 255, 0.3);
+            box-shadow: 0 4px 12px rgba(109, 74, 255, 0.3);
         }
 
         .hero-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(87, 115, 255, 0.4);
+            box-shadow: 0 6px 16px rgba(109, 74, 255, 0.4);
         }
 
         /* ==================== CONTENT SECTIONS ==================== */
@@ -359,27 +344,73 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 1.5rem;
+            position: relative;
         }
 
         .section-title {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--text-primary);
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 0;
         }
 
-        .view-all {
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition);
+        .section-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 25px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* ==================== CATEGORY TABS ==================== */
+        .categories-container {
+            margin-bottom: 2rem;
+        }
+
+        .category-tabs {
             display: flex;
-            align-items: center;
-            gap: 6px;
+            overflow-x: auto;
+            scrollbar-width: none; /* For Firefox */
+            -ms-overflow-style: none; /* For Internet Explorer and Edge */
+            padding-bottom: 5px;
+            gap: 8px;
+            margin-bottom: 18px;
         }
 
-        .view-all:hover {
-            color: var(--accent);
+        .category-tabs::-webkit-scrollbar {
+            display: none; /* For Chrome, Safari, and Opera */
+        }
+
+        .category-tab {
+            padding: 10px 20px;
+            border-radius: var(--border-radius-md);
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-tertiary);
+            background-color: rgba(27, 15, 84, 0.4);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+
+        .category-tab:hover {
+            border-color: var(--primary);
+            color: var(--primary-light);
+        }
+
+        .category-tab.active {
+            background: linear-gradient(45deg, var(--primary-dark), var(--primary));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 10px rgba(109, 74, 255, 0.2);
         }
 
         /* ==================== CARD GRID ==================== */
@@ -389,8 +420,34 @@
             gap: 24px;
         }
 
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 5rem 0;
+            color: var(--text-tertiary);
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .empty-state p {
+            max-width: 500px;
+            margin: 0 auto;
+            margin-bottom: 2rem;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
         .card {
-            background-color: var(--bg-card);
+            background: linear-gradient(135deg, rgba(37, 20, 112, 0.9), rgba(27, 15, 84, 0.7));
             border-radius: var(--border-radius-lg);
             overflow: hidden;
             transition: var(--transition);
@@ -398,12 +455,13 @@
             position: relative;
             display: flex;
             flex-direction: column;
+            backdrop-filter: blur(5px);
         }
 
         .card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
-            border-color: rgba(87, 115, 255, 0.2);
+            border-color: rgba(109, 74, 255, 0.2);
         }
 
         .card-image-container {
@@ -433,6 +491,7 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            z-index: 1;
         }
 
         .badge-new {
@@ -515,13 +574,14 @@
         }
 
         .btn-primary {
-            background-color: var(--primary);
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
             color: white;
             flex: 1;
         }
 
         .btn-primary:hover {
-            background-color: var(--primary-dark);
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            box-shadow: 0 4px 10px rgba(109, 74, 255, 0.3);
         }
 
         .btn-outline {
@@ -532,8 +592,8 @@
 
         .btn-outline:hover {
             background-color: var(--bg-tertiary);
-            border-color: var(--text-tertiary);
-            color: var(--text-primary);
+            border-color: var(--primary);
+            color: var(--primary);
         }
 
         .btn-icon {
@@ -541,48 +601,35 @@
             padding: 0;
         }
 
-        /* ==================== CATEGORY NAV ==================== */
-        .category-nav {
-            margin-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-            scrollbar-width: none;  /* Firefox */
-            white-space: nowrap;
-            padding-bottom: 2px;
-        }
-
-        .category-nav::-webkit-scrollbar {
-            display: none;  /* Chrome, Safari, Opera */
-        }
-
-        .category-nav-list {
+        /* Admin card actions for delete/edit */
+        .admin-card-actions {
+            position: absolute;
+            top: 12px;
+            left: 12px;
             display: flex;
-            gap: 2px;
-            list-style: none;
+            gap: 6px;
+            z-index: 10;
         }
 
-        .category-nav-item {
-            position: relative;
-        }
-
-        .category-nav-link {
-            display: block;
-            padding: 12px 20px;
-            color: var(--text-tertiary);
-            font-weight: 500;
-            font-size: 0.95rem;
+        .admin-action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: rgba(10, 5, 33, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            cursor: pointer;
             transition: var(--transition);
-            border-bottom: 2px solid transparent;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .category-nav-link:hover {
-            color: var(--text-primary);
-        }
-
-        .category-nav-link.active {
-            color: var(--primary);
-            border-bottom-color: var(--primary);
+        .delete-btn:hover {
+            background-color: var(--danger);
+            color: white;
         }
 
         /* ==================== LOGIN PAGE STYLES ==================== */
@@ -590,10 +637,11 @@
             max-width: 440px;
             margin: 4rem auto;
             padding: 2rem;
-            background-color: var(--bg-secondary);
+            background: linear-gradient(145deg, rgba(18, 8, 58, 0.9), rgba(27, 15, 84, 0.8));
             border-radius: var(--border-radius-lg);
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
         }
 
         .auth-header {
@@ -602,7 +650,7 @@
         }
 
         .auth-title {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
@@ -629,7 +677,7 @@
         .form-input {
             width: 100%;
             padding: 12px 16px;
-            background-color: var(--bg-tertiary);
+            background-color: rgba(27, 15, 84, 0.6);
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius-md);
             color: var(--text-primary);
@@ -639,7 +687,7 @@
 
         .form-input:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 2px rgba(87, 115, 255, 0.15);
+            box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.15);
         }
 
         .form-footer {
@@ -664,96 +712,25 @@
             font-size: 0.85rem;
         }
 
-        .forgot-password {
-            color: var(--primary);
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .forgot-password:hover {
-            color: var(--accent-hover);
-        }
-
         .submit-btn {
             width: 100%;
             padding: 12px;
-            background-color: var(--primary);
+            background: linear-gradient(to right, var(--primary), var(--accent));
             border-radius: var(--border-radius-md);
             color: white;
             font-weight: 600;
             font-size: 0.95rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             transition: var(--transition);
         }
 
         .submit-btn:hover {
-            background-color: var(--accent-hover);
-            box-shadow: 0 4px 12px rgba(87, 115, 255, 0.3);
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 1.5rem 0;
-            color: var(--text-tertiary);
-            font-size: 0.9rem;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background-color: var(--border-color);
-        }
-
-        .divider span {
-            padding: 0 1rem;
-        }
-
-        .social-login {
-            display: flex;
-            gap: 10px;
-        }
-
-        .social-btn {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            background-color: var(--bg-tertiary);
-            border-radius: var(--border-radius-md);
-            border: 1px solid var(--border-color);
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            transition: var(--transition);
-        }
-
-        .social-btn:hover {
-            background-color: var(--bg-secondary);
-            border-color: var(--text-tertiary);
-            color: var(--text-primary);
-        }
-
-        .auth-footer {
-            text-align: center;
-            margin-top: 2rem;
-            color: var(--text-tertiary);
-            font-size: 0.9rem;
-        }
-
-        .auth-footer a {
-            color: var(--primary);
-            font-weight: 500;
-        }
-
-        .auth-footer a:hover {
-            color: var(--accent-hover);
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            box-shadow: 0 4px 12px rgba(109, 74, 255, 0.3);
         }
 
         .error-message {
-            background-color: rgba(239, 68, 68, 0.1);
+            background-color: rgba(250, 82, 82, 0.1);
             color: var(--danger);
             padding: 12px;
             border-radius: var(--border-radius-md);
@@ -765,15 +742,16 @@
             display: none;
         }
 
-        /* ==================== ADD NEW LINK FORM STYLES ==================== */
+        /*  ADD NEW LINK FORM STYLES */
         .form-container {
             max-width: 700px;
             margin: 4rem auto;
             padding: 2rem;
-            background-color: var(--bg-secondary);
+            background: linear-gradient(145deg, rgba(18, 8, 58, 0.9), rgba(27, 15, 84, 0.8));
             border-radius: var(--border-radius-lg);
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(10px);
         }
 
         .form-header {
@@ -786,7 +764,7 @@
         }
 
         .form-title {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--text-primary);
@@ -849,12 +827,78 @@
             color: var(--text-primary);
         }
 
-        /* ==================== FOOTER ==================== */
+        /* Logo upload area styles */
+        .logo-upload-container {
+            grid-column: span 2;
+            padding: 20px;
+            border: 2px dashed var(--border-color);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            background-color: rgba(27, 15, 84, 0.3);
+        }
+
+        .logo-upload-container:hover {
+            border-color: var(--primary);
+            background-color: rgba(27, 15, 84, 0.5);
+        }
+
+        .logo-preview {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background-color: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            font-size: 28px;
+        }
+
+        .logo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* CONFIRM DIALOG STYLES */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.7) !important;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: linear-gradient(145deg, rgba(18, 8, 58, 0.95), rgba(27, 15, 84, 0.9));
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-header, .modal-footer {
+            border-color: var(--border-color);
+        }
+
+        .modal-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--text-primary);
+        }
+
+        .btn-close {
+            color: var(--text-primary);
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+
+        /* FOOTER */
         .footer {
-            background-color: var(--bg-secondary);
+            background: linear-gradient(to right, rgba(18, 8, 58, 0.9), rgba(27, 15, 84, 0.8));
             padding: 3rem 0;
             border-top: 1px solid var(--border-color);
             margin-top: 3rem;
+            backdrop-filter: blur(10px);
         }
 
         .footer-content {
@@ -867,7 +911,7 @@
         }
 
         .footer-column h3 {
-            font-family: 'Rajdhani', sans-serif;
+            font-family: 'Orbitron', sans-serif;
             color: var(--text-primary);
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
@@ -901,7 +945,7 @@
             font-size: 0.85rem;
         }
 
-        /* ==================== SVG ICONS ==================== */
+        /* SVG ICONS */
         .icon {
             width: 18px;
             height: 18px;
@@ -912,7 +956,7 @@
             fill: none;
         }
 
-        /* ==================== LOGOUT BUTTON ==================== */
+        /* LOGOUT BUTTON */
         .logout-btn {
             font-size: 0.9rem;
             color: var(--text-tertiary);
@@ -929,10 +973,41 @@
 
         .logout-btn:hover {
             color: var(--primary);
-            background: rgba(87, 115, 255, 0.1);
+            background: rgba(109, 74, 255, 0.1);
         }
 
-        /* ==================== RESPONSIVE STYLES ==================== */
+        /* Toast notification */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .toast {
+            background: linear-gradient(145deg, rgba(18, 8, 58, 0.95), rgba(27, 15, 84, 0.9));
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--border-radius-md);
+            margin-top: 10px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 250px;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+        }
+
+        .toast.success {
+            border-left: 4px solid var(--success);
+        }
+
+        .toast.error {
+            border-left: 4px solid var(--danger);
+        }
+
+        /* RESPONSIVE STYLES */
         @media (max-width: 1024px) {
             .footer-content {
                 grid-template-columns: repeat(2, 1fr);
@@ -1003,16 +1078,18 @@
             .logo-text {
                 font-size: 1.4rem;
             }
-        }
 
-        /* Debug outlines for development
-        [id] {
-            outline: 1px solid red;
+            .category-tab {
+                padding: 8px 16px;
+                font-size: 0.85rem;
+            }
         }
-        */
     </style>
 </head>
 <body>
+    <!-- Particle.js container -->
+    <div id="particles-js"></div>
+
     <div class="app-container">
         <!-- Header -->
         <header class="header">
@@ -1026,24 +1103,19 @@
                                 <line x1="21" y1="21" x2="15" y2="15"></line>
                             </svg>
                         </div>
-                        <input type="text" class="search-input" placeholder="Search games and software...">
+                        <input type="text" id="searchInput" class="search-input" placeholder="Search games and software...">
                     </div>
                 </div>
 
                 <div class="logo">
-                    <div class="logo-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 4h16v8a8 8 0 0 1 -16 0v-8"></path>
-                            <path d="M4 4v8a8 8 0 0 0 16 0v-8"></path>
-                            <path d="M9 15v2"></path>
-                            <path d="M15 15v2"></path>
-                        </svg>
+                    <div id="siteLogo" class="logo-icon">
+                        <div id="logoPlaceholder">C</div>
                     </div>
                     <div class="logo-text">CHOBBER'S SERVER</div>
                 </div>
 
                 <div class="header-right">
-                    <!-- Invisible admin access area - blended with background -->
+                    <!-- Invisible admin access area -->
                     <div id="adminAccessArea" class="admin-access-area"></div>
 
                     <!-- Only visible when admin is logged in -->
@@ -1063,124 +1135,36 @@
         <main class="main-content">
             <!-- Homepage -->
             <div id="homepage" class="page active">
-                <!-- Announcements Ticker -->
-                <div class="announcement-bar">
-                    <div class="ticker-container">
-                        <div class="ticker">
-                            <div class="ticker-item">
-                                <span class="ticker-label label-new">NEW</span>
-                                <span class="ticker-text">Cyberpunk 2077: Phantom Liberty now available</span>
-                            </div>
-                            <div class="ticker-item">
-                                <span class="ticker-label label-hot">HOT</span>
-                                <span class="ticker-text">Adobe Creative Cloud 2023 Suite complete collection</span>
-                            </div>
-                            <div class="ticker-item">
-                                <span class="ticker-label label-popular">POPULAR</span>
-                                <span class="ticker-text">Call of Duty: Modern Warfare III pre-release</span>
-                            </div>
-                            <div class="ticker-item">
-                                <span class="ticker-label label-new">NEW</span>
-                                <span class="ticker-text">FL Studio Mobile Premium with sound packs</span>
-                            </div>
-                            <div class="ticker-item">
-                                <span class="ticker-label label-hot">HOT</span>
-                                <span class="ticker-text">Microsoft Office 2023 Professional Plus with activator</span>
-                            </div>
-                        </div>
-                        <div class="ticker" aria-hidden="true">
-                            <div class="ticker-item">
-                                <span class="ticker-label label-new">NEW</span>
-                                <span class="ticker-text">Cyberpunk 2077: Phantom Liberty now available</span>
-                            </div>
-                            <div class="ticker-item">
-                                <span class="ticker-label label-hot">HOT</span>
-                                <span class="ticker-text">Adobe Creative Cloud 2023 Suite complete collection</span>
-                            </div>
-                            <div class="ticker-item">
-                                <span class="ticker-label label-popular">POPULAR</span>
-                                <span class="ticker-text">Call of Duty: Modern Warfare III pre-release</span>
-                            </div>
-                            <div class="ticker-item">
-                                <span class="ticker-label label-new">NEW</span>
-                                <span class="ticker-text">FL Studio Mobile Premium with sound packs</span>
-                            </div>
-                            <div class="ticker-item">
-                                <span class="ticker-label label-hot">HOT</span>
-                                <span class="ticker-text">Microsoft Office 2023 Professional Plus with activator</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Hero Section -->
                 <section class="hero-section">
                     <div class="hero-content">
                         <h1 class="hero-title">Premium Games & Software</h1>
                         <p class="hero-subtitle">Access a vast library of premium content, always up-to-date and ready to download</p>
-                        <button class="hero-btn">Explore Collection</button>
+                        <button class="btn btn-custom-primary btn-lg hero-btn">Explore Collection</button>
                     </div>
                 </section>
 
-                <!-- Categories Navigation -->
                 <div class="container">
-                    <nav class="category-nav">
-                        <ul class="category-nav-list">
-                            <li class="category-nav-item">
-                                <a href="#" class="category-nav-link active">All Content</a>
-                            </li>
-                            <li class="category-nav-item">
-                                <a href="#" class="category-nav-link">Games</a>
-                            </li>
-                            <li class="category-nav-item">
-                                <a href="#" class="category-nav-link">Creative Software</a>
-                            </li>
-                            <li class="category-nav-item">
-                                <a href="#" class="category-nav-link">Productivity</a>
-                            </li>
-                            <li class="category-nav-item">
-                                <a href="#" class="category-nav-link">Mobile Apps</a>
-                            </li>
-                            <li class="category-nav-item">
-                                <a href="#" class="category-nav-link">Templates & Assets</a>
-                            </li>
-                        </ul>
-                    </nav>
+                    <!-- Categories Tabs -->
+                    <div class="categories-container">
+                        <div class="category-tabs" id="categoryTabs">
+                            <div class="category-tab active" data-category="all">All Content</div>
+                            <div class="category-tab" data-category="games">Games</div>
+                            <div class="category-tab" data-category="creative">Creative Software</div>
+                            <div class="category-tab" data-category="productivity">Productivity</div>
+                            <div class="category-tab" data-category="mobile">Mobile Apps</div>
+                            <div class="category-tab" data-category="templates">Templates & Assets</div>
+                        </div>
+                    </div>
 
-                    <!-- Featured Section -->
+                    <!-- Content Section -->
                     <section class="section">
                         <div class="section-header">
                             <h2 class="section-title">Featured Content</h2>
-                            <a href="#" class="view-all">
-                                View all
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <polyline points="9 6 15 12 9 18"></polyline>
-                                </svg>
-                            </a>
                         </div>
 
-                        <!-- FIXED: Corrected ID attribute from "i d" to "id" -->
                         <div class="cards-grid" id="cardsContainer">
-                            <!-- Cards will be dynamically inserted here -->
-                        </div>
-                    </section>
-
-                    <!-- Recent Additions Section -->
-                    <section class="section">
-                        <div class="section-header">
-                            <h2 class="section-title">Recently Added</h2>
-                            <a href="#" class="view-all">
-                                View all
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <polyline points="9 6 15 12 9 18"></polyline>
-                                </svg>
-                            </a>
-                        </div>
-
-                        <div class="cards-grid" id="recentCardsContainer">
-                            <!-- Recent cards will be dynamically inserted here -->
+                            <!-- Empty state will be shown initially, cards will be added here -->
                         </div>
                     </section>
                 </div>
@@ -1223,7 +1207,7 @@
                                 </div>
                             </div>
 
-                            <button type="submit" class="submit-btn">Sign In</button>
+                            <button type="submit" class="btn btn-custom-primary submit-btn">Sign In</button>
                         </form>
                     </div>
                 </div>
@@ -1247,6 +1231,15 @@
                         </div>
 
                         <form id="addLinkForm">
+                            <!-- Logo upload area -->
+                            <div class="logo-upload-container" id="logoUploadContainer">
+                                <div class="logo-preview" id="logoPreview">
+                                    <span>+</span>
+                                </div>
+                                <p>Click to upload site logo</p>
+                                <input type="file" id="logoUpload" style="display: none;" accept="image/*">
+                            </div>
+
                             <div class="form-grid">
                                 <div class="form-group">
                                     <label for="title" class="form-label">Title</label>
@@ -1256,7 +1249,7 @@
 
                                 <div class="form-group">
                                     <label for="category" class="form-label">Category</label>
-                                    <select class="form-input" id="category">
+                                    <select class="form-input form-select" id="category">
                                         <option value="games">Games</option>
                                         <option value="creative">Creative Software</option>
                                         <option value="productivity">Productivity</option>
@@ -1273,7 +1266,7 @@
 
                                 <div class="form-group">
                                     <label for="badge" class="form-label">Badge (optional)</label>
-                                    <select class="form-input" id="badge">
+                                    <select class="form-input form-select" id="badge">
                                         <option value="">None</option>
                                         <option value="NEW">New</option>
                                         <option value="HOT">Hot</option>
@@ -1296,13 +1289,35 @@
 
                             <div class="form-actions">
                                 <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
-                                <button type="submit" class="submit-btn">Publish Content</button>
+                                <button type="submit" class="btn btn-custom-primary submit-btn">Publish Content</button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </main>
+
+        <!-- Confirmation Dialog (Bootstrap Modal) -->
+        <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirm Deletion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this item? This action cannot be undone.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications Container -->
+        <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer"></div>
 
         <!-- Footer -->
         <footer class="footer">
@@ -1353,114 +1368,136 @@
         </footer>
     </div>
 
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        // ==================== INITIALIZE SAMPLE CARD DATA ====================
-        const initialCards = [
-            {
-                title: "Cyberpunk 2077: Phantom Liberty",
-                image: "https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/3091615a8a2b7bb84a8fa55687be2bd8.jpg",
-                url: "https://drive.google.com/drive/folders/example1",
-                badge: "NEW",
-                category: "games",
-                description: "The massive expansion for Cyberpunk 2077 featuring a spy-thriller adventure in a new district of Night City."
-            },
-            {
-                title: "Adobe Creative Cloud 2023 Complete",
-                image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1200px-Adobe_Photoshop_CC_icon.svg.png",
-                url: "https://drive.google.com/drive/folders/example2",
-                badge: "POPULAR",
-                category: "creative",
-                description: "Complete Adobe Creative Cloud 2023 suite including Photoshop, Illustrator, Premiere Pro and more."
-            },
-            {
-                title: "Call of Duty: Modern Warfare III",
-                image: "https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/60eca3ac0eda3f337dfb5b6a045670912eef0e8e0c5c667c.jpg",
-                url: "https://drive.google.com/drive/folders/example3",
-                badge: "HOT",
-                category: "games",
-                description: "The newest installment in the Call of Duty franchise with enhanced multiplayer and campaign modes."
-            },
-            {
-                title: "FL Studio Mobile Premium",
-                image: "https://play-lh.googleusercontent.com/E8comp6AI-ViExCJT9l2BfWQVE3aEFdTVV2_Y-VuTRDuOQEB2zdEAtxKmRsgrMErCRs=w240-h480-rw",
-                url: "https://drive.google.com/drive/folders/example4",
-                badge: "MOBILE",
-                category: "mobile",
-                description: "Professional music production studio for mobile devices with all premium features unlocked."
-            },
-            {
-                title: "Microsoft Office 2023 Professional Plus",
-                image: "https://cdn-icons-png.flaticon.com/512/732/732224.png",
-                url: "https://drive.google.com/drive/folders/example6",
-                badge: "UPDATED",
-                category: "productivity",
-                description: "The latest version of Microsoft Office suite including Word, Excel, PowerPoint and more."
-            },
-            {
-                title: "Premiere Pro Templates Pack 2023",
-                image: "https://cdn.mos.cms.futurecdn.net/SytNGv3ZxAVCkvcszmLGd3.jpg",
-                url: "https://drive.google.com/drive/folders/example5",
-                badge: "",
-                category: "templates",
-                description: "Collection of 500+ professional templates for Adobe Premiere Pro with transitions and effects."
-            }
-        ];
-
-        // Recent cards data
-        const recentCards = [
-            {
-                title: "Autodesk 3ds Max 2024",
-                image: "https://www.gamepressure.com/gallery/html/news/bigphotos/51775860.jpg",
-                url: "https://drive.google.com/drive/folders/example7",
-                badge: "NEW",
-                category: "creative",
-                description: "Professional 3D modeling and animation software for game developers and visual effects artists."
-            },
-            {
-                title: "The Sims 4: All Expansions Bundle",
-                image: "https://media.contentapi.ea.com/content/dam/eacom/SIMS/franchise-landing/ts4-refresh-assets/images/2019/06/ts4-featured-image-base-refresh.png.adapt.crop16x9.1455w.png",
-                url: "https://drive.google.com/drive/folders/example8",
-                badge: "UPDATED",
-                category: "games",
-                description: "Complete collection of The Sims 4 with all expansion packs, game packs, and stuff packs included."
-            },
-            {
-                title: "Final Cut Pro X (macOS)",
-                image: "https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/7c/78/74/7c7874f8-ddf7-dcde-5a23-22dff756a0cb/AppIcon-FCPX-85-220-0-4-2x.png/1200x630bb.png",
-                url: "https://drive.google.com/drive/folders/example9",
-                badge: "",
-                category: "creative",
-                description: "Apple's professional video editing software with all plugins and additional resources."
-            },
-            {
-                title: "Windows 11 Pro (22H2)",
-                image: "https://cdn.mos.cms.futurecdn.net/UMtzXfbKX8wd9ynELARPYb.jpg",
-                url: "https://drive.google.com/drive/folders/example10",
-                badge: "POPULAR",
-                category: "productivity",
-                description: "The latest version of Windows 11 Professional with activator and pre-installed essential software."
-            }
-        ];
-
-        // ==================== DOM ELEMENTS ====================
-        // Wait for DOM to be fully loaded before accessing elements
+        // ==================== PARTICLES.JS CONFIGURATION ====================
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize particles.js
+            particlesJS('particles-js', {
+                "particles": {
+                    "number": {
+                        "value": 100,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#6d4aff"
+                    },
+                    "shape": {
+                        "type": "circle",
+                        "stroke": {
+                            "width": 0,
+                            "color": "#000000"
+                        },
+                        "polygon": {
+                            "nb_sides": 5
+                        }
+                    },
+                    "opacity": {
+                        "value": 0.3,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 1,
+                            "opacity_min": 0.1,
+                            "sync": false
+                        }
+                    },
+                    "size": {
+                        "value": 5,
+                        "random": true,
+                        "anim": {
+                            "enable": true,
+                            "speed": 2,
+                            "size_min": 0.3,
+                            "sync": false
+                        }
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#6d4aff",
+                        "opacity": 0.2,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 1,
+                        "direction": "none",
+                        "random": true,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                        "attract": {
+                            "enable": false,
+                            "rotateX": 600,
+                            "rotateY": 1200
+                        }
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "grab"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "grab": {
+                            "distance": 150,
+                            "line_linked": {
+                                "opacity": 0.6
+                            }
+                        },
+                        "bubble": {
+                            "distance": 400,
+                            "size": 40,
+                            "duration": 2,
+                            "opacity": 8,
+                            "speed": 3
+                        },
+                        "repulse": {
+                            "distance": 200,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        },
+                        "remove": {
+                            "particles_nb": 2
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            // ==================== DOM ELEMENTS ====================
             const homepage = document.getElementById("homepage");
             const loginPage = document.getElementById("loginPage");
             const addLinkPage = document.getElementById("addLinkPage");
-
-            // Fixed: Make sure these elements exist and are properly selected
             const cardsContainer = document.getElementById("cardsContainer");
-            const recentCardsContainer = document.getElementById("recentCardsContainer");
+            const searchInput = document.getElementById("searchInput");
+            const categoryTabs = document.getElementById("categoryTabs");
+            const deleteConfirmModal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
+            const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+            const siteLogo = document.getElementById("siteLogo");
+            const logoPlaceholder = document.getElementById("logoPlaceholder");
+            const logoUploadContainer = document.getElementById("logoUploadContainer");
+            const logoPreview = document.getElementById("logoPreview");
+            const logoUpload = document.getElementById("logoUpload");
+            const toastContainer = document.getElementById("toastContainer");
 
-            if (!cardsContainer) {
-                console.error("Cards container element not found!");
-            }
-
-            if (!recentCardsContainer) {
-                console.error("Recent cards container element not found!");
-            }
-
+            // Admin elements
             const adminBtn = document.getElementById("adminBtn");
             const adminAccessArea = document.getElementById("adminAccessArea");
             const footerAdminLink = document.getElementById("footerAdminLink");
@@ -1483,8 +1520,93 @@
             let lastClickTime = 0;
 
             // ==================== DATA STORAGE ====================
-            // Load cards from localStorage or use initial data
-            let cards = JSON.parse(localStorage.getItem("chobbersCards")) || initialCards;
+            // Load cards from localStorage or use initial data (empty array)
+            let cards =  [];
+            try {
+                const savedCards = localStorage.getItem("chobbersCards");
+                if (savedCards) {
+                    cards = JSON.parse(savedCards);
+                }
+            } catch (error) {
+                console.error("Error loading cards from localStorage:", error);
+                cards = [];
+            }
+
+            let currentCategory = "all"; // Track current category filter
+            let cardToDelete = null; // Store the card ID to delete
+
+            // Load site logo
+            const savedLogo = localStorage.getItem("chobbersLogo");
+            if (savedLogo) {
+                siteLogo.innerHTML = `<img src="${savedLogo}" alt="Site Logo">`;
+                logoPlaceholder.style.display = 'none';
+            }
+
+            // =================== TOAST NOTIFICATION SYSTEM ===================
+            function showToast(message, type = 'success') {
+                // Create toast element using Bootstrap
+                const toastEl = document.createElement('div');
+                toastEl.className = `toast align-items-center border-0 ${type === 'success' ? 'bg-success' : 'bg-danger'} text-white`;
+                toastEl.setAttribute('role', 'alert');
+                toastEl.setAttribute('aria-live', 'assertive');
+                toastEl.setAttribute('aria-atomic', 'true');
+
+                toastEl.innerHTML = `
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            ${message}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                `;
+
+                toastContainer.appendChild(toastEl);
+
+                const bsToast = new bootstrap.Toast(toastEl, {
+                    delay: 5000,
+                    autohide: true
+                });
+
+                bsToast.show();
+
+                // Remove the element when hidden
+                toastEl.addEventListener('hidden.bs.toast', function() {
+                    toastEl.remove();
+                });
+            }
+
+            // ==================== LOGO UPLOAD FUNCTIONALITY ====================
+            logoUploadContainer.addEventListener('click', () => {
+                logoUpload.click();
+            });
+
+            logoUpload.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                if (!file.type.startsWith('image/')) {
+                    showToast('Please select an image file', 'danger');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const dataUrl = e.target.result;
+
+                    // Update preview
+                    logoPreview.innerHTML = `<img src="${dataUrl}" alt="Logo Preview">`;
+
+                    // Store logo in localStorage
+                    localStorage.setItem("chobbersLogo", dataUrl);
+
+                    // Update site logo
+                    siteLogo.innerHTML = `<img src="${dataUrl}" alt="Site Logo">`;
+                    logoPlaceholder.style.display = 'none';
+
+                    showToast('Logo uploaded successfully');
+                };
+                reader.readAsDataURL(file);
+            });
 
             // Check if admin is logged in (using session storage)
             function isAdminLoggedIn() {
@@ -1510,62 +1632,144 @@
                     adminBtn.classList.remove('visible');
                     logoutBtn.classList.remove('visible');
                 }
+
+                // Rerender cards to show/hide admin actions
+                renderCards();
             }
 
-            // ==================== FUNCTIONS ====================
-            // Function to render all cards
+            // ==================== DELETE FUNCTIONALITY ====================
+            function showDeleteConfirmation(cardId) {
+                cardToDelete = cardId;
+                deleteConfirmModal.show();
+            }
+
+            // Delete card function - completely rewritten for reliability
+            function deleteCard(cardId) {
+                console.log("Attempting to delete card with ID:", cardId);
+
+                // First, find the index of the card to delete
+                const cardIndex = cards.findIndex(card => card.id === cardId);
+
+                if (cardIndex !== -1) {
+                    // Remove the card from the array
+                    cards.splice(cardIndex, 1);
+
+                    // Save changes to localStorage
+                    localStorage.setItem("chobbersCards", JSON.stringify(cards));
+
+                    // Re-render the updated cards
+                    renderCards();
+
+                    // Show success toast
+                    showToast("Item successfully deleted", "success");
+
+                    console.log("Card deleted successfully. Remaining cards:", cards.length);
+                    return true;
+                } else {
+                    console.error("Card with ID:", cardId, "not found.");
+                    showToast("Error: Item not found", "danger");
+                    return false;
+                }
+            }
+
+            // ==================== CARD FUNCTIONALITY ====================
+            // Function to filter cards based on category and search term
+            function filterCards() {
+                const searchTerm = searchInput.value.toLowerCase();
+
+                return cards.filter(card => {
+                    const matchesCategory = currentCategory === 'all' || card.category === currentCategory;
+                    const matchesSearch = card.title.toLowerCase().includes(searchTerm) ||
+                                          (card.description && card.description.toLowerCase().includes(searchTerm));
+                    return matchesCategory && matchesSearch;
+                });
+            }
+
+            // Function to render filtered cards
             function renderCards() {
                 if (!cardsContainer) {
                     console.error("Cannot render cards: container element not found");
                     return;
                 }
 
-                console.log("Rendering cards...");
+                const filteredCards = filterCards();
                 cardsContainer.innerHTML = "";
-                cards.forEach(card => {
+
+                // Show empty state if no cards
+                if (cards.length === 0) {
+                    cardsContainer.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">➕</div>
+                            <h3>No content found</h3>
+                            <p>Click the "+" button when logged in as admin to add your first content item.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Show no results message if no matching cards
+                if (filteredCards.length === 0) {
+                    cardsContainer.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">🔍</div>
+                            <h3>No matching content</h3>
+                            <p>Try adjusting your search or filter criteria to find what you're looking for.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // Render cards
+                filteredCards.forEach(card => {
                     const cardElement = createCardElement(card);
                     cardsContainer.appendChild(cardElement);
                 });
 
-                // Render recent cards
-                if (recentCardsContainer) {
-                    recentCardsContainer.innerHTML = "";
-                    recentCards.forEach(card => {
-                        const cardElement = createCardElement(card);
-                        recentCardsContainer.appendChild(cardElement);
+                // Set up delete buttons
+                if (isAdminLoggedIn()) {
+                    document.querySelectorAll('.delete-btn').forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const cardId = this.getAttribute('data-id');
+                            showDeleteConfirmation(cardId);
+                        });
                     });
                 }
-
-                console.log("Cards rendered successfully");
             }
 
             // Function to create a single card element
             function createCardElement(card) {
                 const cardDiv = document.createElement("div");
                 cardDiv.className = "card";
+                cardDiv.setAttribute("data-id", card.id); // Store card ID in data attribute
 
                 // Add badge if it exists
                 const badgeHtml = card.badge ?
                     `<div class="card-badge badge-${card.badge.toLowerCase()}">${card.badge}</div>` : '';
 
+                // Add admin action buttons if logged in
+                const adminActionsHtml = isAdminLoggedIn() ? `
+                    <div class="admin-card-actions">
+                        <button class="admin-action-btn delete-btn" data-id="${card.id}" title="Delete" aria-label="Delete item">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <line x1="4" y1="7" x2="20" y2="7"></line>
+                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                            </svg>
+                        </button>
+                    </div>` : '';
+
                 cardDiv.innerHTML = `
                     <div class="card-image-container">
                         <img src="${card.image}" alt="${card.title}" class="card-image">
                         ${badgeHtml}
+                        ${adminActionsHtml}
                     </div>
                     <div class="card-content">
                         <h3 class="card-title">${card.title}</h3>
                         <div class="card-meta">
-                            <div class="meta-item">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
-                                    <line x1="4" y1="8" x2="20" y2="8"></line>
-                                    <line x1="8" y1="4" x2="8" y2="8"></line>
-                                    <line x1="16" y1="4" x2="16" y2="8"></line>
-                                </svg>
-                                ${new Date().toLocaleDateString()}
-                            </div>
                             <div class="meta-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -1574,7 +1778,7 @@
                                     <path d="M12 12l8 -4.5"></path>
                                     <path d="M8.2 9.8l7.6 -4.6"></path>
                                 </svg>
-                                ${card.category || 'General'}
+                                ${capitalizeFirstLetter(card.category) || 'General'}
                             </div>
                         </div>
                         <p class="card-description">${card.description || 'No description available'}</p>
@@ -1601,9 +1805,18 @@
                 return cardDiv;
             }
 
+            // Helper function to capitalize first letter
+            function capitalizeFirstLetter(string) {
+                return string ? string.charAt(0).toUpperCase() + string.slice(1) : '';
+            }
+
             // Function to add a new card
             function addNewCard(title, imageUrl, driveUrl, category, badge, description) {
+                // Generate a unique ID for the card
+                const id = 'card' + Date.now();
+
                 const newCard = {
+                    id: id,
                     title: title,
                     image: imageUrl,
                     url: driveUrl,
@@ -1617,13 +1830,12 @@
                 saveCards();
                 renderCards();
 
-                console.log("New card added:", newCard);
+                showToast('New content added successfully');
             }
 
             // Function to save cards to localStorage
             function saveCards() {
                 localStorage.setItem("chobbersCards", JSON.stringify(cards));
-                console.log("Cards saved to localStorage");
             }
 
             // Function to navigate between pages
@@ -1639,8 +1851,6 @@
                 } else if (page === "addLink") {
                     addLinkPage.style.display = "block";
                 }
-
-                console.log("Navigated to:", page);
             }
 
             // ==================== EVENT LISTENERS ====================
@@ -1701,6 +1911,7 @@
             logoutBtn.addEventListener("click", () => {
                 setAdminLoggedIn(false);
                 navigateTo("homepage");
+                showToast('Logged out successfully');
             });
 
             // Login form submission
@@ -1715,6 +1926,7 @@
                     navigateTo("addLink");
                     loginForm.reset();
                     loginError.style.display = "none";
+                    showToast('Logged in successfully');
                 } else {
                     loginError.style.display = "flex";
                     setTimeout(() => {
@@ -1750,16 +1962,34 @@
                 navigateTo("homepage");
             });
 
-            // Category navigation
-            document.querySelectorAll('.category-nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    document.querySelectorAll('.category-nav-link').forEach(l => {
-                        l.classList.remove('active');
-                    });
-                    link.classList.add('active');
-                });
+            // Confirm delete button click (Bootstrap modal)
+            confirmDeleteBtn.addEventListener('click', function() {
+                if (cardToDelete) {
+                    deleteCard(cardToDelete);
+                    deleteConfirmModal.hide();
+                    cardToDelete = null;
+                }
             });
+
+            // Category tabs click
+            if (categoryTabs) {
+                categoryTabs.querySelectorAll('.category-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        categoryTabs.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+
+                        currentCategory = tab.dataset.category;
+                        renderCards();
+                    });
+                });
+            }
+
+            // Search input
+            if (searchInput) {
+                searchInput.addEventListener('input', () => {
+                    renderCards();
+                });
+            }
 
             // Add event listener for secret key combination (Ctrl+Shift+A)
             document.addEventListener('keydown', function(event) {
@@ -1775,8 +2005,6 @@
 
             // Update admin UI based on login status
             updateAdminUI();
-
-            console.log("Application initialized successfully");
         });
     </script>
 </body>
