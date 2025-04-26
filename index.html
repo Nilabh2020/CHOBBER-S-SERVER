@@ -4,18 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CHOBBER'S Server | Premium Content Hub</title>
-
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Particle.js for better background effects -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
-
     <style>
         /* ==================== BASE STYLES ==================== */
         :root {
@@ -30,6 +26,8 @@
             --accent: #bd4be3;
             --accent-light: #d176ed;
             --accent-dark: #9a30c2;
+            --discord: #5865F2;
+            --discord-dark: #4752C4;
             --text-primary: #ffffff;
             --text-secondary: #e6e6e6;
             --text-tertiary: #b3b3b3;
@@ -50,13 +48,11 @@
             --header-height: 70px;
             --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary), #1e0f5a);
@@ -66,7 +62,6 @@
             min-height: 100vh;
             position: relative;
         }
-
         /* Particles.js container */
         #particles-js {
             position: fixed;
@@ -76,22 +71,18 @@
             left: 0;
             z-index: -1;
         }
-
         button, input, select, textarea {
             font-family: inherit;
             outline: none;
         }
-
         button {
             cursor: pointer;
             border: none;
         }
-
         a {
             text-decoration: none;
             color: inherit;
         }
-
         /* Override some Bootstrap styles */
         .btn-custom-primary {
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -100,12 +91,52 @@
             box-shadow: 0 4px 12px rgba(109, 74, 255, 0.3);
             transition: var(--transition);
         }
-
         .btn-custom-primary:hover,
         .btn-custom-primary:active {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary));
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(109, 74, 255, 0.4);
+            color: white;
+        }
+
+        /* Discord button styles */
+        .discord-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--discord);
+            color: white;
+            border-radius: var(--border-radius-md);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 2px 5px rgba(88, 101, 242, 0.3);
+            text-decoration: none;
+            margin-right: 12px;
+        }
+
+        .discord-btn:hover {
+            background: var(--discord-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(88, 101, 242, 0.4);
+            color: white;
+        }
+
+        .discord-btn svg {
+            color: white;
+        }
+
+        .hero-discord-btn {
+            background-color: var(--discord);
+            color: white;
+            margin-left: 10px;
+        }
+
+        .hero-discord-btn:hover {
+            background-color: var(--discord-dark);
             color: white;
         }
 
@@ -115,14 +146,12 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
         .main-content {
             flex: 1;
             margin-top: var(--header-height);
             position: relative;
             z-index: 1;
         }
-
         /* ==================== HEADER STYLES ==================== */
         .header {
             position: fixed;
@@ -140,7 +169,6 @@
             box-shadow: var(--shadow-md);
             border-bottom: 1px solid var(--border-color);
         }
-
         .header-content {
             display: flex;
             align-items: center;
@@ -150,7 +178,6 @@
             margin: 0 auto;
             position: relative;
         }
-
         .logo {
             position: absolute;
             left: 50%;
@@ -160,7 +187,6 @@
             justify-content: center;
             gap: 12px;
         }
-
         .logo-icon {
             display: flex;
             align-items: center;
@@ -172,13 +198,11 @@
             box-shadow: 0 2px 5px rgba(109, 74, 255, 0.3);
             overflow: hidden;
         }
-
         .logo-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         .logo-icon.empty {
             display: flex;
             justify-content: center;
@@ -187,7 +211,6 @@
             font-weight: bold;
             color: white;
         }
-
         .logo-text {
             font-family: 'Orbitron', sans-serif;
             font-weight: 700;
@@ -196,22 +219,18 @@
             letter-spacing: 1px;
             text-shadow: 0 0 10px rgba(109, 74, 255, 0.3);
         }
-
         .header-left {
             flex: 1;
         }
-
         .header-right {
             flex: 1;
             display: flex;
             justify-content: flex-end;
         }
-
         .search-bar {
             position: relative;
             width: 300px;
         }
-
         .search-input {
             width: 100%;
             padding: 10px 16px 10px 40px;
@@ -222,12 +241,10 @@
             font-size: 0.9rem;
             transition: var(--transition);
         }
-
         .search-input:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.15);
         }
-
         .search-icon {
             position: absolute;
             left: 12px;
@@ -236,7 +253,6 @@
             color: var(--text-tertiary);
             pointer-events: none;
         }
-
         /* Secret admin area - completely invisible */
         .admin-access-area {
             position: absolute;
@@ -248,7 +264,6 @@
             background-color: transparent;
             z-index: 1001;
         }
-
         /* Visible admin button - only shows when admin is logged in */
         .admin-btn {
             display: none; /* Hidden by default */
@@ -264,17 +279,14 @@
             border: 1px solid rgba(109, 74, 255, 0.2);
             margin-left: 10px;
         }
-
         .admin-btn.visible {
             display: flex; /* Show when admin is logged in */
         }
-
         .admin-btn:hover {
             background-color: var(--primary);
             border-color: var(--primary);
             box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.15);
         }
-
         /* ==================== HERO SECTION ==================== */
         .hero-section {
             position: relative;
@@ -289,13 +301,11 @@
             align-items: center;
             justify-content: center;
         }
-
         .hero-content {
             text-align: center;
             max-width: 700px;
             padding: 0 2rem;
         }
-
         .hero-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 3rem;
@@ -305,13 +315,11 @@
             color: var(--text-primary);
             text-shadow: 0 2px 10px rgba(109, 74, 255, 0.5);
         }
-
         .hero-subtitle {
             font-size: 1.1rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
         }
-
         .hero-btn {
             padding: 12px 28px;
             background: linear-gradient(135deg, var(--primary), var(--accent));
@@ -322,23 +330,19 @@
             transition: var(--transition);
             box-shadow: 0 4px 12px rgba(109, 74, 255, 0.3);
         }
-
         .hero-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(109, 74, 255, 0.4);
         }
-
         /* ==================== CONTENT SECTIONS ==================== */
         .container {
             max-width: 1440px;
             margin: 0 auto;
             padding: 0 2rem;
         }
-
         .section {
             margin-bottom: 4rem;
         }
-
         .section-header {
             display: flex;
             align-items: center;
@@ -346,7 +350,6 @@
             margin-bottom: 1.5rem;
             position: relative;
         }
-
         .section-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
@@ -356,7 +359,6 @@
             padding-left: 15px;
             margin-bottom: 0;
         }
-
         .section-title::before {
             content: "";
             position: absolute;
@@ -368,12 +370,10 @@
             background: linear-gradient(to bottom, var(--primary), var(--accent));
             border-radius: 2px;
         }
-
         /* ==================== CATEGORY TABS ==================== */
         .categories-container {
             margin-bottom: 2rem;
         }
-
         .category-tabs {
             display: flex;
             overflow-x: auto;
@@ -383,14 +383,12 @@
             gap: 8px;
             margin-bottom: 18px;
         }
-
         .category-tabs::-webkit-scrollbar {
             display: none; /* For Chrome, Safari, and Opera */
         }
-
         .category-tab {
             padding: 10px 20px;
-            border-radius: var(--border-radius-md);
+            border-radius: var(--border-radius-m);
             font-size: 0.95rem;
             font-weight: 500;
             color: var(--text-tertiary);
@@ -400,52 +398,44 @@
             white-space: nowrap;
             transition: var(--transition);
         }
-
         .category-tab:hover {
             border-color: var(--primary);
             color: var(--primary-light);
         }
-
         .category-tab.active {
             background: linear-gradient(45deg, var(--primary-dark), var(--primary));
             color: white;
             border-color: transparent;
             box-shadow: 0 4px 10px rgba(109, 74, 255, 0.2);
         }
-
         /* ==================== CARD GRID ==================== */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 24px;
         }
-
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
             padding: 5rem 0;
             color: var(--text-tertiary);
         }
-
         .empty-state h3 {
             font-size: 1.5rem;
             color: var(--text-secondary);
             margin-bottom: 1rem;
         }
-
         .empty-state p {
             max-width: 500px;
             margin: 0 auto;
             margin-bottom: 2rem;
         }
-
         .empty-state-icon {
             font-size: 4rem;
             color: var(--primary);
             margin-bottom: 1rem;
             opacity: 0.5;
         }
-
         .card {
             background: linear-gradient(135deg, rgba(37, 20, 112, 0.9), rgba(27, 15, 84, 0.7));
             border-radius: var(--border-radius-lg);
@@ -457,30 +447,25 @@
             flex-direction: column;
             backdrop-filter: blur(5px);
         }
-
         .card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
             border-color: rgba(109, 74, 255, 0.2);
         }
-
         .card-image-container {
             position: relative;
             height: 180px;
             overflow: hidden;
         }
-
         .card-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
-
         .card:hover .card-image {
             transform: scale(1.05);
         }
-
         .card-badge {
             position: absolute;
             top: 12px;
@@ -493,34 +478,28 @@
             letter-spacing: 0.5px;
             z-index: 1;
         }
-
         .badge-new {
             background-color: var(--primary);
             color: white;
         }
-
         .badge-hot {
             background-color: var(--danger);
             color: white;
         }
-
         .badge-popular {
             background-color: var(--success);
             color: white;
         }
-
         .badge-updated {
             background-color: var(--info);
             color: white;
         }
-
         .card-content {
             padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
-
         .card-title {
             font-weight: 600;
             font-size: 1.1rem;
@@ -528,7 +507,6 @@
             color: var(--text-primary);
             line-height: 1.4;
         }
-
         .card-meta {
             margin-bottom: 16px;
             color: var(--text-tertiary);
@@ -536,13 +514,11 @@
             display: flex;
             gap: 12px;
         }
-
         .meta-item {
             display: flex;
             align-items: center;
             gap: 4px;
         }
-
         .card-description {
             color: var(--text-secondary);
             font-size: 0.9rem;
@@ -554,13 +530,11 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
-
         .card-actions {
             margin-top: auto;
             display: flex;
             gap: 10px;
         }
-
         .btn {
             display: inline-flex;
             align-items: center;
@@ -572,35 +546,29 @@
             transition: var(--transition);
             gap: 8px;
         }
-
         .btn-primary {
             background: linear-gradient(to right, var(--primary-dark), var(--primary));
             color: white;
             flex: 1;
         }
-
         .btn-primary:hover {
             background: linear-gradient(to right, var(--primary), var(--primary-dark));
             box-shadow: 0 4px 10px rgba(109, 74, 255, 0.3);
         }
-
         .btn-outline {
             background-color: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-secondary);
         }
-
         .btn-outline:hover {
             background-color: var(--bg-tertiary);
             border-color: var(--primary);
             color: var(--primary);
         }
-
         .btn-icon {
             width: 38px;
             padding: 0;
         }
-
         /* Admin card actions for delete/edit */
         .admin-card-actions {
             position: absolute;
@@ -610,7 +578,6 @@
             gap: 6px;
             z-index: 10;
         }
-
         .admin-action-btn {
             width: 32px;
             height: 32px;
@@ -626,12 +593,10 @@
             transition: var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
         .delete-btn:hover {
             background-color: var(--danger);
             color: white;
         }
-
         /* ==================== LOGIN PAGE STYLES ==================== */
         .auth-container {
             max-width: 440px;
@@ -643,12 +608,10 @@
             box-shadow: var(--shadow-lg);
             backdrop-filter: blur(10px);
         }
-
         .auth-header {
             text-align: center;
             margin-bottom: 2rem;
         }
-
         .auth-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
@@ -656,16 +619,13 @@
             margin-bottom: 0.5rem;
             color: var(--text-primary);
         }
-
         .auth-subtitle {
             color: var(--text-tertiary);
             font-size: 0.95rem;
         }
-
         .form-group {
             margin-bottom: 1.5rem;
         }
-
         .form-label {
             display: block;
             margin-bottom: 0.5rem;
@@ -673,7 +633,6 @@
             font-size: 0.9rem;
             font-weight: 500;
         }
-
         .form-input {
             width: 100%;
             padding: 12px 16px;
@@ -684,34 +643,28 @@
             font-size: 0.95rem;
             transition: var(--transition);
         }
-
         .form-input:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 2px rgba(109, 74, 255, 0.15);
         }
-
         .form-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 1.5rem;
         }
-
         .form-checkbox {
             display: flex;
             align-items: center;
             gap: 8px;
         }
-
         .form-checkbox input {
             accent-color: var(--primary);
         }
-
         .form-checkbox label {
             color: var(--text-tertiary);
             font-size: 0.85rem;
         }
-
         .submit-btn {
             width: 100%;
             padding: 12px;
@@ -723,12 +676,10 @@
             margin-bottom: 1rem;
             transition: var(--transition);
         }
-
         .submit-btn:hover {
             background: linear-gradient(to right, var(--primary-dark), var(--primary));
             box-shadow: 0 4px 12px rgba(109, 74, 255, 0.3);
         }
-
         .error-message {
             background-color: rgba(250, 82, 82, 0.1);
             color: var(--danger);
@@ -741,7 +692,6 @@
             gap: 10px;
             display: none;
         }
-
         /*  ADD NEW LINK FORM STYLES */
         .form-container {
             max-width: 700px;
@@ -753,7 +703,6 @@
             box-shadow: var(--shadow-lg);
             backdrop-filter: blur(10px);
         }
-
         .form-header {
             display: flex;
             align-items: center;
@@ -762,14 +711,12 @@
             padding-bottom: 1rem;
             border-bottom: 1px solid var(--border-color);
         }
-
         .form-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--text-primary);
         }
-
         .back-btn {
             display: flex;
             align-items: center;
@@ -779,37 +726,30 @@
             font-weight: 500;
             transition: var(--transition);
         }
-
         .back-btn:hover {
             color: var(--primary);
         }
-
         .form-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
-
         .form-grid .form-group:last-child {
             grid-column: span 2;
         }
-
         .form-group.full-width {
             grid-column: span 2;
         }
-
         .form-help {
             font-size: 0.8rem;
             margin-top: 4px;
             color: var(--text-tertiary);
         }
-
         .form-actions {
             display: flex;
             gap: 12px;
             margin-top: 2rem;
         }
-
         .cancel-btn {
             padding: 12px 20px;
             background-color: transparent;
@@ -820,13 +760,11 @@
             font-size: 0.95rem;
             transition: var(--transition);
         }
-
         .cancel-btn:hover {
             background-color: var(--bg-tertiary);
             border-color: var(--text-tertiary);
             color: var(--text-primary);
         }
-
         /* Logo upload area styles */
         .logo-upload-container {
             grid-column: span 2;
@@ -839,12 +777,10 @@
             cursor: pointer;
             background-color: rgba(27, 15, 84, 0.3);
         }
-
         .logo-upload-container:hover {
             border-color: var(--primary);
             background-color: rgba(27, 15, 84, 0.5);
         }
-
         .logo-preview {
             width: 100px;
             height: 100px;
@@ -859,48 +795,40 @@
             color: var(--text-tertiary);
             font-size: 28px;
         }
-
         .logo-preview img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-
         /* CONFIRM DIALOG STYLES */
         .modal-backdrop {
             background-color: rgba(0, 0, 0, 0.7) !important;
             backdrop-filter: blur(5px);
         }
-
         .modal-content {
             background: linear-gradient(145deg, rgba(18, 8, 58, 0.95), rgba(27, 15, 84, 0.9));
             border-radius: var(--border-radius-lg);
             border: 1px solid var(--border-color);
         }
-
         .modal-header, .modal-footer {
             border-color: var(--border-color);
         }
-
         .modal-title {
             font-family: 'Orbitron', sans-serif;
             color: var(--text-primary);
         }
-
         .btn-close {
             color: var(--text-primary);
             filter: invert(1) grayscale(100%) brightness(200%);
         }
-
         /* FOOTER */
         .footer {
-            background: linear-gradient(to right, rgba(18, 8, 58, 0.9), rgba(27, 15, 84, 0.8));
+            background: linear-gradient(to right, rgba(18, 8, 58, 0.9), rgba(27, 15, 84,0.8));
             padding: 3rem 0;
             border-top: 1px solid var(--border-color);
             margin-top: 3rem;
             backdrop-filter: blur(10px);
         }
-
         .footer-content {
             max-width: 1440px;
             margin: 0 auto;
@@ -909,33 +837,27 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 3rem;
         }
-
         .footer-column h3 {
             font-family: 'Orbitron', sans-serif;
             color: var(--text-primary);
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
         }
-
         .footer-links {
             list-style: none;
             padding: 0;
         }
-
         .footer-links li {
             margin-bottom: 0.8rem;
         }
-
         .footer-links a {
             color: var(--text-tertiary);
             font-size: 0.9rem;
             transition: var(--transition);
         }
-
         .footer-links a:hover {
             color: var(--primary);
         }
-
         .footer-bottom {
             text-align: center;
             padding-top: 2rem;
@@ -944,7 +866,6 @@
             color: var(--text-tertiary);
             font-size: 0.85rem;
         }
-
         /* SVG ICONS */
         .icon {
             width: 18px;
@@ -955,7 +876,6 @@
             stroke-linejoin: round;
             fill: none;
         }
-
         /* LOGOUT BUTTON */
         .logout-btn {
             font-size: 0.9rem;
@@ -966,16 +886,13 @@
             transition: var(--transition);
             display: none;
         }
-
         .logout-btn.visible {
             display: block;
         }
-
         .logout-btn:hover {
             color: var(--primary);
             background: rgba(109, 74, 255, 0.1);
         }
-
         /* Toast notification */
         .toast-container {
             position: fixed;
@@ -983,7 +900,6 @@
             right: 20px;
             z-index: 9999;
         }
-
         .toast {
             background: linear-gradient(145deg, rgba(18, 8, 58, 0.95), rgba(27, 15, 84, 0.9));
             color: white;
@@ -998,87 +914,71 @@
             backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
         }
-
         .toast.success {
             border-left: 4px solid var(--success);
         }
-
         .toast.error {
             border-left: 4px solid var(--danger);
         }
-
         /* RESPONSIVE STYLES */
         @media (max-width: 1024px) {
             .footer-content {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
-
         @media (max-width: 768px) {
             .header {
                 padding: 0 1rem;
             }
-
             .search-bar {
                 width: 200px;
             }
-
             .hero-title {
                 font-size: 2.5rem;
             }
-
             .hero-section {
                 height: 350px;
             }
-
             .cards-grid {
                 grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             }
-
             .form-grid {
                 grid-template-columns: 1fr;
             }
-
             .form-grid .form-group:last-child,
             .form-group.full-width {
                 grid-column: span 1;
             }
+            .discord-btn span {
+                display: none;
+            }
         }
-
         @media (max-width: 576px) {
             .hero-title {
                 font-size: 2rem;
             }
-
             .hero-subtitle {
                 font-size: 1rem;
             }
-
             .hero-section {
                 height: 300px;
             }
-
             .hero-btn {
                 padding: 10px 20px;
             }
-
             .container {
                 padding: 0 1rem;
             }
-
             .footer-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
-
             .search-bar {
                 display: none;
             }
-
             .logo-text {
                 font-size: 1.4rem;
             }
-
             .category-tab {
                 padding: 8px 16px;
                 font-size: 0.85rem;
@@ -1089,7 +989,6 @@
 <body>
     <!-- Particle.js container -->
     <div id="particles-js"></div>
-
     <div class="app-container">
         <!-- Header -->
         <header class="header">
@@ -1106,18 +1005,22 @@
                         <input type="text" id="searchInput" class="search-input" placeholder="Search games and software...">
                     </div>
                 </div>
-
                 <div class="logo">
                     <div id="siteLogo" class="logo-icon">
                         <div id="logoPlaceholder">C</div>
                     </div>
                     <div class="logo-text">CHOBBER'S SERVER</div>
                 </div>
-
                 <div class="header-right">
+                    <!-- Discord button -->
+                    <a href="https://discord.gg/SKqbQupn" target="_blank" class="discord-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+                        </svg>
+                        <span>Join Discord</span>
+                    </a>
                     <!-- Invisible admin access area -->
                     <div id="adminAccessArea" class="admin-access-area"></div>
-
                     <!-- Only visible when admin is logged in -->
                     <button class="admin-btn" id="adminBtn">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1130,7 +1033,6 @@
                 </div>
             </div>
         </header>
-
         <!-- Main Content -->
         <main class="main-content">
             <!-- Homepage -->
@@ -1140,10 +1042,17 @@
                     <div class="hero-content">
                         <h1 class="hero-title">Premium Games & Software</h1>
                         <p class="hero-subtitle">Access a vast library of premium content, always up-to-date and ready to download</p>
-                        <button class="btn btn-custom-primary btn-lg hero-btn">Explore Collection</button>
+                        <div class="d-flex justify-content-center gap-2">
+                            <button class="btn btn-custom-primary btn-lg hero-btn">Explore Collection</button>
+                            <a href="https://discord.gg/SKqbQupn" target="_blank" class="btn btn-lg hero-discord-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+                                </svg>
+                                Join Discord
+                            </a>
+                        </div>
                     </div>
                 </section>
-
                 <div class="container">
                     <!-- Categories Tabs -->
                     <div class="categories-container">
@@ -1156,20 +1065,17 @@
                             <div class="category-tab" data-category="templates">Templates & Assets</div>
                         </div>
                     </div>
-
                     <!-- Content Section -->
                     <section class="section">
                         <div class="section-header">
                             <h2 class="section-title">Featured Content</h2>
                         </div>
-
                         <div class="cards-grid" id="cardsContainer">
                             <!-- Empty state will be shown initially, cards will be added here -->
                         </div>
                     </section>
                 </div>
             </div>
-
             <!-- Login Page -->
             <div id="loginPage" class="page" style="display: none;">
                 <div class="container">
@@ -1178,7 +1084,6 @@
                             <h2 class="auth-title">Admin Login</h2>
                             <p class="auth-subtitle">Enter your credentials to access admin panel</p>
                         </div>
-
                         <div class="error-message" id="loginError">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -1188,31 +1093,26 @@
                             </svg>
                             Invalid username or password
                         </div>
-
                         <form id="loginForm">
                             <div class="form-group">
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" id="username" class="form-input" required>
                             </div>
-
                             <div class="form-group">
                                 <label for="password" class="form-label">Password</label>
                                 <input type="password" id="password" class="form-input" required>
                             </div>
-
                             <div class="form-footer">
                                 <div class="form-checkbox">
                                     <input type="checkbox" id="remember">
                                     <label for="remember">Remember me</label>
                                 </div>
                             </div>
-
                             <button type="submit" class="btn btn-custom-primary submit-btn">Sign In</button>
                         </form>
                     </div>
                 </div>
             </div>
-
             <!-- Add New Link Page -->
             <div id="addLinkPage" class="page" style="display: none;">
                 <div class="container">
@@ -1229,7 +1129,6 @@
                                 Back to Dashboard
                             </a>
                         </div>
-
                         <form id="addLinkForm">
                             <!-- Logo upload area -->
                             <div class="logo-upload-container" id="logoUploadContainer">
@@ -1239,14 +1138,12 @@
                                 <p>Click to upload site logo</p>
                                 <input type="file" id="logoUpload" style="display: none;" accept="image/*">
                             </div>
-
                             <div class="form-grid">
                                 <div class="form-group">
                                     <label for="title" class="form-label">Title</label>
                                     <input type="text" id="title" class="form-input" required placeholder="Enter content title">
                                     <p class="form-help">Name of the game or software</p>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="category" class="form-label">Category</label>
                                     <select class="form-input form-select" id="category">
@@ -1257,13 +1154,11 @@
                                         <option value="templates">Templates & Assets</option>
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="imageUrl" class="form-label">Image URL</label>
                                     <input type="url" id="imageUrl" class="form-input" required placeholder="https://example.com/image.jpg">
                                     <p class="form-help">URL to the cover image</p>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="badge" class="form-label">Badge (optional)</label>
                                     <select class="form-input form-select" id="badge">
@@ -1274,19 +1169,16 @@
                                         <option value="UPDATED">Updated</option>
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="description" class="form-label">Description (optional)</label>
                                     <textarea id="description" class="form-input" rows="3" placeholder="Brief description of the content"></textarea>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="driveUrl" class="form-label">Google Drive URL</label>
                                     <input type="url" id="driveUrl" class="form-input" required placeholder="https://drive.google.com/...">
                                     <p class="form-help">Direct link to the Google Drive file or folder</p>
                                 </div>
                             </div>
-
                             <div class="form-actions">
                                 <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
                                 <button type="submit" class="btn btn-custom-primary submit-btn">Publish Content</button>
@@ -1296,7 +1188,6 @@
                 </div>
             </div>
         </main>
-
         <!-- Confirmation Dialog (Bootstrap Modal) -->
         <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -1315,10 +1206,8 @@
                 </div>
             </div>
         </div>
-
         <!-- Toast Notifications Container -->
         <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastContainer"></div>
-
         <!-- Footer -->
         <footer class="footer">
             <div class="footer-content">
@@ -1367,10 +1256,8 @@
             </div>
         </footer>
     </div>
-
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
         // ==================== PARTICLES.JS CONFIGURATION ====================
         document.addEventListener('DOMContentLoaded', function() {
@@ -1480,7 +1367,6 @@
                 },
                 "retina_detect": true
             });
-
             // ==================== DOM ELEMENTS ====================
             const homepage = document.getElementById("homepage");
             const loginPage = document.getElementById("loginPage");
@@ -1496,7 +1382,6 @@
             const logoPreview = document.getElementById("logoPreview");
             const logoUpload = document.getElementById("logoUpload");
             const toastContainer = document.getElementById("toastContainer");
-
             // Admin elements
             const adminBtn = document.getElementById("adminBtn");
             const adminAccessArea = document.getElementById("adminAccessArea");
@@ -1508,17 +1393,14 @@
             const addLinkForm = document.getElementById("addLinkForm");
             const backBtn = document.getElementById("backBtn");
             const cancelBtn = document.getElementById("cancelBtn");
-
             // ==================== ADMIN CREDENTIALS ====================
             const adminCredentials = {
                 username: "admin",
                 password: "password123"
             };
-
             // ==================== SECRET ADMIN ACCESS VARIABLES ====================
             let clickCount = 0;
             let lastClickTime = 0;
-
             // ==================== DATA STORAGE ====================
             // Load cards from localStorage or use initial data (empty array)
             let cards =  [];
@@ -1531,17 +1413,14 @@
                 console.error("Error loading cards from localStorage:", error);
                 cards = [];
             }
-
             let currentCategory = "all"; // Track current category filter
             let cardToDelete = null; // Store the card ID to delete
-
             // Load site logo
             const savedLogo = localStorage.getItem("chobbersLogo");
             if (savedLogo) {
                 siteLogo.innerHTML = `<img src="${savedLogo}" alt="Site Logo">`;
                 logoPlaceholder.style.display = 'none';
             }
-
             // =================== TOAST NOTIFICATION SYSTEM ===================
             function showToast(message, type = 'success') {
                 // Create toast element using Bootstrap
@@ -1550,7 +1429,6 @@
                 toastEl.setAttribute('role', 'alert');
                 toastEl.setAttribute('aria-live', 'assertive');
                 toastEl.setAttribute('aria-atomic', 'true');
-
                 toastEl.innerHTML = `
                     <div class="d-flex">
                         <div class="toast-body">
@@ -1559,60 +1437,46 @@
                         <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                     </div>
                 `;
-
                 toastContainer.appendChild(toastEl);
-
                 const bsToast = new bootstrap.Toast(toastEl, {
                     delay: 5000,
                     autohide: true
                 });
-
                 bsToast.show();
-
                 // Remove the element when hidden
                 toastEl.addEventListener('hidden.bs.toast', function() {
                     toastEl.remove();
                 });
             }
-
             // ==================== LOGO UPLOAD FUNCTIONALITY ====================
             logoUploadContainer.addEventListener('click', () => {
                 logoUpload.click();
             });
-
             logoUpload.addEventListener('change', (e) => {
                 const file = e.target.files[0];
                 if (!file) return;
-
                 if (!file.type.startsWith('image/')) {
                     showToast('Please select an image file', 'danger');
                     return;
                 }
-
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     const dataUrl = e.target.result;
-
                     // Update preview
                     logoPreview.innerHTML = `<img src="${dataUrl}" alt="Logo Preview">`;
-
                     // Store logo in localStorage
                     localStorage.setItem("chobbersLogo", dataUrl);
-
                     // Update site logo
                     siteLogo.innerHTML = `<img src="${dataUrl}" alt="Site Logo">`;
                     logoPlaceholder.style.display = 'none';
-
                     showToast('Logo uploaded successfully');
                 };
                 reader.readAsDataURL(file);
             });
-
             // Check if admin is logged in (using session storage)
             function isAdminLoggedIn() {
                 return sessionStorage.getItem('adminLoggedIn') === 'true';
             }
-
             // Set admin logged in status
             function setAdminLoggedIn(status) {
                 if (status) {
@@ -1622,7 +1486,6 @@
                 }
                 updateAdminUI();
             }
-
             // Update UI based on admin login status
             function updateAdminUI() {
                 if (isAdminLoggedIn()) {
@@ -1632,37 +1495,28 @@
                     adminBtn.classList.remove('visible');
                     logoutBtn.classList.remove('visible');
                 }
-
                 // Rerender cards to show/hide admin actions
                 renderCards();
             }
-
             // ==================== DELETE FUNCTIONALITY ====================
             function showDeleteConfirmation(cardId) {
                 cardToDelete = cardId;
                 deleteConfirmModal.show();
             }
-
             // Delete card function - completely rewritten for reliability
             function deleteCard(cardId) {
                 console.log("Attempting to delete card with ID:", cardId);
-
                 // First, find the index of the card to delete
                 const cardIndex = cards.findIndex(card => card.id === cardId);
-
                 if (cardIndex !== -1) {
                     // Remove the card from the array
                     cards.splice(cardIndex, 1);
-
                     // Save changes to localStorage
                     localStorage.setItem("chobbersCards", JSON.stringify(cards));
-
                     // Re-render the updated cards
                     renderCards();
-
                     // Show success toast
                     showToast("Item successfully deleted", "success");
-
                     console.log("Card deleted successfully. Remaining cards:", cards.length);
                     return true;
                 } else {
@@ -1671,12 +1525,10 @@
                     return false;
                 }
             }
-
             // ==================== CARD FUNCTIONALITY ====================
             // Function to filter cards based on category and search term
             function filterCards() {
                 const searchTerm = searchInput.value.toLowerCase();
-
                 return cards.filter(card => {
                     const matchesCategory = currentCategory === 'all' || card.category === currentCategory;
                     const matchesSearch = card.title.toLowerCase().includes(searchTerm) ||
@@ -1684,17 +1536,14 @@
                     return matchesCategory && matchesSearch;
                 });
             }
-
             // Function to render filtered cards
             function renderCards() {
                 if (!cardsContainer) {
                     console.error("Cannot render cards: container element not found");
                     return;
                 }
-
                 const filteredCards = filterCards();
                 cardsContainer.innerHTML = "";
-
                 // Show empty state if no cards
                 if (cards.length === 0) {
                     cardsContainer.innerHTML = `
@@ -1706,7 +1555,6 @@
                     `;
                     return;
                 }
-
                 // Show no results message if no matching cards
                 if (filteredCards.length === 0) {
                     cardsContainer.innerHTML = `
@@ -1718,13 +1566,11 @@
                     `;
                     return;
                 }
-
                 // Render cards
                 filteredCards.forEach(card => {
                     const cardElement = createCardElement(card);
                     cardsContainer.appendChild(cardElement);
                 });
-
                 // Set up delete buttons
                 if (isAdminLoggedIn()) {
                     document.querySelectorAll('.delete-btn').forEach(btn => {
@@ -1735,17 +1581,14 @@
                     });
                 }
             }
-
             // Function to create a single card element
             function createCardElement(card) {
                 const cardDiv = document.createElement("div");
                 cardDiv.className = "card";
                 cardDiv.setAttribute("data-id", card.id); // Store card ID in data attribute
-
                 // Add badge if it exists
                 const badgeHtml = card.badge ?
                     `<div class="card-badge badge-${card.badge.toLowerCase()}">${card.badge}</div>` : '';
-
                 // Add admin action buttons if logged in
                 const adminActionsHtml = isAdminLoggedIn() ? `
                     <div class="admin-card-actions">
@@ -1760,7 +1603,6 @@
                             </svg>
                         </button>
                     </div>` : '';
-
                 cardDiv.innerHTML = `
                     <div class="card-image-container">
                         <img src="${card.image}" alt="${card.title}" class="card-image">
@@ -1801,20 +1643,16 @@
                         </div>
                     </div>
                 `;
-
                 return cardDiv;
             }
-
             // Helper function to capitalize first letter
             function capitalizeFirstLetter(string) {
                 return string ? string.charAt(0).toUpperCase() + string.slice(1) : '';
             }
-
             // Function to add a new card
             function addNewCard(title, imageUrl, driveUrl, category, badge, description) {
                 // Generate a unique ID for the card
                 const id = 'card' + Date.now();
-
                 const newCard = {
                     id: id,
                     title: title,
@@ -1824,26 +1662,21 @@
                     category: category,
                     description: description
                 };
-
                 // Add to beginning of array
                 cards.unshift(newCard);
                 saveCards();
                 renderCards();
-
                 showToast('New content added successfully');
             }
-
             // Function to save cards to localStorage
             function saveCards() {
                 localStorage.setItem("chobbersCards", JSON.stringify(cards));
             }
-
             // Function to navigate between pages
             function navigateTo(page) {
                 homepage.style.display = "none";
                 loginPage.style.display = "none";
                 addLinkPage.style.display = "none";
-
                 if (page === "homepage") {
                     homepage.style.display = "block";
                 } else if (page === "login") {
@@ -1852,37 +1685,30 @@
                     addLinkPage.style.display = "block";
                 }
             }
-
             // ==================== EVENT LISTENERS ====================
             // Admin button click (visible only when logged in)
             adminBtn.addEventListener("click", () => {
                 navigateTo("addLink");
             });
-
             // Secret admin access area click handling
             adminAccessArea.addEventListener("click", (e) => {
                 const currentTime = new Date().getTime();
-
                 // Reset counter if clicks are more than 1 second apart
                 if (currentTime - lastClickTime > 1000) {
                     clickCount = 0;
                 }
-
                 clickCount++;
                 lastClickTime = currentTime;
-
                 // After 3 quick clicks, show login page
                 if (clickCount >= 3) {
                     clickCount = 0;
                     navigateTo("login");
                 }
             });
-
             // Footer hidden admin access
             footerAdminLink.addEventListener("click", (e) => {
                 // Prevent normal navigation
                 e.preventDefault();
-
                 // Special sequence: right-click followed by left-click within 1 second
                 const now = new Date().getTime();
                 if (e.button === 0 && footerAdminLink.dataset.rightClicked === 'true' &&
@@ -1892,7 +1718,6 @@
                     footerAdminLink.dataset.rightClicked = 'false';
                 }
             });
-
             footerAdminLink.addEventListener("contextmenu", (e) => {
                 // Mark that right-click occurred and store the time
                 footerAdminLink.dataset.rightClicked = 'true';
@@ -1900,27 +1725,23 @@
                 // Don't show context menu
                 e.preventDefault();
             });
-
             // Second footer link - double-click access
             footerAdminLink2.addEventListener("dblclick", (e) => {
                 e.preventDefault();
                 navigateTo("login");
             });
-
             // Logout button click
             logoutBtn.addEventListener("click", () => {
                 setAdminLoggedIn(false);
                 navigateTo("homepage");
                 showToast('Logged out successfully');
             });
-
             // Login form submission
             loginForm.addEventListener("submit", (e) => {
                 e.preventDefault();
                 const username = document.getElementById("username").value;
                 const password = document.getElementById("password").value;
                 const remember = document.getElementById("remember").checked;
-
                 if (username === adminCredentials.username && password === adminCredentials.password) {
                     setAdminLoggedIn(true);
                     navigateTo("addLink");
@@ -1934,7 +1755,6 @@
                     }, 3000);
                 }
             });
-
             // Add link form submission
             addLinkForm.addEventListener("submit", (e) => {
                 e.preventDefault();
@@ -1944,24 +1764,20 @@
                 const category = document.getElementById("category").value;
                 const badge = document.getElementById("badge").value;
                 const description = document.getElementById("description").value;
-
                 addNewCard(title, imageUrl, driveUrl, category, badge, description);
                 addLinkForm.reset();
                 navigateTo("homepage");
             });
-
             // Back button click
             backBtn.addEventListener("click", (e) =>  {
                 e.preventDefault();
                 navigateTo("homepage");
             });
-
             // Cancel button click
             cancelBtn.addEventListener("click", (e) => {
                 e.preventDefault();
                 navigateTo("homepage");
             });
-
             // Confirm delete button click (Bootstrap modal)
             confirmDeleteBtn.addEventListener('click', function() {
                 if (cardToDelete) {
@@ -1970,27 +1786,23 @@
                     cardToDelete = null;
                 }
             });
-
             // Category tabs click
             if (categoryTabs) {
                 categoryTabs.querySelectorAll('.category-tab').forEach(tab => {
                     tab.addEventListener('click', () => {
                         categoryTabs.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
                         tab.classList.add('active');
-
                         currentCategory = tab.dataset.category;
                         renderCards();
                     });
                 });
             }
-
             // Search input
             if (searchInput) {
                 searchInput.addEventListener('input', () => {
                     renderCards();
                 });
             }
-
             // Add event listener for secret key combination (Ctrl+Shift+A)
             document.addEventListener('keydown', function(event) {
                 if (event.ctrlKey && event.shiftKey && event.key === 'A') {
@@ -1998,11 +1810,9 @@
                     event.preventDefault();
                 }
             });
-
             // ==================== INITIALIZATION ====================
             // Render initial cards
             renderCards();
-
             // Update admin UI based on login status
             updateAdminUI();
         });
