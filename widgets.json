@@ -55,6 +55,14 @@
             "description": "Connect with our community on Discord!",
             "url": "https://discord.gg/SKqbQupn",
             "badge": "POPULAR"
+        },
+        {
+            "type": "widget",
+            "title": "Anomly",
+            "image": "https://cdn.discordapp.com/attachments/1314933020020703242/1365284260763799703/log1-3.png?ex=680e110d&is=680cbf8d&hm=588380168b157ca168f01a7dd128709c8892f866c23c3f8339d28cf0bf45157c&",
+            "description": "Free and Multiplayer",
+            "url": "https://drive.google.com/drive/folders/1BvzmOjtdAXjegONoBj0tVQrFwORJZjVY?usp=sharing",
+            "badge": "HOT"
         }
     ]
 }
